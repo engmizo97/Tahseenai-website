@@ -70,7 +70,7 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     const isDesktop = width >= 1024;
     const isTablet = width >= 640 && width < 1024;
     
-    const ringBaseX = mirrored ? -2.05 : 2.05;
+    const ringBaseX = mirrored ? -3.91 : 3.91;
     const ringBaseY = 0.90;
     const ringBaseZ = 0.0;
     const ringBaseScale = 0.78;

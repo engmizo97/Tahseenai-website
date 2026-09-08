@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero 3D Ring Position Tuner | Tahseen AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zain:wght@400;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- lil-gui -->
+  <script src="https://cdn.jsdelivr.net/npm/lil-gui@0.19/dist/lil-gui.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #0d1426;
+      --teal: #008688;
+      --teal-light: #00f5d4;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: #fff;
+      font-family: 'Zain', system-ui, sans-serif;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    #webgl-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    /* Top Floating Control Bar */
+    .top-bar {
+      position: absolute;
+      top: 14px;
+      left: 20px;
+      right: 360px;
+      height: 52px;
+      background: rgba(13, 20, 38, 0.88);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 10px;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .brand-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .brand-pill {
+      background: rgba(0, 134, 136, 0.2);
+      border: 1px solid var(--teal);
+      color: #5eead4;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-action {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #e2e8f0;
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-action:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #fff;
+    }
+
+    .btn-primary {
+      background: var(--teal);
+      border-color: #00a8aa;
+      color: #fff;
+      box-shadow: 0 0 15px rgba(0, 134, 136, 0.35);
+    }
+
+    .btn-primary:hover {
+      background: #00a3a6;
+      box-shadow: 0 0 25px rgba(0, 134, 136, 0.6);
+      transform: translateY(-1px);
+    }
+
+    /* Authentic Full-Page Hero Layout Simulation */
+    .hero-container {
+      position: absolute;
+      top: 65px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 50px 6vw 50px 6vw;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 540px;
+      pointer-events: auto;
+    }
+
+    .hero-title {
+      font-size: 52px;
+      font-weight: 800;
+      line-height: 1.12;
+      color: #ffffff;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.85);
+      margin-bottom: 22px;
+    }
+
+    .hero-title span {
+      color: var(--teal);
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      line-height: 1.65;
+      color: #cbd5e1;
+      max-width: 400px;
+      margin-bottom: 26px;
+    }
+
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 28px;
+      border-radius: 8px;
+      border: 1px solid var(--teal);
+      background: rgba(0, 134, 136, 0.12);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      box-shadow: 0 0 20px rgba(0, 134, 136, 0.25);
+    }
+
+    /* Coordinates HUD Display */
+    .coords-hud {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(13, 20, 38, 0.90);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(0, 245, 212, 0.25);
+      border-radius: 10px;
+      z-index: 30;
+      padding: 12px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      min-width: 260px;
+    }
+
+    .hud-title {
+      font-size: 11px;
+      color: #94a3b8;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 4px;
+      margin-bottom: 2px;
+    }
+
+    .hud-row {
+      display: flex;
+      justify-content: space-between;
+      color: #e2e8f0;
+    }
+
+    .hud-row span:last-child {
+      color: #00f5d4;
+      font-weight: 600;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #008688;
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      box-shadow: 0 10px 30px rgba(0, 134, 136, 0.5);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #0d1426;
+      border: 1px solid var(--teal);
+      border-radius: 12px;
+      width: 680px;
+      max-width: 90vw;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+      overflow: hidden;
+    }
+
+    .modal-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-body {
+      padding: 20px;
+      overflow-y: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #cbd5e1;
+      background: #070b16;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .modal-footer {
+      padding: 14px 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    /* lil-gui Custom Theme */
+    .lil-gui {
+      --background-color: rgba(13, 20, 38, 0.95);
+      --text-color: #e2e8f0;
+      --title-background-color: #090e1b;
+      --widget-color: rgba(255, 255, 255, 0.08);
+      --hover-color: rgba(0, 134, 136, 0.25);
+      --focus-color: #008688;
+      --number-color: #5eead4;
+      --string-color: #38bdf8;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      border-radius: 10px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      top: 14px !important;
+      right: 14px !important;
+      max-height: calc(100vh - 28px);
+      overflow-y: auto;
+    }
+
+    .lil-gui .title {
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #5eead4;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Floating Controls -->
+  <div class="top-bar">
+    <div class="brand-title">
+      <span>TAHSEEN &lt;AI&gt;</span>
+      <span class="brand-pill">3D RING POSITION &amp; LAYOUT TUNER</span>
+    </div>
+    <div class="actions">
+      <button class="btn-action" id="btnToggleText" title="Show or hide hero text overlay">
+        👁️ Toggle Text
+      </button>
+      <button class="btn-action" id="btnReset" title="Reset to live code defaults">
+        ↺ Reset
+      </button>
+      <button class="btn-action" id="btnViewCode" title="View formatted TypeScript snippet">
+        &lt;/&gt; Code
+      </button>
+      <button class="btn-action btn-primary" id="btnCopyConfig" title="Copy config JSON directly to clipboard">
+        📋 Copy Config
+      </button>
+    </div>
+  </div>
+
+  <!-- Live Hero Section Layout Overlay -->
+  <div class="hero-container" id="heroContainer">
+    <div class="hero-content" id="heroContent">
+      <h1 class="hero-title">
+        AI Solutions That<br>
+        <span>Enhance</span> Your Work
+      </h1>
+      <p class="hero-subtitle">
+        We build agents and automation systems that help businesses work smarter, faster, and more efficiently.
+      </p>
+      <div class="hero-btn">
+        <span>LET'S BUILD TOGETHER</span> →
+      </div>
+    </div>
+  </div>
+
+  <!-- Real-time HUD Values -->
+  <div class="coords-hud">
+    <div class="hud-title">LIVE RING COORDINATES</div>
+    <div class="hud-row"><span>Position X:</span><span id="hudPosX">2.05</span></div>
+    <div class="hud-row"><span>Position Y:</span><span id="hudPosY">0.90</span></div>
+    <div class="hud-row"><span>Position Z:</span><span id="hudPosZ">0.00</span></div>
+    <div class="hud-row"><span>Scale:</span><span id="hudScale">0.78</span></div>
+    <div class="hud-row"><span>Rotation (X,Y,Z):</span><span id="hudRot">-0.59, -0.66, -0.99</span></div>
+    <div class="hud-row"><span>Camera Z:</span><span id="hudCamZ">10.50</span></div>
+  </div>
+
+  <!-- Three.js Canvas Container -->
+  <div id="webgl-canvas"></div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">Config Copied to Clipboard!</div>
+
+  <!-- Code Modal -->
+  <div class="modal-backdrop" id="codeModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 style="font-size: 15px; font-weight: 700; color: #5eead4;">Generated Code for HeroRing3D.tsx</h3>
+        <button class="btn-action" id="btnCloseModal">✕</button>
+      </div>
+      <div class="modal-body">
+        <pre id="codeOutput"></pre>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-action btn-primary" id="btnCopyModalCode">Copy Code Snippet</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- 1. Master Configuration for 3D Ring ---
+    const config = {
+      // 3D Ring Position & Scale
+      posX: 2.05,
+      posY: 0.90,
+      posZ: 0.0,
+      scale: 0.78,
+
+      // 3D Ring Orientation Angles (Euler radians)
+      rotX: -0.59,
+      rotY: -0.66,
+      rotZ: -0.99,
+
+      // Camera Perspective
+      cameraZ: 10.5,
+      cameraFov: 36,
+
+      // In-Place Dynamic Orbital Motion
+      enableOrbit: true,
+      orbitAmplitudeX: 0.16,
+      orbitAmplitudeY: 0.20,
+      orbitSpeed: 1.15,
+      orbitTilt: 0.04,
+
+      // Mouse Parallax Sensitivity
+      enableParallax: true,
+      parallaxStrength: 0.30,
+
+      // Scene Environment
+      mirroredRTL: false,
+      showText: true,
+      showWaves: true,
+      sceneBg: '#0d1426',
+
+      preset: 'Live Default',
+    };
+
+    const defaults = JSON.parse(JSON.stringify(config));
+
+    // --- 2. Setup Three.js Scene ---
+    const container = document.getElementById('webgl-canvas');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(config.sceneBg);
+
+    const initialW = window.innerWidth;
+    const initialH = window.innerHeight;
+
+    const camera = new THREE.PerspectiveCamera(config.cameraFov, initialW / initialH, 0.1, 1000);
+    camera.position.set(0, 0, config.cameraZ);
+
+    const renderer = new THREE.WebGLRenderer({
+      antialias: true,
+      powerPreference: 'high-performance',
+    });
+    renderer.setSize(initialW, initialH);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.45;
+    container.appendChild(renderer.domElement);
+
+    // --- 3. Lighting Setup ---
+    const ambientLight = new THREE.AmbientLight(0x020712, 1.2);
+    scene.add(ambientLight);
+
+    const textKeyLight = new THREE.PointLight(0x00f5d4, 15.0, 50, 1.1);
+    textKeyLight.position.set(-6.0, -3.0, 1.2);
+    scene.add(textKeyLight);
+
+    const textDirLight = new THREE.DirectionalLight(0x38bdf8, 3.8);
+    textDirLight.position.set(-6.0, -1.5, 1.5);
+    scene.add(textDirLight);
+
+    const rightRimLight = new THREE.PointLight(0x06b6d4, 8.5, 35);
+    rightRimLight.position.set(6.0, 5.0, 2.0);
+    scene.add(rightRimLight);
+
+    const topHighlight = new THREE.DirectionalLight(0xe0ffff, 2.2);
+    topHighlight.position.set(4.0, 8.0, 6.0);
+    scene.add(topHighlight);
+
+    // --- 4. 3D Ring Mesh Construction ---
+    const heroGroup = new THREE.Group();
+    heroGroup.position.set(config.posX, config.posY, config.posZ);
+    heroGroup.scale.setScalar(config.scale);
+    heroGroup.rotation.set(config.rotX, config.rotY, config.rotZ);
+    scene.add(heroGroup);
+
+    // Ring Materials
+    const illuminatedMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0x00f5d4,
+      emissive: 0x003830,
+      emissiveIntensity: 0.25,
+      roughness: 0.12,
+      metalness: 0.45,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.06,
+      reflectivity: 0.95,
+      side: THREE.DoubleSide,
+    });
+
+    const shadedMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0x00d2b4,
+      emissive: 0x002c25,
+      emissiveIntensity: 0.18,
+      roughness: 0.16,
+      metalness: 0.48,
+      clearcoat: 0.6,
+      side: THREE.DoubleSide,
+    });
+
+    const sideCapMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0x00f5d4,
+      emissive: 0x00e5be,
+      emissiveIntensity: 0.4,
+      roughness: 0.12,
+      metalness: 0.4,
+      side: THREE.DoubleSide,
+    });
+
+    // Ring Lathe Geometry
+    const innerR = 1.8;
+    const outerR = 2.6;
+    const ringDepth = 0.74;
+    const halfDepth = ringDepth / 2;
+    const bevel = 0.03;
+
+    const profilePoints = [
+      new THREE.Vector2(innerR, -halfDepth + bevel),
+      new THREE.Vector2(innerR + bevel, -halfDepth),
+      new THREE.Vector2(outerR - bevel, -halfDepth),
+      new THREE.Vector2(outerR, -halfDepth + bevel),
+      new THREE.Vector2(outerR, halfDepth - bevel),
+      new THREE.Vector2(outerR - bevel, halfDepth),
+      new THREE.Vector2(innerR + bevel, halfDepth),
+      new THREE.Vector2(innerR, halfDepth - bevel),
+      new THREE.Vector2(innerR, -halfDepth + bevel),
+    ];
+
+    const segments = 64;
+    const gapAngle = 0.06;
+    const arcLength = Math.PI - gapAngle;
+
+    const topGeom = new THREE.LatheGeometry(profilePoints, segments, gapAngle / 2, arcLength);
+    topGeom.computeVertexNormals();
+    const topMesh = new THREE.Mesh(topGeom, shadedMaterial);
+    topMesh.rotation.x = Math.PI / 2;
+    topMesh.position.set(0, 0.025, 0);
+    heroGroup.add(topMesh);
+
+    const botGeom = new THREE.LatheGeometry(profilePoints, segments, Math.PI + gapAngle / 2, arcLength);
+    botGeom.computeVertexNormals();
+    const botMesh = new THREE.Mesh(botGeom, illuminatedMaterial);
+    botMesh.rotation.x = Math.PI / 2;
+    botMesh.position.set(0, 0.015, 0);
+    heroGroup.add(botMesh);
+
+    // End Caps
+    const capWidth = outerR - innerR;
+    const capHeight = ringDepth;
+    const capGeom = new THREE.PlaneGeometry(capWidth, capHeight);
+    const midR = (innerR + outerR) / 2;
+
+    function createCutCap(angle) {
+      const cap = new THREE.Mesh(capGeom, sideCapMaterial);
+      cap.position.set(midR * Math.cos(angle), 0, midR * Math.sin(angle));
+      cap.rotation.y = -angle + Math.PI / 2;
+      return cap;
+    }
+
+    heroGroup.add(createCutCap(gapAngle / 2));
+    heroGroup.add(createCutCap(Math.PI - gapAngle / 2));
+    heroGroup.add(createCutCap(Math.PI + gapAngle / 2));
+    heroGroup.add(createCutCap(2 * Math.PI - gapAngle / 2));
+
+    // --- 5. Digital Particle Wave with Faint Gridlines ---
+    const numStrands = 43;
+    const ptsPerStrand = 270;
+    const totalParticles = numStrands * ptsPerStrand;
+
+    const waveGeom = new THREE.BufferGeometry();
+    const positions = new Float32Array(totalParticles * 3);
+    const alphas = new Float32Array(totalParticles);
+    const sizes = new Float32Array(totalParticles);
+
+    const strandSpread = 15.0;
+    const waveArcHeight = 1.4;
+    const waveArcCenter = -0.5;
+    const waveTwist = 0.8;
+    const gridWidth = 81.0;
+
+    const sparkleChance = 0.07;
+    const sparkleSizeMult = 3.8;
+    const filamentSize = 0.16;
+    const sparkleBrightness = 0.9;
+    const filamentBrightness = 0.85;
+
+    const leftFadeStart = -0.1;
+    const leftFadeEnd = -0.1;
+    const leftFadePower = 1.95;
+    const rightFadeStart = 0.2;
+    const rightFadeEnd = 1.0;
+    const rightFadePower = 1.5;
+
+    const waveElevationY = -2.35;
+    const waveAmplitude = 0.65;
+    const waveSpeed = 0.6;
+    const depthFadePower = 0.5;
+
+    function computeLeftFade(uNorm) {
+      if (leftFadeEnd <= leftFadeStart) return uNorm >= leftFadeEnd ? 1.0 : 0.0;
+      if (uNorm <= leftFadeStart) return 0.0;
+      if (uNorm >= leftFadeEnd) return 1.0;
+      const t = (uNorm - leftFadeStart) / (leftFadeEnd - leftFadeStart);
+      return Math.pow(Math.max(0.0, Math.min(1.0, t * t * (3.0 - 2.0 * t))), leftFadePower);
+    }
+
+    function computeRightFade(uNorm) {
+      if (rightFadeEnd <= rightFadeStart) return uNorm <= rightFadeStart ? 1.0 : 0.0;
+      if (uNorm <= rightFadeStart) return 1.0;
+      if (uNorm >= rightFadeEnd) return 0.0;
+      const t = (rightFadeEnd - uNorm) / (rightFadeEnd - rightFadeStart);
+      return Math.pow(Math.max(0.0, Math.min(1.0, t * t * (3.0 - 2.0 * t))), rightFadePower);
+    }
+
+    function pseudoRandom(seed) {
+      const x = Math.sin(seed * 9999) * 10000;
+      return x - Math.floor(x);
+    }
+
+    let pIdx = 0;
+    for (let s = 0; s < numStrands; s++) {
+      const vNorm = (s / (numStrands - 1)) * 2.0 - 1.0;
+      const strandZOffset = vNorm * (strandSpread * 0.5) - 3.8;
+
+      for (let p = 0; p < ptsPerStrand; p++) {
+        const uNorm = (p / (ptsPerStrand - 1)) * 2.0 - 1.0;
+        const uZeroToOne = p / (ptsPerStrand - 1);
+
+        const x = uNorm * (gridWidth * 0.5);
+        const z = strandZOffset + Math.sin(uZeroToOne * Math.PI) * 2.8;
+
+        const fadeX = uNorm < 0.0 ? computeLeftFade(uNorm) : computeRightFade(uNorm);
+        const fadeZ = Math.cos(vNorm * Math.PI * 0.5);
+        const depthFade = Math.pow(Math.max(0.0, fadeZ), depthFadePower);
+        const totalEdgeFade = fadeX * depthFade;
+
+        const arcPhase = (x - waveArcCenter) / 18.0;
+        const risingArch = Math.exp(-arcPhase * arcPhase) * waveArcHeight;
+        const undulatingWave = Math.sin(p * 0.08 + s * 0.22) * waveAmplitude + Math.cos(s * 0.16) * 0.45;
+        const strandTwist = vNorm * waveTwist * Math.sin(uZeroToOne * Math.PI);
+        const diagonalLift = (uNorm + 0.3) * 1.25;
+
+        const y = waveElevationY + (risingArch + undulatingWave + strandTwist + diagonalLift) * totalEdgeFade;
+
+        positions[pIdx * 3] = x;
+        positions[pIdx * 3 + 1] = y;
+        positions[pIdx * 3 + 2] = z;
+
+        const randVal = pseudoRandom(pIdx * 17 + s * 131 + p * 3);
+        const isSparkle = randVal < sparkleChance;
+
+        if (isSparkle) {
+          alphas[pIdx] = totalEdgeFade * sparkleBrightness;
+          sizes[pIdx] = Math.max(0.08, totalEdgeFade * filamentSize * sparkleSizeMult);
+        } else {
+          alphas[pIdx] = totalEdgeFade * filamentBrightness;
+          sizes[pIdx] = Math.max(0.02, totalEdgeFade * filamentSize);
+        }
+        pIdx++;
+      }
+    }
+
+    waveGeom.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    waveGeom.setAttribute("alpha", new THREE.BufferAttribute(alphas, 1));
+    waveGeom.setAttribute("size", new THREE.BufferAttribute(sizes, 1));
+
+    // Texture
+    const pCanvas = document.createElement("canvas");
+    pCanvas.width = 128;
+    pCanvas.height = 128;
+    const pCtx = pCanvas.getContext("2d");
+    const pGrad = pCtx.createRadialGradient(64, 64, 0, 64, 64, 60);
+    pGrad.addColorStop(0.00, "rgba(255, 255, 255, 1.0)");
+    pGrad.addColorStop(0.18, "rgba(0, 245, 212, 1.0)");
+    pGrad.addColorStop(0.42, "rgba(0, 180, 216, 0.85)");
+    pGrad.addColorStop(0.70, "rgba(0, 134, 136, 0.35)");
+    pGrad.addColorStop(1.00, "rgba(0, 0, 0, 0.0)");
+    pCtx.fillStyle = pGrad;
+    pCtx.fillRect(0, 0, 128, 128);
+    const pTexture = new THREE.CanvasTexture(pCanvas);
+
+    const waveShaderMaterial = new THREE.ShaderMaterial({
+      uniforms: {
+        pointTexture: { value: pTexture },
+        uTime: { value: 0.0 },
+        uWaveSpeed: { value: waveSpeed },
+      },
+      vertexShader: `
+        attribute float alpha;
+        attribute float size;
+        varying float vAlpha;
+        uniform float uTime;
+        uniform float uWaveSpeed;
+        void main() {
+          vAlpha = alpha;
+          vec3 pos = position;
+          float wave = sin(pos.x * 0.22 + uTime * uWaveSpeed * 1.1 + pos.z * 0.14) * 0.38 +
+                       cos(pos.z * 0.20 + uTime * uWaveSpeed * 0.85) * 0.25;
+          pos.y += wave * (0.25 + alpha * 0.75);
+          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+          gl_PointSize = size * (390.0 / -mvPosition.z);
+          gl_Position = projectionMatrix * mvPosition;
+        }
+      `,
+      fragmentShader: `
+        uniform sampler2D pointTexture;
+        varying float vAlpha;
+        void main() {
+          vec4 texColor = texture2D(pointTexture, gl_PointCoord);
+          if (texColor.a < 0.02) discard;
+          gl_FragColor = vec4(texColor.rgb, texColor.a * vAlpha * 0.98);
+        }
+      `,
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+
+    const waveParticleSystem = new THREE.Points(waveGeom, waveShaderMaterial);
+    scene.add(waveParticleSystem);
+
+    // Faint Gridlines
+    const lineIndices = [];
+    for (let s = 0; s < numStrands; s++) {
+      for (let p = 0; p < ptsPerStrand - 1; p++) {
+        lineIndices.push(s * ptsPerStrand + p, s * ptsPerStrand + p + 1);
+      }
+    }
+    for (let p = 0; p < ptsPerStrand; p += 3) {
+      for (let s = 0; s < numStrands - 1; s++) {
+        lineIndices.push(s * ptsPerStrand + p, (s + 1) * ptsPerStrand + p);
+      }
+    }
+
+    const lineGeom = new THREE.BufferGeometry();
+    lineGeom.setAttribute("position", waveGeom.getAttribute("position"));
+    lineGeom.setAttribute("alpha", waveGeom.getAttribute("alpha"));
+    lineGeom.setIndex(lineIndices);
+
+    const lineShaderMaterial = new THREE.ShaderMaterial({
+      uniforms: {
+        uTime: { value: 0.0 },
+        uWaveSpeed: { value: waveSpeed },
+        uLineColor: { value: new THREE.Color(0x00d2b4) },
+        uLineOpacity: { value: 0.14 },
+      },
+      vertexShader: `
+        attribute float alpha;
+        varying float vAlpha;
+        uniform float uTime;
+        uniform float uWaveSpeed;
+        void main() {
+          vAlpha = alpha;
+          vec3 pos = position;
+          float wave = sin(pos.x * 0.22 + uTime * uWaveSpeed * 1.1 + pos.z * 0.14) * 0.38 +
+                       cos(pos.z * 0.20 + uTime * uWaveSpeed * 0.85) * 0.25;
+          pos.y += wave * (0.25 + alpha * 0.75);
+          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+          gl_Position = projectionMatrix * mvPosition;
+        }
+      `,
+      fragmentShader: `
+        uniform vec3 uLineColor;
+        uniform float uLineOpacity;
+        varying float vAlpha;
+        void main() {
+          if (vAlpha < 0.02) discard;
+          gl_FragColor = vec4(uLineColor, vAlpha * uLineOpacity);
+        }
+      `,
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+
+    const waveLineMesh = new THREE.LineSegments(lineGeom, lineShaderMaterial);
+    scene.add(waveLineMesh);
+
+    // --- 6. Live HUD Updater ---
+    function updateHUD() {
+      document.getElementById('hudPosX').textContent = config.posX.toFixed(2);
+      document.getElementById('hudPosY').textContent = config.posY.toFixed(2);
+      document.getElementById('hudPosZ').textContent = config.posZ.toFixed(2);
+      document.getElementById('hudScale').textContent = config.scale.toFixed(2);
+      document.getElementById('hudRot').textContent = `${config.rotX.toFixed(2)}, ${config.rotY.toFixed(2)}, ${config.rotZ.toFixed(2)}`;
+      document.getElementById('hudCamZ').textContent = config.cameraZ.toFixed(2);
+
+      // Update actual Three.js objects
+      heroGroup.scale.setScalar(config.scale);
+      camera.position.z = config.cameraZ;
+      camera.fov = config.cameraFov;
+      camera.updateProjectionMatrix();
+    }
+
+    // --- 7. Setup lil-gui Control Panel ---
+    const gui = new lil.GUI({ title: '⚡ 3D Ring Position Tuner', width: 330 });
+
+    // POSITION FOLDER
+    const fPos = gui.addFolder('📍 Ring Position (X, Y, Z)');
+    fPos.add(config, 'posX', -5.0, 5.0, 0.01).name('Position X (Horizontal)').onChange(updateHUD);
+    fPos.add(config, 'posY', -3.0, 3.0, 0.01).name('Position Y (Vertical)').onChange(updateHUD);
+    fPos.add(config, 'posZ', -4.0, 4.0, 0.01).name('Position Z (Depth)').onChange(updateHUD);
+    fPos.add(config, 'scale', 0.3, 1.6, 0.01).name('Scale Multiplier').onChange(updateHUD);
+    fPos.open();
+
+    // ROTATION FOLDER
+    const fRot = gui.addFolder('🔄 Ring Rotation (Radians)');
+    fRot.add(config, 'rotX', -3.14, 3.14, 0.01).name('Rotation X (Tilt)').onChange(updateHUD);
+    fRot.add(config, 'rotY', -3.14, 3.14, 0.01).name('Rotation Y (Turn)').onChange(updateHUD);
+    fRot.add(config, 'rotZ', -3.14, 3.14, 0.01).name('Rotation Z (Roll)').onChange(updateHUD);
+    fRot.open();
+
+    // CAMERA FOLDER
+    const fCam = gui.addFolder('🎥 Camera View');
+    fCam.add(config, 'cameraZ', 6.0, 18.0, 0.1).name('Camera Distance Z').onChange(updateHUD);
+    fCam.add(config, 'cameraFov', 24, 60, 1).name('Field of View (FOV)').onChange(updateHUD);
+
+    // ORBIT MOTION FOLDER
+    const fOrbit = gui.addFolder('🌊 In-Place Orbital Motion');
+    fOrbit.add(config, 'enableOrbit').name('Enable Orbit Motion');
+    fOrbit.add(config, 'orbitAmplitudeX', 0.0, 0.5, 0.01).name('Orbit Width X');
+    fOrbit.add(config, 'orbitAmplitudeY', 0.0, 0.5, 0.01).name('Orbit Height Y');
+    fOrbit.add(config, 'orbitSpeed', 0.0, 3.0, 0.05).name('Orbit Speed');
+    fOrbit.add(config, 'enableParallax').name('Enable Mouse Parallax');
+
+    // PRESETS FOLDER
+    const fPresets = gui.addFolder('🎯 Curated Layout Presets');
+    const presets = {
+      'Live Default': {
+        posX: 2.05,
+        posY: 0.90,
+        posZ: 0.0,
+        scale: 0.78,
+        rotX: -0.59,
+        rotY: -0.66,
+        rotZ: -0.99,
+        cameraZ: 10.5,
+      },
+      'Heroic Cinematic (Larger & Slightly Forward)': {
+        posX: 2.15,
+        posY: 0.85,
+        posZ: 0.35,
+        scale: 0.92,
+        rotX: -0.55,
+        rotY: -0.62,
+        rotZ: -0.95,
+        cameraZ: 10.5,
+      },
+      'Centered Balance (Between Copy & Edge)': {
+        posX: 1.85,
+        posY: 0.95,
+        posZ: 0.0,
+        scale: 0.82,
+        rotX: -0.58,
+        rotY: -0.65,
+        rotZ: -0.98,
+        cameraZ: 10.5,
+      },
+      'Tighter Compact Offset': {
+        posX: 2.25,
+        posY: 0.75,
+        posZ: -0.20,
+        scale: 0.72,
+        rotX: -0.62,
+        rotY: -0.68,
+        rotZ: -1.02,
+        cameraZ: 10.5,
+      },
+      'Arabic RTL Mirrored': {
+        posX: -2.05,
+        posY: 0.90,
+        posZ: 0.0,
+        scale: 0.78,
+        rotX: -0.59,
+        rotY: 0.66,
+        rotZ: 0.99,
+        cameraZ: 10.5,
+      }
+    };
+
+    fPresets.add(config, 'preset', Object.keys(presets)).name('Select Preset').onChange((pName) => {
+      const p = presets[pName];
+      if (p) {
+        Object.assign(config, p);
+        gui.controllersRecursive().forEach(c => c.updateDisplay());
+        updateHUD();
+      }
+    });
+
+    // SCENE LAYERS TOGGLES
+    const fToggles = gui.addFolder('👁️ Scene Layers');
+    fToggles.add(config, 'showText').name('Show Headline Copy').onChange(val => {
+      document.getElementById('heroContent').style.opacity = val ? '1' : '0';
+    });
+    fToggles.add(config, 'showWaves').name('Show Wave Particles').onChange(val => {
+      waveParticleSystem.visible = val;
+      waveLineMesh.visible = val;
+    });
+
+    // --- 8. Code Snippet Generation ---
+    function generateCodeSnippet() {
+      return `// --- Tuned 3D Ring Coordinates for HeroRing3D.tsx ---
+const ringBaseX = ${config.posX.toFixed(2)};
+const ringBaseY = ${config.posY.toFixed(2)};
+const ringBaseZ = ${config.posZ.toFixed(2)};
+const ringBaseScale = ${config.scale.toFixed(2)};
+
+const baseRotX = ${config.rotX.toFixed(2)};
+const baseRotY = ${config.rotY.toFixed(2)};
+const baseRotZ = ${config.rotZ.toFixed(2)};
+
+// In HeroRing3D.tsx:
+// heroGroup.position.set(ringBaseX, ringBaseY, ringBaseZ);
+// heroGroup.scale.setScalar(ringBaseScale);
+// heroGroup.rotation.set(baseRotX, baseRotY, baseRotZ);
+// camera.position.set(0, 0, ${config.cameraZ.toFixed(1)});`;
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    function copyToClipboard(text, msg) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(msg || 'Copied to clipboard!');
+      }).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast(msg || 'Copied to clipboard!');
+      });
+    }
+
+    document.getElementById('btnCopyConfig').addEventListener('click', () => {
+      copyToClipboard(JSON.stringify(config, null, 2), 'Ring Config JSON copied!');
+    });
+
+    document.getElementById('btnToggleText').addEventListener('click', () => {
+      config.showText = !config.showText;
+      document.getElementById('heroContent').style.opacity = config.showText ? '1' : '0';
+    });
+
+    document.getElementById('btnReset').addEventListener('click', () => {
+      Object.assign(config, defaults);
+      gui.controllersRecursive().forEach(c => c.updateDisplay());
+      updateHUD();
+      showToast('Reset to defaults');
+    });
+
+    const modal = document.getElementById('codeModal');
+    const codeOutput = document.getElementById('codeOutput');
+
+    document.getElementById('btnViewCode').addEventListener('click', () => {
+      codeOutput.textContent = generateCodeSnippet();
+      modal.classList.add('open');
+    });
+
+    document.getElementById('btnCloseModal').addEventListener('click', () => {
+      modal.classList.remove('open');
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.remove('open');
+    });
+
+    document.getElementById('btnCopyModalCode').addEventListener('click', () => {
+      copyToClipboard(generateCodeSnippet(), 'Code snippet copied!');
+    });
+
+    // --- 9. Mouse Parallax Tracking ---
+    let mouseX = 0;
+    let mouseY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+    });
+
+    // --- 10. Animation Loop ---
+    const clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const elapsedTime = clock.getElapsedTime();
+
+      // Undulate wave shaders
+      waveShaderMaterial.uniforms.uTime.value = elapsedTime;
+      lineShaderMaterial.uniforms.uTime.value = elapsedTime;
+
+      // In-place orbital circular motion
+      let circleX = 0;
+      let circleY = 0;
+      let tiltX = 0;
+      let tiltY = 0;
+
+      if (config.enableOrbit) {
+        const orbitAngle = elapsedTime * config.orbitSpeed;
+        circleX = Math.cos(orbitAngle) * config.orbitAmplitudeX;
+        circleY = Math.sin(orbitAngle) * config.orbitAmplitudeY;
+        tiltX = Math.sin(orbitAngle) * config.orbitTilt;
+        tiltY = Math.cos(orbitAngle) * config.orbitTilt;
+      }
+
+      // Parallax offset
+      const pX = config.enableParallax ? mouseX * config.parallaxStrength : 0;
+      const pY = config.enableParallax ? -mouseY * (config.parallaxStrength * 0.7) : 0;
+
+      // Smooth target calculation
+      const targetX = config.posX + circleX + pX;
+      const targetY = config.posY + circleY + pY;
+      const targetZ = config.posZ;
+
+      const targetRotX = config.rotX + tiltX + (-mouseY * 0.22);
+      const targetRotY = config.rotY + tiltY + (mouseX * 0.25);
+      const targetRotZ = config.rotZ + (circleX * 0.12);
+
+      // Apply to ring group
+      heroGroup.position.x += (targetX - heroGroup.position.x) * 0.08;
+      heroGroup.position.y += (targetY - heroGroup.position.y) * 0.08;
+      heroGroup.position.z += (targetZ - heroGroup.position.z) * 0.08;
+
+      heroGroup.rotation.x += (targetRotX - heroGroup.rotation.x) * 0.08;
+      heroGroup.rotation.y += (targetRotY - heroGroup.rotation.y) * 0.08;
+      heroGroup.rotation.z += (targetRotZ - heroGroup.rotation.z) * 0.08;
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+    updateHUD();
+
+    window.addEventListener('resize', () => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    });
+  </script>
+</body>
+</html>
