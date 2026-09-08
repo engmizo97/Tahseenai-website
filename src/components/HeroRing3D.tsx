@@ -503,15 +503,9 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     const waveLineMesh = new THREE.LineSegments(lineGeom, lineShaderMaterial);
     scene.add(waveLineMesh);
 
-    // --- 5. Cursor Parallax & In-Place Circular Impulse Tracking ---
+    // --- 5. Cursor Parallax Tracking ---
     let mouseX = 0;
     let mouseY = 0;
-    let clickSwirlImpulse = 0;
-    let clickImpulseRotX = 0;
-    let clickImpulseRotY = 0;
-    let clickScaleSpring = 1.0;
-    let clickScaleVelocity = 0;
-    let clickGlowBoost = 0.0;
 
     const handleMouseMove = (e: MouseEvent) => {
       // Screen-wide normalized mouse coordinates [-1, 1]
@@ -521,27 +515,7 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
       mouseY = Math.max(-1, Math.min(1, y));
     };
 
-    const handlePointerDown = (e: PointerEvent) => {
-      // Calculate click vector relative to window center
-      const clickX = (e.clientX / window.innerWidth - 0.5) * 2;
-      const clickY = (e.clientY / window.innerHeight - 0.5) * 2;
-
-      // 1. Soft cushion scale impulse
-      clickScaleVelocity = -0.07;
-
-      // 2. Add an in-place circular orbital swirl impulse
-      clickSwirlImpulse += 0.55;
-
-      // 3. Gentle rotational tilt in place towards click angle
-      clickImpulseRotX += -clickY * 0.25;
-      clickImpulseRotY += clickX * 0.30 * (mirrored ? -1 : 1);
-
-      // 4. Subtle glow burst
-      clickGlowBoost = 0.25;
-    };
-
     window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("pointerdown", handlePointerDown);
 
     // --- 6. Resize Observer with Adaptive Mobile Viewport ---
     let isCurrentDesktop = window.innerWidth >= 1024;
@@ -581,35 +555,20 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
       lineShaderMaterial.uniforms.uTime.value = elapsedTime;
       glowUniforms.pulseTime.value = elapsedTime * glowPulseSpeed;
 
-      // --- Spring Physics for Scale ---
-      const springStiffness = 0.16;
-      const springDamping = 0.82;
-      const springForce = (1.0 - clickScaleSpring) * springStiffness;
-      clickScaleVelocity = (clickScaleVelocity + springForce) * springDamping;
-      clickScaleSpring += clickScaleVelocity;
-
-      // --- Decay Click Impulses ---
-      clickSwirlImpulse *= 0.93;
-      clickImpulseRotX *= 0.91;
-      clickImpulseRotY *= 0.91;
-      clickGlowBoost *= 0.92;
-
-      glowUniforms.intensity.value = 0.15 + clickGlowBoost;
-
       // 1. Smooth In-Place Circular Motion (Orbit in XY plane)
       const orbitSpeed = 1.15;
-      const totalOrbitAngle = elapsedTime * orbitSpeed + clickSwirlImpulse * 3.0;
+      const totalOrbitAngle = elapsedTime * orbitSpeed;
       
-      const inPlaceCircleX = Math.cos(totalOrbitAngle) * (0.16 + clickSwirlImpulse * 0.12);
-      const inPlaceCircleY = Math.sin(totalOrbitAngle) * (0.20 + clickSwirlImpulse * 0.14);
+      const inPlaceCircleX = Math.cos(totalOrbitAngle) * 0.16;
+      const inPlaceCircleY = Math.sin(totalOrbitAngle) * 0.20;
 
       // Gyroscopic in-place subtle tilt
       const inPlaceTiltX = Math.sin(totalOrbitAngle) * 0.04;
       const inPlaceTiltY = Math.cos(totalOrbitAngle) * 0.04;
 
       // 2. Cursor Parallax + In-Place Circular Rotation
-      const targetRotX = baseRotX + (-mouseY * 0.26) + inPlaceTiltX + clickImpulseRotX;
-      const targetRotY = baseRotY + (mouseX * 0.30 * (mirrored ? -1 : 1)) + inPlaceTiltY + clickImpulseRotY;
+      const targetRotX = baseRotX + (-mouseY * 0.26) + inPlaceTiltX;
+      const targetRotY = baseRotY + (mouseX * 0.30 * (mirrored ? -1 : 1)) + inPlaceTiltY;
       const targetRotZ = baseRotZ + (-mouseX * 0.10 * (mirrored ? -1 : 1)) + inPlaceCircleX * 0.15;
 
       // 3. Position: Base Position + In-Place Circular Movement + Cursor Parallax (NO Z pushback)
@@ -629,9 +588,9 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
       heroGroup.position.y += (targetPosY - heroGroup.position.y) * 0.06;
       heroGroup.position.z += (targetPosZ - heroGroup.position.z) * 0.06;
 
-      // Apply dynamic scale with spring
+      // Apply dynamic scale
       const currentBaseScale = isCurrentDesktop ? ringBaseScale : isCurrentTablet ? 0.62 : 0.50;
-      heroGroup.scale.setScalar(currentBaseScale * clickScaleSpring);
+      heroGroup.scale.setScalar(currentBaseScale);
 
       renderer.render(scene, camera);
     };
@@ -640,7 +599,6 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("pointerdown", handlePointerDown);
       resizeObserver.disconnect();
       cancelAnimationFrame(animationFrameId);
 
