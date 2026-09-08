@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowRight, Mail, MapPin, Clock, CheckCircle2, MessageSquare, Sparkles, Send, Globe, Menu, X, Sun, Moon } from "lucide-react";
 import Footer from "@/components/Footer";
 import AmbientWaveParticles from "@/components/AmbientWaveParticles";
+import CurvedRibbonBackground from "@/components/CurvedRibbonBackground";
 
 export default function ContactPage() {
   const [lang, setLang] = useState<"ar" | "en">("en");
@@ -129,9 +130,8 @@ export default function ContactPage() {
       dir={isAr ? "rtl" : "ltr"}
       className="relative min-h-screen bg-[#060913] text-white flex flex-col justify-between overflow-x-clip font-sans"
     >
-      {/* Background ambient radial glow */}
-      <div className="absolute top-0 right-1/4 w-[350px] sm:w-[650px] h-[350px] sm:h-[550px] bg-cyan-500/10 rounded-full blur-[140px] sm:blur-[180px] pointer-events-none -z-10" />
-      <div className="absolute bottom-1/4 left-[-80px] w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-[#00E5BE]/5 rounded-full blur-[160px] sm:blur-[200px] pointer-events-none -z-10" />
+      {/* Architectural Sweeping Ribbon & Dashed Grid Background */}
+      <CurvedRibbonBackground theme={theme} />
 
       {/* Ambient Wave Particles */}
       <AmbientWaveParticles theme={theme} />
@@ -162,7 +162,7 @@ export default function ContactPage() {
                   key={link.name}
                   href={link.href}
                   className={`transition-colors duration-200 cursor-pointer ${
-                    link.href === contactHref ? "text-[#00E5BE]" : "hover:text-[#00E5BE]"
+                    link.href === contactHref ? "text-[#008688]" : "hover:text-[#008688]"
                   }`}
                 >
                   {link.name}
@@ -186,7 +186,7 @@ export default function ContactPage() {
               </div>
               <span
                 style={{ left: "2px" }}
-                className={`absolute top-0.5 bottom-0.5 w-5 h-5 rounded-full bg-[#00E5BE] shadow-xs flex items-center justify-center text-[#060913] transition-transform duration-300 transform ${
+                className={`absolute top-0.5 bottom-0.5 w-5 h-5 rounded-full bg-[#008688] shadow-xs flex items-center justify-center text-[#060913] transition-transform duration-300 transform ${
                   isLight ? "translate-x-0" : "translate-x-6"
                 }`}
               >
@@ -198,9 +198,9 @@ export default function ContactPage() {
             <button
               onClick={toggleLanguage}
               aria-label="Toggle language"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-[#00E5BE]/40 text-gray-200 hover:text-[#00E5BE] transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-[#008688]/40 text-gray-200 hover:text-[#008688] transition-all cursor-pointer"
             >
-              <Globe className="w-3.5 h-3.5 text-[#00E5BE]" />
+              <Globe className="w-3.5 h-3.5 text-[#008688]" />
               <span>{isAr ? "English" : "العربية"}</span>
             </button>
 
@@ -228,7 +228,7 @@ export default function ContactPage() {
               </div>
               <span
                 style={{ left: "2px" }}
-                className={`absolute top-0.5 bottom-0.5 w-4.5 h-4.5 rounded-full bg-[#00E5BE] shadow-xs flex items-center justify-center text-[#060913] transition-transform duration-300 transform ${
+                className={`absolute top-0.5 bottom-0.5 w-4.5 h-4.5 rounded-full bg-[#008688] shadow-xs flex items-center justify-center text-[#060913] transition-transform duration-300 transform ${
                   isLight ? "translate-x-0" : "translate-x-5"
                 }`}
               >
@@ -239,16 +239,16 @@ export default function ContactPage() {
             <button
               onClick={toggleLanguage}
               aria-label="Toggle language"
-              className="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-bold rounded-md bg-white/[0.04] border border-white/10 text-gray-200 hover:text-[#00E5BE]"
+              className="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-bold rounded-md bg-white/[0.04] border border-white/10 text-gray-200 hover:text-[#008688]"
             >
-              <Globe className="w-3 h-3 text-[#00E5BE]" />
+              <Globe className="w-3 h-3 text-[#008688]" />
               <span>{isAr ? "EN" : "عربي"}</span>
             </button>
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle mobile menu"
-              className="p-2 rounded-lg bg-white/[0.04] border border-white/10 text-white hover:text-[#00E5BE] transition-colors"
+              className="p-2 rounded-lg bg-white/[0.04] border border-white/10 text-white hover:text-[#008688] transition-colors"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -265,7 +265,7 @@ export default function ContactPage() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="py-2.5 border-b border-white/5 text-gray-200 hover:text-[#00E5BE] transition-colors flex items-center justify-between"
+                  className="py-2.5 border-b border-white/5 text-gray-200 hover:text-[#008688] transition-colors flex items-center justify-between"
                 >
                   <span>{link.name}</span>
                   <ArrowRight className={`w-3.5 h-3.5 text-gray-500 ${isAr ? "rotate-180" : ""}`} />
@@ -281,18 +281,18 @@ export default function ContactPage() {
         
         {/* Header Title */}
         <div className="text-center space-y-3 max-w-3xl mx-auto mb-10 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-xs font-bold tracking-widest uppercase">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-[#008688]/10 border border-[#008688]/30 text-[#008688] text-[10px] sm:text-xs font-bold tracking-widest uppercase">
             <Sparkles className="w-3.5 h-3.5" />
             <span>{isAr ? "تحدث مع خبراء الذكاء الاصطناعي" : "LET'S TALK AI SOLUTIONS"}</span>
           </div>
           <h1 className="text-2xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
             {isAr ? (
               <>
-                ابدأ رحلة <span className="text-[#00E5BE]">التحول بالذكاء الاصطناعي</span>
+                ابدأ رحلة <span className="text-[#008688]">التحول بالذكاء الاصطناعي</span>
               </>
             ) : (
               <>
-                Start Your <span className="text-[#00E5BE]">AI Transformation</span>
+                Start Your <span className="text-[#008688]">AI Transformation</span>
               </>
             )}
           </h1>
@@ -309,7 +309,7 @@ export default function ContactPage() {
           <div className="lg:col-span-7 bg-white/[0.02] border border-white/[0.06] rounded-2xl sm:rounded-3xl p-5 sm:p-10 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.4)] text-start">
             {formSubmitted ? (
               <div className="py-12 sm:py-16 text-center space-y-6">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE] text-[#00E5BE] flex items-center justify-center mx-auto shadow-[0_0_30px_rgba(0,229,190,0.3)]">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#008688]/10 border border-[#008688] text-[#008688] flex items-center justify-center mx-auto shadow-[0_0_30px_rgba(0,134,136,0.3)]">
                   <CheckCircle2 className="w-7 h-7 sm:w-8 sm:h-8" />
                 </div>
                 <div className="space-y-2">
@@ -319,11 +319,11 @@ export default function ContactPage() {
                   <p className="text-xs sm:text-sm text-gray-300 max-w-md mx-auto leading-relaxed">
                     {isAr ? (
                       <>
-                        شكراً لك، <span className="text-white font-semibold">{formData.fullName}</span>. سيقوم فريقنا الهندسي في الرياض بمراجعة تفاصيل مشروعك والتواصل معك عبر البريد <span className="text-[#00E5BE]">{formData.email}</span> خلال ٢٤ ساعة عمل.
+                        شكراً لك، <span className="text-white font-semibold">{formData.fullName}</span>. سيقوم فريقنا الهندسي في الرياض بمراجعة تفاصيل مشروعك والتواصل معك عبر البريد <span className="text-[#008688]">{formData.email}</span> خلال ٢٤ ساعة عمل.
                       </>
                     ) : (
                       <>
-                        Thank you, <span className="text-white font-semibold">{formData.fullName}</span>. Our AI engineering team in Riyadh will review your project details and get back to you at <span className="text-[#00E5BE]">{formData.email}</span> within 24 business hours.
+                        Thank you, <span className="text-white font-semibold">{formData.fullName}</span>. Our AI engineering team in Riyadh will review your project details and get back to you at <span className="text-[#008688]">{formData.email}</span> within 24 business hours.
                       </>
                     )}
                   </p>
@@ -341,7 +341,7 @@ export default function ContactPage() {
                   {/* Full Name */}
                   <div className="space-y-1.5">
                     <label className="text-[11px] sm:text-xs font-bold text-gray-300 uppercase tracking-wider">
-                      {isAr ? "الاسم الكامل" : "Your Name"} <span className="text-[#00E5BE]">*</span>
+                      {isAr ? "الاسم الكامل" : "Your Name"} <span className="text-[#008688]">*</span>
                     </label>
                     <input
                       type="text"
@@ -349,14 +349,14 @@ export default function ContactPage() {
                       placeholder={isAr ? "مثال: سلطان العتيبي" : "e.g. Sultan Al-Otaibi"}
                       value={formData.fullName}
                       onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                      className="w-full px-3.5 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#00E5BE] focus:ring-1 focus:ring-[#00E5BE] transition-colors text-sm"
+                      className="w-full px-3.5 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#008688] focus:ring-1 focus:ring-[#008688] transition-colors text-sm"
                     />
                   </div>
 
                   {/* Work Email */}
                   <div className="space-y-1.5">
                     <label className="text-[11px] sm:text-xs font-bold text-gray-300 uppercase tracking-wider">
-                      {isAr ? "البريد الإلكتروني للعمل" : "Work Email"} <span className="text-[#00E5BE]">*</span>
+                      {isAr ? "البريد الإلكتروني للعمل" : "Work Email"} <span className="text-[#008688]">*</span>
                     </label>
                     <input
                       type="email"
@@ -364,7 +364,7 @@ export default function ContactPage() {
                       placeholder="sultan@company.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-3.5 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#00E5BE] focus:ring-1 focus:ring-[#00E5BE] transition-colors text-sm"
+                      className="w-full px-3.5 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#008688] focus:ring-1 focus:ring-[#008688] transition-colors text-sm"
                     />
                   </div>
                 </div>
@@ -380,7 +380,7 @@ export default function ContactPage() {
                       placeholder={isAr ? "مثال: مجموعة النخبة" : "e.g. Al-Nokhba Group"}
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      className="w-full px-3.5 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#00E5BE] focus:ring-1 focus:ring-[#00E5BE] transition-colors text-sm"
+                      className="w-full px-3.5 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#008688] focus:ring-1 focus:ring-[#008688] transition-colors text-sm"
                     />
                   </div>
 
@@ -394,7 +394,7 @@ export default function ContactPage() {
                       placeholder="+966 5X XXX XXXX"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-3.5 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#00E5BE] focus:ring-1 focus:ring-[#00E5BE] transition-colors text-sm"
+                      className="w-full px-3.5 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#008688] focus:ring-1 focus:ring-[#008688] transition-colors text-sm"
                     />
                   </div>
                 </div>
@@ -412,7 +412,7 @@ export default function ContactPage() {
                         onClick={() => setFormData({ ...formData, service: svc })}
                         className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                           formData.service === svc
-                            ? "bg-[#00E5BE] text-[#060913] shadow-[0_0_15px_rgba(0,229,190,0.4)]"
+                            ? "bg-[#008688] text-white shadow-[0_0_15px_rgba(0,134,136,0.4)]"
                             : "bg-white/[0.04] text-gray-300 border border-white/10 hover:border-white/30"
                         }`}
                       >
@@ -425,7 +425,7 @@ export default function ContactPage() {
                 {/* Message */}
                 <div className="space-y-1.5">
                   <label className="text-[11px] sm:text-xs font-bold text-gray-300 uppercase tracking-wider">
-                    {isAr ? "تفاصيل وأهداف المشروع" : "Project Details & Goals"} <span className="text-[#00E5BE]">*</span>
+                    {isAr ? "تفاصيل وأهداف المشروع" : "Project Details & Goals"} <span className="text-[#008688]">*</span>
                   </label>
                   <textarea
                     required
@@ -437,14 +437,14 @@ export default function ContactPage() {
                     }
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-3.5 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#00E5BE] focus:ring-1 focus:ring-[#00E5BE] transition-colors text-sm resize-none"
+                    className="w-full px-3.5 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#008688] focus:ring-1 focus:ring-[#008688] transition-colors text-sm resize-none"
                   />
                 </div>
 
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full py-3.5 rounded-xl bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] font-bold text-xs sm:text-sm uppercase tracking-widest transition-all shadow-[0_4px_25px_rgba(0,229,190,0.4)] flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-3.5 rounded-xl bg-[#008688] text-white hover:brightness-110 font-bold text-xs sm:text-sm uppercase tracking-widest transition-all shadow-[0_4px_25px_rgba(0,134,136,0.4)] flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Send className={`w-4 h-4 ${isAr ? "rotate-180" : ""}`} />
                   <span>{isAr ? "إرسال طلب المشروع ←" : "SEND INQUIRY →"}</span>
@@ -457,7 +457,7 @@ export default function ContactPage() {
           <div className="lg:col-span-5 space-y-6 text-start">
             
             {/* Direct Contact Card */}
-            <div className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#0c1f24] via-[#07131a] to-[#060913] border border-[#00E5BE]/30 space-y-5 shadow-[0_12px_40px_rgba(0,229,190,0.1)]">
+            <div className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#0c1f24] via-[#07131a] to-[#060913] border border-[#008688]/30 space-y-5 shadow-[0_12px_40px_rgba(0,134,136,0.1)]">
               <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">
                 {isAr ? "معلومات التواصل المباشر" : "Direct Contact Details"}
               </h3>
@@ -465,9 +465,9 @@ export default function ContactPage() {
               <div className="space-y-4 text-xs sm:text-sm">
                 <a
                   href="mailto:info@tahseenai.com"
-                  className="flex items-center gap-3 text-gray-300 hover:text-[#00E5BE] transition-colors group"
+                  className="flex items-center gap-3 text-gray-300 hover:text-[#008688] transition-colors group"
                 >
-                  <div className="w-9 h-9 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] group-hover:scale-110 transition-transform flex-shrink-0">
+                  <div className="w-9 h-9 rounded-xl bg-[#008688]/10 border border-[#008688]/20 flex items-center justify-center text-[#008688] group-hover:scale-110 transition-transform flex-shrink-0">
                     <Mail className="w-4 h-4" />
                   </div>
                   <div>
@@ -479,7 +479,7 @@ export default function ContactPage() {
                 </a>
 
                 <div className="flex items-center gap-3 text-gray-300">
-                  <div className="w-9 h-9 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] flex-shrink-0">
+                  <div className="w-9 h-9 rounded-xl bg-[#008688]/10 border border-[#008688]/20 flex items-center justify-center text-[#008688] flex-shrink-0">
                     <MapPin className="w-4 h-4" />
                   </div>
                   <div>
@@ -493,7 +493,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-center gap-3 text-gray-300">
-                  <div className="w-9 h-9 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] flex-shrink-0">
+                  <div className="w-9 h-9 rounded-xl bg-[#008688]/10 border border-[#008688]/20 flex items-center justify-center text-[#008688] flex-shrink-0">
                     <Clock className="w-4 h-4" />
                   </div>
                   <div>
@@ -510,18 +510,18 @@ export default function ContactPage() {
 
             {/* Social Commitment */}
             <div className="p-5 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-2.5">
-              <div className="flex items-center gap-2 text-[#00E5BE] font-bold text-xs uppercase tracking-wider">
+              <div className="flex items-center gap-2 text-[#008688] font-bold text-xs uppercase tracking-wider">
                 <Sparkles className="w-4 h-4" />
                 <span>{isAr ? "التزامنا تجاه المجتمع السعودي" : "National Impact Pledge"}</span>
               </div>
               <p className="text-xs text-gray-300 leading-relaxed">
                 {isAr ? (
                   <>
-                    نلتزم بالتبرع بنسبة <strong className="text-white">١٪ من عوائد أعمالنا</strong> لصالح <strong className="text-[#00E5BE]">منصة إحسان (Ehsan Platform)</strong> لدعم المبادرات الخيرية في المملكة.
+                    نلتزم بالتبرع بنسبة <strong className="text-white">١٪ من عوائد أعمالنا</strong> لصالح <strong className="text-[#008688]">منصة إحسان (Ehsan Platform)</strong> لدعم المبادرات الخيرية في المملكة.
                   </>
                 ) : (
                   <>
-                    We proudly donate <strong className="text-white">1% of all revenue</strong> to the <strong className="text-[#00E5BE]">Ehsan Platform (منصة إحسان)</strong> to support social development across Saudi Arabia.
+                    We proudly donate <strong className="text-white">1% of all revenue</strong> to the <strong className="text-[#008688]">Ehsan Platform (منصة إحسان)</strong> to support social development across Saudi Arabia.
                   </>
                 )}
               </p>

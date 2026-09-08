@@ -252,51 +252,119 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
 
     const glowPulseSpeed = 1.7;
 
-    // --- 4. Digital Particle Wave ---
-    const cols = 110;
-    const rows = 48;
-    const totalParticles = rows * cols;
+    // --- 4. Digital Particle Wave (Tuned to HBD Reference) ---
+    const numStrands = 43;
+    const ptsPerStrand = 270;
+    const totalParticles = numStrands * ptsPerStrand;
 
     const waveGeom = new THREE.BufferGeometry();
     const positions = new Float32Array(totalParticles * 3);
     const alphas = new Float32Array(totalParticles);
     const sizes = new Float32Array(totalParticles);
 
+    const strandSpread = 15.0;
+    const waveArcHeight = 1.4;
+    const waveArcCenter = -0.5;
+    const waveTwist = 0.8;
+    const gridWidth = 81.0;
+
+    const sparkleChance = 0.07;
+    const sparkleSizeMult = 3.8;
+    const filamentSize = 0.16;
+    const sparkleBrightness = 0.9;
+    const filamentBrightness = 0.85;
+
+    const leftFadeStart = -0.1;
+    const leftFadeEnd = -0.1;
+    const leftFadePower = 1.95;
+
+    const rightFadeStart = 0.2;
+    const rightFadeEnd = 1.0;
+    const rightFadePower = 1.5;
+
+    const waveElevationY = -2.35;
+    const waveAmplitude = 0.65;
+    const waveSpeed = 0.6;
+    const depthFadePower = 0.5;
+
+    function computeLeftFade(uNorm: number) {
+      if (leftFadeEnd <= leftFadeStart) {
+        return uNorm >= leftFadeEnd ? 1.0 : 0.0;
+      }
+      if (uNorm <= leftFadeStart) return 0.0;
+      if (uNorm >= leftFadeEnd) return 1.0;
+      const t = (uNorm - leftFadeStart) / (leftFadeEnd - leftFadeStart);
+      const smooth = t * t * (3.0 - 2.0 * t);
+      return Math.pow(Math.max(0.0, Math.min(1.0, smooth)), leftFadePower);
+    }
+
+    function computeRightFade(uNorm: number) {
+      if (rightFadeEnd <= rightFadeStart) {
+        return uNorm <= rightFadeStart ? 1.0 : 0.0;
+      }
+      if (uNorm <= rightFadeStart) return 1.0;
+      if (uNorm >= rightFadeEnd) return 0.0;
+      const t = (rightFadeEnd - uNorm) / (rightFadeEnd - rightFadeStart);
+      const smooth = t * t * (3.0 - 2.0 * t);
+      return Math.pow(Math.max(0.0, Math.min(1.0, smooth)), rightFadePower);
+    }
+
+    function getHorizontalFade(uNorm: number) {
+      return uNorm < 0.0 ? computeLeftFade(uNorm) : computeRightFade(uNorm);
+    }
+
+    function pseudoRandom(seed: number) {
+      const x = Math.sin(seed * 9999) * 10000;
+      return x - Math.floor(x);
+    }
+
     let pIdx = 0;
-    const gridWidth = 58.0;
-    const gridDepth = 32.0;
-    const waveElevationY = -1.55;
-    const waveAmplitude = 1.0;
-    const waveAlphaMax = 1.0;
-    const waveBaseSize = 0.4;
-    const waveSpeed = 1.0;
+    for (let s = 0; s < numStrands; s++) {
+      const vNorm = (s / (numStrands - 1)) * 2.0 - 1.0;
+      const strandZOffset = vNorm * (strandSpread * 0.5) - 3.8;
 
-    for (let i = 0; i < rows; i++) {
-      for (let j = 0; j < cols; j++) {
-        const uNorm = (j / (cols - 1)) * 2.0 - 1.0;
-        const vNorm = (i / (rows - 1)) * 2.0 - 1.0;
+      for (let p = 0; p < ptsPerStrand; p++) {
+        const uNorm = (p / (ptsPerStrand - 1)) * 2.0 - 1.0;
+        const uZeroToOne = p / (ptsPerStrand - 1);
 
-        const x = uNorm * (gridWidth * 0.5);
-        const z = vNorm * (gridDepth * 0.5) - 3.8;
+        const x = (mirrored ? -uNorm : uNorm) * (gridWidth * 0.5);
 
-        const fadeX = Math.cos(uNorm * Math.PI * 0.5);
+        const zCurve = Math.sin(uZeroToOne * Math.PI) * 2.8;
+        const z = strandZOffset + zCurve;
+
+        const fadeX = getHorizontalFade(uNorm);
+
         const fadeZ = Math.cos(vNorm * Math.PI * 0.5);
-        const edgeFade =
-          Math.pow(Math.max(0.0, fadeX), 1.6) *
-          Math.pow(Math.max(0.0, fadeZ), 1.6);
+        const depthFade = Math.pow(Math.max(0.0, fadeZ), depthFadePower);
 
-        const baseY =
-          (Math.sin(j * 0.18) * waveAmplitude +
-            Math.cos(i * 0.25) * 0.85 +
-            waveElevationY) *
-          edgeFade;
+        const totalEdgeFade = fadeX * depthFade;
+
+        const arcPhase = (x - (mirrored ? -waveArcCenter : waveArcCenter)) / 18.0;
+        const risingArch = Math.exp(-arcPhase * arcPhase) * waveArcHeight;
+
+        const undulatingWave =
+          Math.sin(p * 0.08 + s * 0.22) * waveAmplitude +
+          Math.cos(s * 0.16) * 0.45;
+
+        const strandTwist = vNorm * waveTwist * Math.sin(uZeroToOne * Math.PI);
+        const diagonalLift = (uNorm + 0.3) * 1.25;
+
+        const y = waveElevationY + (risingArch + undulatingWave + strandTwist + diagonalLift) * totalEdgeFade;
 
         positions[pIdx * 3] = x;
-        positions[pIdx * 3 + 1] = baseY;
+        positions[pIdx * 3 + 1] = y;
         positions[pIdx * 3 + 2] = z;
 
-        alphas[pIdx] = edgeFade * waveAlphaMax;
-        sizes[pIdx] = Math.max(0.03, edgeFade * waveBaseSize);
+        const randVal = pseudoRandom(pIdx * 17 + s * 131 + p * 3);
+        const isSparkle = randVal < sparkleChance;
+
+        if (isSparkle) {
+          alphas[pIdx] = totalEdgeFade * sparkleBrightness;
+          sizes[pIdx] = Math.max(0.08, totalEdgeFade * filamentSize * sparkleSizeMult);
+        } else {
+          alphas[pIdx] = totalEdgeFade * filamentBrightness;
+          sizes[pIdx] = Math.max(0.02, totalEdgeFade * filamentSize);
+        }
 
         pIdx++;
       }
@@ -307,18 +375,18 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     waveGeom.setAttribute("size", new THREE.BufferAttribute(sizes, 1));
 
     const pCanvas = document.createElement("canvas");
-    pCanvas.width = 64;
-    pCanvas.height = 64;
+    pCanvas.width = 128;
+    pCanvas.height = 128;
     const pCtx = pCanvas.getContext("2d");
     if (pCtx) {
-      const pGrad = pCtx.createRadialGradient(32, 32, 0, 32, 32, 30);
-      pGrad.addColorStop(0, "rgba(255, 255, 255, 1.0)");
-      pGrad.addColorStop(0.2, "rgba(0, 245, 212, 1.0)");
-      pGrad.addColorStop(0.5, "rgba(6, 182, 212, 0.85)");
-      pGrad.addColorStop(0.8, "rgba(0, 180, 216, 0.3)");
-      pGrad.addColorStop(1, "rgba(0, 0, 0, 0.0)");
+      const pGrad = pCtx.createRadialGradient(64, 64, 0, 64, 64, 60);
+      pGrad.addColorStop(0.00, "rgba(255, 255, 255, 1.0)");
+      pGrad.addColorStop(0.18, "rgba(0, 245, 212, 1.0)");
+      pGrad.addColorStop(0.42, "rgba(0, 180, 216, 0.85)");
+      pGrad.addColorStop(0.70, "rgba(0, 134, 136, 0.35)");
+      pGrad.addColorStop(1.00, "rgba(0, 0, 0, 0.0)");
       pCtx.fillStyle = pGrad;
-      pCtx.fillRect(0, 0, 64, 64);
+      pCtx.fillRect(0, 0, 128, 128);
     }
     const pTexture = new THREE.CanvasTexture(pCanvas);
 
@@ -339,12 +407,12 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
           vAlpha = alpha;
           
           vec3 pos = position;
-          float wave = sin(pos.x * 0.22 + uTime * uWaveSpeed * 1.2) * 0.35 +
-                       cos(pos.z * 0.18 + uTime * uWaveSpeed * 0.8) * 0.25;
-          pos.y += wave * alpha;
+          float wave = sin(pos.x * 0.22 + uTime * uWaveSpeed * 1.1 + pos.z * 0.14) * 0.38 +
+                       cos(pos.z * 0.20 + uTime * uWaveSpeed * 0.85) * 0.25;
+          pos.y += wave * (0.25 + alpha * 0.75);
 
           vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-          gl_PointSize = size * (380.0 / -mvPosition.z);
+          gl_PointSize = size * (390.0 / -mvPosition.z);
           gl_Position = projectionMatrix * mvPosition;
         }
       `,
@@ -353,8 +421,8 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
         varying float vAlpha;
         void main() {
           vec4 texColor = texture2D(pointTexture, gl_PointCoord);
-          if (texColor.a < 0.05) discard;
-          gl_FragColor = vec4(texColor.rgb, texColor.a * vAlpha * 0.95);
+          if (texColor.a < 0.02) discard;
+          gl_FragColor = vec4(texColor.rgb, texColor.a * vAlpha * 0.98);
         }
       `,
       transparent: true,
@@ -364,6 +432,76 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
 
     const waveParticleSystem = new THREE.Points(waveGeom, waveShaderMaterial);
     scene.add(waveParticleSystem);
+
+    // --- 4b. Faint Architectural Gridlines in Between Particles ---
+    const lineIndices: number[] = [];
+
+    // Longitudinal gridlines (along each strand)
+    for (let s = 0; s < numStrands; s++) {
+      for (let p = 0; p < ptsPerStrand - 1; p++) {
+        const idx1 = s * ptsPerStrand + p;
+        const idx2 = s * ptsPerStrand + p + 1;
+        lineIndices.push(idx1, idx2);
+      }
+    }
+
+    // Transverse cross-gridlines (across adjacent strands every 3 points)
+    const crossStep = 3;
+    for (let p = 0; p < ptsPerStrand; p += crossStep) {
+      for (let s = 0; s < numStrands - 1; s++) {
+        const idx1 = s * ptsPerStrand + p;
+        const idx2 = (s + 1) * ptsPerStrand + p;
+        lineIndices.push(idx1, idx2);
+      }
+    }
+
+    const lineGeom = new THREE.BufferGeometry();
+    lineGeom.setAttribute("position", waveGeom.getAttribute("position"));
+    lineGeom.setAttribute("alpha", waveGeom.getAttribute("alpha"));
+    lineGeom.setIndex(lineIndices);
+
+    const lineShaderMaterial = new THREE.ShaderMaterial({
+      uniforms: {
+        uTime: { value: 0.0 },
+        uWaveSpeed: { value: waveSpeed },
+        uLineColor: { value: new THREE.Color(0x00d2b4) },
+        uLineOpacity: { value: 0.14 },
+      },
+      vertexShader: `
+        attribute float alpha;
+        varying float vAlpha;
+        uniform float uTime;
+        uniform float uWaveSpeed;
+        
+        void main() {
+          vAlpha = alpha;
+          
+          vec3 pos = position;
+          float wave = sin(pos.x * 0.22 + uTime * uWaveSpeed * 1.1 + pos.z * 0.14) * 0.38 +
+                       cos(pos.z * 0.20 + uTime * uWaveSpeed * 0.85) * 0.25;
+          pos.y += wave * (0.25 + alpha * 0.75);
+
+          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+          gl_Position = projectionMatrix * mvPosition;
+        }
+      `,
+      fragmentShader: `
+        uniform vec3 uLineColor;
+        uniform float uLineOpacity;
+        varying float vAlpha;
+        
+        void main() {
+          if (vAlpha < 0.02) discard;
+          gl_FragColor = vec4(uLineColor, vAlpha * uLineOpacity);
+        }
+      `,
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+
+    const waveLineMesh = new THREE.LineSegments(lineGeom, lineShaderMaterial);
+    scene.add(waveLineMesh);
 
     // --- 5. Cursor Parallax & In-Place Circular Impulse Tracking ---
     let mouseX = 0;
@@ -440,6 +578,7 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
       const elapsedTime = clock.getElapsedTime();
 
       waveShaderMaterial.uniforms.uTime.value = elapsedTime;
+      lineShaderMaterial.uniforms.uTime.value = elapsedTime;
       glowUniforms.pulseTime.value = elapsedTime * glowPulseSpeed;
 
       // --- Spring Physics for Scale ---
@@ -508,6 +647,8 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
       renderer.dispose();
       waveGeom.dispose();
       waveShaderMaterial.dispose();
+      lineGeom.dispose();
+      lineShaderMaterial.dispose();
       ringGlowGeom.dispose();
       ringGlowShader.dispose();
       pTexture.dispose();

@@ -97,7 +97,7 @@ export default function Footer({ lang = "en", theme = "dark" }: FooterProps) {
   const t = isAr ? content.ar : content.en;
 
   return (
-    <footer className="relative z-10 bg-[#04060d] border-t border-white/[0.06] pt-16 sm:pt-20 pb-12 text-gray-400 font-sans">
+    <footer className="relative z-10 bg-[#0f1629] border-t border-white/[0.08] pt-16 sm:pt-20 pb-12 text-gray-400 font-sans">
       <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-12 xl:px-16 space-y-16">
         
         {/* Main Footer Grid */}
@@ -106,7 +106,7 @@ export default function Footer({ lang = "en", theme = "dark" }: FooterProps) {
           {/* Column 1: Brand Info & Mission */}
           <div className="lg:col-span-4 space-y-6">
             <Link href={isAr ? "/" : "/?lang=en"} className="flex items-center group">
-              <div className="relative h-11 w-52 sm:h-12 sm:w-60 transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_15px_rgba(0,229,190,0.3)]">
+              <div className="relative h-11 w-52 sm:h-12 sm:w-60 transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_15px_rgba(0,134,136,0.3)]">
                 <Image
                   src={isLight ? "/tahseen-logo-light.png" : "/tahseen-logo.png"}
                   alt="Tahseen AI"
@@ -124,11 +124,11 @@ export default function Footer({ lang = "en", theme = "dark" }: FooterProps) {
             {/* Saudi Regional Identity & Ehsan Pledge */}
             <div className="space-y-2.5 pt-2">
               <div className="flex items-center gap-2 text-xs font-semibold text-gray-300">
-                <MapPin className="w-4 h-4 text-[#00E5BE] flex-shrink-0" />
+                <MapPin className="w-4 h-4 text-[#008688] flex-shrink-0" />
                 <span>{t.hq}</span>
               </div>
               <div className="flex items-center gap-2 text-xs font-medium text-gray-300">
-                <HeartHandshake className="w-4 h-4 text-[#00E5BE] flex-shrink-0" />
+                <HeartHandshake className="w-4 h-4 text-[#008688] flex-shrink-0" />
                 <span>{t.social}</span>
               </div>
             </div>
@@ -144,7 +144,7 @@ export default function Footer({ lang = "en", theme = "dark" }: FooterProps) {
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className={`inline-block hover:text-[#00E5BE] transition-all duration-200 ${
+                    className={`inline-block hover:text-[#008688] transition-all duration-200 ${
                       isAr ? "hover:-translate-x-1.5" : "hover:translate-x-1.5"
                     }`}
                   >
@@ -165,7 +165,7 @@ export default function Footer({ lang = "en", theme = "dark" }: FooterProps) {
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className={`inline-block hover:text-[#00E5BE] transition-all duration-200 ${
+                    className={`inline-block hover:text-[#008688] transition-all duration-200 ${
                       isAr ? "hover:-translate-x-1.5" : "hover:translate-x-1.5"
                     }`}
                   >
@@ -187,14 +187,14 @@ export default function Footer({ lang = "en", theme = "dark" }: FooterProps) {
 
             <a
               href="mailto:info@tahseenai.com"
-              className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/[0.02] hover:bg-[#00E5BE]/10 border border-white/[0.08] hover:border-[#00E5BE]/40 transition-all duration-300 group hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(0,229,190,0.15)]"
+              className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/[0.02] hover:bg-[#008688]/10 border border-white/[0.08] hover:border-[#008688]/40 transition-all duration-300 group hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(0,134,136,0.15)]"
             >
-              <div className="w-8 h-8 rounded-xl bg-[#00E5BE]/10 text-[#00E5BE] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+              <div className="w-8 h-8 rounded-xl bg-[#008688]/10 text-[#008688] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                 <Mail className="w-4 h-4" />
               </div>
               <div>
                 <div className="text-[10px] uppercase font-bold text-gray-400">{t.emailLabel}</div>
-                <div className="text-xs font-bold text-white group-hover:text-[#00E5BE] transition-colors">
+                <div className="text-xs font-bold text-white group-hover:text-[#008688] transition-colors">
                   info@tahseenai.com
                 </div>
               </div>
@@ -202,7 +202,7 @@ export default function Footer({ lang = "en", theme = "dark" }: FooterProps) {
 
             <Link
               href={contactHref}
-              className="w-full inline-flex items-center justify-center py-3.5 px-4 rounded-xl bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] font-bold text-xs uppercase tracking-widest transition-all shadow-[0_4px_20px_rgba(0,229,190,0.3)] hover:shadow-[0_6px_25px_rgba(0,229,190,0.5)] hover:-translate-y-0.5 gap-1.5"
+              className="w-full inline-flex items-center justify-center py-3.5 px-4 rounded-xl bg-[#008688] text-white hover:brightness-110 font-bold text-xs uppercase tracking-widest transition-all shadow-[0_4px_20px_rgba(0,134,136,0.3)] hover:shadow-[0_6px_25px_rgba(0,134,136,0.5)] hover:-translate-y-0.5 gap-1.5"
             >
               <span>{t.letsTalk}</span>
               <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
@@ -218,16 +218,16 @@ export default function Footer({ lang = "en", theme = "dark" }: FooterProps) {
           </div>
 
           <div className="flex items-center gap-6 text-gray-400">
-            <Link href={isAr ? "/#about" : "/?lang=en#about"} className="hover:text-[#00E5BE] transition-colors">
+            <Link href={isAr ? "/#about" : "/?lang=en#about"} className="hover:text-[#008688] transition-colors">
               {t.privacy}
             </Link>
-            <Link href={isAr ? "/#about" : "/?lang=en#about"} className="hover:text-[#00E5BE] transition-colors">
+            <Link href={isAr ? "/#about" : "/?lang=en#about"} className="hover:text-[#008688] transition-colors">
               {t.terms}
             </Link>
-            <Link href={isAr ? "/#insights" : "/?lang=en#insights"} className="hover:text-[#00E5BE] transition-colors">
+            <Link href={isAr ? "/#insights" : "/?lang=en#insights"} className="hover:text-[#008688] transition-colors">
               {t.security}
             </Link>
-            <span className="text-[#00E5BE] font-semibold">{t.vision}</span>
+            <span className="text-[#008688] font-semibold">{t.vision}</span>
           </div>
         </div>
 
