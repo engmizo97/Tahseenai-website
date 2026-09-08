@@ -694,7 +694,11 @@ export default function Home() {
       </header>
 
       {/* 2. Hero Section */}
-      <main id="home" className="relative z-10 pt-10 sm:pt-14 lg:pt-18 pb-6 sm:pb-8 lg:pb-10 px-4 sm:px-8 lg:px-16 max-w-[1680px] mx-auto w-full">
+      <main
+        id="home"
+        style={{ minHeight: "calc(100dvh - 65px)" }}
+        className="relative z-10 pt-14 sm:pt-18 lg:pt-22 pb-10 sm:pb-14 px-4 sm:px-8 lg:px-16 max-w-[1680px] mx-auto w-full flex flex-col justify-between"
+      >
         
         {/* 3D Canvas Layer */}
         <HeroRing3D mirrored={isAr} />
