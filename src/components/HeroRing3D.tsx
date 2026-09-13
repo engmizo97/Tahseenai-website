@@ -27,7 +27,7 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
       0.1,
       1000
     );
-    camera.position.set(0, 0, isMobileInitial ? 11.5 : 10.5);
+    camera.position.set(0, 0, isMobileInitial ? 11.8 : 10.5);
 
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -258,6 +258,7 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     const totalParticles = numStrands * ptsPerStrand;
 
     const waveGeom = new THREE.BufferGeometry();
+    let lineGeom: THREE.BufferGeometry | null = null;
     const positions = new Float32Array(totalParticles * 3);
     const alphas = new Float32Array(totalParticles);
     const sizes = new Float32Array(totalParticles);
@@ -318,57 +319,75 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
       return x - Math.floor(x);
     }
 
-    let pIdx = 0;
-    for (let s = 0; s < numStrands; s++) {
-      const vNorm = (s / (numStrands - 1)) * 2.0 - 1.0;
-      const strandZOffset = vNorm * (strandSpread * 0.5) - 3.8;
+    const buildWavePositions = (mobile: boolean) => {
+      const elevation = mobile ? -1.85 : -2.35;
+      const amp = mobile ? 0.68 : 0.65;
+      const arcCenter = mobile ? 0.1 : -0.5;
 
-      for (let p = 0; p < ptsPerStrand; p++) {
-        const uNorm = (p / (ptsPerStrand - 1)) * 2.0 - 1.0;
-        const uZeroToOne = p / (ptsPerStrand - 1);
+      let pIdx = 0;
+      for (let s = 0; s < numStrands; s++) {
+        const vNorm = (s / (numStrands - 1)) * 2.0 - 1.0;
+        const strandZOffset = vNorm * (strandSpread * 0.5) - 3.8;
 
-        const x = (mirrored ? -uNorm : uNorm) * (gridWidth * 0.5);
+        for (let p = 0; p < ptsPerStrand; p++) {
+          const uNorm = (p / (ptsPerStrand - 1)) * 2.0 - 1.0;
+          const uZeroToOne = p / (ptsPerStrand - 1);
 
-        const zCurve = Math.sin(uZeroToOne * Math.PI) * 2.8;
-        const z = strandZOffset + zCurve;
+          const x = (mirrored ? -uNorm : uNorm) * (gridWidth * 0.5);
 
-        const fadeX = getHorizontalFade(uNorm);
+          const zCurve = Math.sin(uZeroToOne * Math.PI) * 2.8;
+          const z = strandZOffset + zCurve;
 
-        const fadeZ = Math.cos(vNorm * Math.PI * 0.5);
-        const depthFade = Math.pow(Math.max(0.0, fadeZ), depthFadePower);
+          const fadeX = getHorizontalFade(uNorm);
 
-        const totalEdgeFade = fadeX * depthFade;
+          const fadeZ = Math.cos(vNorm * Math.PI * 0.5);
+          const depthFade = Math.pow(Math.max(0.0, fadeZ), depthFadePower);
 
-        const arcPhase = (x - (mirrored ? -waveArcCenter : waveArcCenter)) / 18.0;
-        const risingArch = Math.exp(-arcPhase * arcPhase) * waveArcHeight;
+          const totalEdgeFade = fadeX * depthFade;
 
-        const undulatingWave =
-          Math.sin(p * 0.08 + s * 0.22) * waveAmplitude +
-          Math.cos(s * 0.16) * 0.45;
+          const arcPhase = (x - (mirrored ? -arcCenter : arcCenter)) / 18.0;
+          const risingArch = Math.exp(-arcPhase * arcPhase) * waveArcHeight;
 
-        const strandTwist = vNorm * waveTwist * Math.sin(uZeroToOne * Math.PI);
-        const diagonalLift = (uNorm + 0.3) * 1.25;
+          const undulatingWave =
+            Math.sin(p * 0.08 + s * 0.22) * amp +
+            Math.cos(s * 0.16) * 0.45;
 
-        const y = waveElevationY + (risingArch + undulatingWave + strandTwist + diagonalLift) * totalEdgeFade;
+          const strandTwist = vNorm * waveTwist * Math.sin(uZeroToOne * Math.PI);
+          const diagonalLift = (uNorm + 0.3) * 1.25;
 
-        positions[pIdx * 3] = x;
-        positions[pIdx * 3 + 1] = y;
-        positions[pIdx * 3 + 2] = z;
+          const y = elevation + (risingArch + undulatingWave + strandTwist + diagonalLift) * totalEdgeFade;
 
-        const randVal = pseudoRandom(pIdx * 17 + s * 131 + p * 3);
-        const isSparkle = randVal < sparkleChance;
+          positions[pIdx * 3] = x;
+          positions[pIdx * 3 + 1] = y;
+          positions[pIdx * 3 + 2] = z;
 
-        if (isSparkle) {
-          alphas[pIdx] = totalEdgeFade * sparkleBrightness;
-          sizes[pIdx] = Math.max(0.08, totalEdgeFade * filamentSize * sparkleSizeMult);
-        } else {
-          alphas[pIdx] = totalEdgeFade * filamentBrightness;
-          sizes[pIdx] = Math.max(0.02, totalEdgeFade * filamentSize);
+          const randVal = pseudoRandom(pIdx * 17 + s * 131 + p * 3);
+          const isSparkle = randVal < sparkleChance;
+
+          if (isSparkle) {
+            alphas[pIdx] = totalEdgeFade * sparkleBrightness;
+            sizes[pIdx] = Math.max(0.08, totalEdgeFade * filamentSize * sparkleSizeMult);
+          } else {
+            alphas[pIdx] = totalEdgeFade * filamentBrightness;
+            sizes[pIdx] = Math.max(0.02, totalEdgeFade * filamentSize);
+          }
+
+          pIdx++;
         }
-
-        pIdx++;
       }
-    }
+
+      if (waveGeom.attributes.position) {
+        waveGeom.attributes.position.needsUpdate = true;
+        waveGeom.attributes.alpha.needsUpdate = true;
+        waveGeom.attributes.size.needsUpdate = true;
+      }
+      if (lineGeom && lineGeom.attributes.position) {
+        lineGeom.attributes.position.needsUpdate = true;
+        lineGeom.attributes.alpha.needsUpdate = true;
+      }
+    };
+
+    buildWavePositions(isMobileInitial);
 
     waveGeom.setAttribute("position", new THREE.BufferAttribute(positions, 3));
     waveGeom.setAttribute("alpha", new THREE.BufferAttribute(alphas, 1));
@@ -455,7 +474,7 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
       }
     }
 
-    const lineGeom = new THREE.BufferGeometry();
+    lineGeom = new THREE.BufferGeometry();
     lineGeom.setAttribute("position", waveGeom.getAttribute("position"));
     lineGeom.setAttribute("alpha", waveGeom.getAttribute("alpha"));
     lineGeom.setIndex(lineIndices);
@@ -524,6 +543,8 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     let responsiveBaseX = ringBaseX;
     let responsiveBaseY = ringBaseY;
 
+    let lastWasMobile = isMobileInitial;
+
     const handleResize = () => {
       if (!container) return;
       const w = container.clientWidth || window.innerWidth;
@@ -531,6 +552,11 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
       const isMobile = w < 640;
       isCurrentDesktop = w >= 1024;
       isCurrentTablet = w >= 640 && w < 1024;
+
+      if (isMobile !== lastWasMobile) {
+        lastWasMobile = isMobile;
+        buildWavePositions(isMobile);
+      }
 
       camera.fov = isMobile ? 46 : isCurrentTablet ? 40 : 36;
       camera.position.set(0, 0, isMobile ? 11.8 : isCurrentTablet ? 11.0 : 10.5);
@@ -595,7 +621,7 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
       const targetRotZ = baseRotZ + (-mouseX * 0.10 * (mirrored ? -1 : 1)) + inPlaceCircleX * 0.15;
 
       // 3. Position: Base Position + In-Place Circular Movement + Cursor Parallax (NO Z pushback)
-      const baseX = isCurrentDesktop ? (mirrored ? -responsiveBaseX : responsiveBaseX) : 0;
+      const baseX = mirrored ? -responsiveBaseX : responsiveBaseX;
       const baseY = responsiveBaseY;
       
       const targetPosX = baseX + inPlaceCircleX + (mouseX * 0.30);
