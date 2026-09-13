@@ -239,8 +239,8 @@ export default function ContactPage() {
           </h1>
           <p className="text-xs sm:text-base text-gray-300 leading-relaxed max-w-2xl mx-auto">
             {isAr
-              ? "جاهز لأتمتة تدفقات العمل اليدوية، وتدشين وكلاء مبيعات أذكياء، أو استشارة فريقنا المتخصص؟ شاركنا تفاصيل مشروعك أدناه."
-              : "Ready to automate manual workflows, deploy intelligent sales agents, or consult on enterprise AI strategy? Tell us about your project below."}
+              ? "أخبرنا عن عملك وأين تريد استخدام الذكاء الاصطناعي أو الأتمتة، وسنرد عليك خلال ٢٤ ساعة."
+              : "Tell us about your business and where you want to use AI or automation. We will get back to you within 24 hours."}
           </p>
         </div>
 

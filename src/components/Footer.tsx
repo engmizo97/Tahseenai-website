@@ -16,11 +16,11 @@ export default function Footer({ lang = "en" }: FooterProps) {
   const content = {
     ar: {
       mission:
-        "نبتكر حلول ذكاء اصطناعي متقدمة وتدفقات عمل مؤتمتة تمكّن الشركات والمؤسسات السعودية من التوسع والنمو بذكاء وسرعة وأمان فائق.",
+        "نبني وكلاء ذكاء اصطناعي وأنظمة أتمتة تساعد الشركات في المملكة على توفير الوقت وإنجاز الأعمال بكفاءة.",
       hq: "المقر الرئيسي في الرياض، المملكة العربية السعودية",
       social: (
         <>
-          تبرع بنسبة 1% من الأعمال لصالح{" "}
+          تبرع بنسبة 1% من الأرباح لصالح{" "}
           <strong className="text-white">منصة إحسان (Ehsan Platform)</strong>
         </>
       ),
@@ -43,7 +43,7 @@ export default function Footer({ lang = "en" }: FooterProps) {
         { name: "اتصل بنا", href: contactHref },
       ],
       colContact: "التواصل المباشر",
-      contactDesc: "هل لديك مشروع أو استفسار حول تكامل الأنظمة؟ تواصل مباشرة مع فريقنا الهندسي.",
+      contactDesc: "هل لديك استفسار أو ترغب في بدء مشروع جديد؟ تواصل معنا مباشرة.",
       emailLabel: "البريد الإلكتروني المباشر",
       letsTalk: "تحدث معنا",
       copyright: `© ${new Date().getFullYear()} مجموعة تحسين للذكاء الاصطناعي (Tahseen AI). جميع الحقوق محفوظة.`,
@@ -54,11 +54,11 @@ export default function Footer({ lang = "en" }: FooterProps) {
     },
     en: {
       mission:
-        "Pioneering enterprise Artificial Intelligence and automated workflows that empower Saudi enterprises and SMEs to scale smarter, faster, and more securely.",
+        "We build AI agents, automated workflows, and custom software that help Saudi businesses save time and work efficiently.",
       hq: "Headquartered in Riyadh, Kingdom of Saudi Arabia",
       social: (
         <>
-          1% of proceeds donated to{" "}
+          1% of profits donated to{" "}
           <strong className="text-white">Ehsan Platform (منصة إحسان)</strong>
         </>
       ),
@@ -81,7 +81,7 @@ export default function Footer({ lang = "en" }: FooterProps) {
         { name: "Contact Us", href: contactHref },
       ],
       colContact: "Direct Contact",
-      contactDesc: "Have an RFP, integration question, or need AI consulting? Connect directly with our team.",
+      contactDesc: "Have a question or want to start a project? Connect directly with our team.",
       emailLabel: "Email Engineering",
       letsTalk: "LET'S TALK",
       copyright: `© ${new Date().getFullYear()} Tahseen AI (مجموعة تحسين للذكاء الاصطناعي). All rights reserved.`,

@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Tahseen AI - AI Solutions That Enhance Your Work",
-  description: "We build AI agents and automation systems that help businesses work smarter, faster, and more efficiently.",
+  description: "We build AI agents, automated workflows, and custom software that save businesses time and reduce manual work.",
   icons: {
     icon: [
       { url: "/icon.png", type: "image/png" },
