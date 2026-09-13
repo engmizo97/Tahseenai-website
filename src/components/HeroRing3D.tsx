@@ -70,13 +70,13 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     const isDesktop = width >= 1024;
     const isTablet = width >= 640 && width < 1024;
     
-    const ringBaseX = mirrored ? -3.91 : 3.91;
+    const ringBaseX = 3.91;
     const ringBaseY = 0.90;
     const ringBaseZ = 0.0;
     const ringBaseScale = 0.78;
 
     heroGroup.position.set(
-      isDesktop ? ringBaseX : 0,
+      isDesktop ? (mirrored ? -ringBaseX : ringBaseX) : 0,
       isDesktop ? ringBaseY : isTablet ? 0.75 : 0.65,
       ringBaseZ
     );
@@ -84,9 +84,13 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     scene.add(heroGroup);
 
     const baseRotX = -0.59;
-    const baseRotY = mirrored ? 0.66 : -0.66;
-    const baseRotZ = mirrored ? 0.99 : -0.99;
-    heroGroup.rotation.set(baseRotX, baseRotY, baseRotZ);
+    const baseRotY = -0.66;
+    const baseRotZ = -0.99;
+    heroGroup.rotation.set(
+      baseRotX,
+      mirrored ? -baseRotY : baseRotY,
+      mirrored ? -baseRotZ : baseRotZ
+    );
 
     // --- Custom Hollow Ring Perimeter Glow Shader ---
     const glowUniforms = {
@@ -579,9 +583,9 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
         responsiveBaseY = -0.10;
         responsiveScale = 0.52;
       } else {
-        // Mobile phone coordinates tuned by user
-        responsiveBaseX = 0.5;
-        responsiveBaseY = 0.75;
+        // Mobile phone coordinates: in Arabic, center ring in open lower area to prevent text overlap
+        responsiveBaseX = mirrored ? 0.0 : 0.5;
+        responsiveBaseY = mirrored ? -1.10 : 0.75;
         responsiveScale = 0.44;
       }
 
@@ -615,10 +619,14 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
       const inPlaceTiltX = Math.sin(totalOrbitAngle) * 0.04;
       const inPlaceTiltY = Math.cos(totalOrbitAngle) * 0.04;
 
-      // 2. Cursor Parallax + In-Place Circular Rotation
-      const targetRotX = baseRotX + (-mouseY * 0.26) + inPlaceTiltX;
-      const targetRotY = baseRotY + (mouseX * 0.30 * (mirrored ? -1 : 1)) + inPlaceTiltY;
-      const targetRotZ = baseRotZ + (-mouseX * 0.10 * (mirrored ? -1 : 1)) + inPlaceCircleX * 0.15;
+      // 2. Cursor Parallax + In-Place Circular Rotation (Mirrored angle in RTL)
+      const activeRotX = baseRotX;
+      const activeRotY = mirrored ? -baseRotY : baseRotY;
+      const activeRotZ = mirrored ? -baseRotZ : baseRotZ;
+
+      const targetRotX = activeRotX + (-mouseY * 0.26) + inPlaceTiltX;
+      const targetRotY = activeRotY + (mouseX * 0.30 * (mirrored ? -1 : 1)) + inPlaceTiltY * (mirrored ? -1 : 1);
+      const targetRotZ = activeRotZ + (-mouseX * 0.10 * (mirrored ? -1 : 1)) + inPlaceCircleX * 0.15 * (mirrored ? -1 : 1);
 
       // 3. Position: Base Position + In-Place Circular Movement + Cursor Parallax (NO Z pushback)
       const baseX = mirrored ? -responsiveBaseX : responsiveBaseX;
