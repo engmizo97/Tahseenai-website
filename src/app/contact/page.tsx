@@ -133,9 +133,9 @@ export default function ContactPage() {
             </div>
           </Link>
 
-          {/* Desktop Nav Links & Controls */}
-          <div className="hidden md:flex items-center gap-4 lg:gap-7">
-            <nav className="flex items-center gap-4 lg:gap-7 text-xs font-semibold tracking-wider text-gray-200">
+          {/* Desktop Nav Links & Controls (Adaptive: Visible on Large Screens) */}
+          <div className="hidden lg:flex items-center gap-4 xl:gap-7">
+            <nav className="flex items-center gap-4 xl:gap-7 text-xs font-semibold tracking-wider text-gray-200">
               {navLinks.map((link) => {
                 const isActive = link.href === contactHref;
                 return (
@@ -175,8 +175,8 @@ export default function ContactPage() {
             </Link>
           </div>
 
-          {/* Mobile Controls */}
-          <div className="flex md:hidden items-center gap-2">
+          {/* Mobile & Tablet Controls */}
+          <div className="flex lg:hidden items-center gap-2">
             <button
               onClick={toggleLanguage}
               aria-label="Toggle language"
@@ -197,9 +197,9 @@ export default function ContactPage() {
 
         </div>
 
-        {/* Mobile Slide-Down Drawer Menu */}
+        {/* Mobile & Tablet Slide-Down Drawer Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-white/10 bg-[#060913]/98 px-6 py-6 space-y-4 shadow-2xl backdrop-blur-2xl">
+          <div className="lg:hidden border-t border-white/10 bg-[#060913]/98 px-6 py-6 space-y-4 shadow-2xl backdrop-blur-2xl">
             <nav className="flex flex-col space-y-3 text-sm font-bold">
               {navLinks.map((link) => (
                 <Link

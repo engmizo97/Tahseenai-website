@@ -86,7 +86,8 @@ export default function CurvedRibbonBackground() {
       // Catmull-Rom to Cubic Bezier spline for flowing curvature
       const n = points.length;
       let d = `M ${points[0][0].toFixed(1)} ${points[0][1].toFixed(1)}`;
-      let compD = `M ${(points[0][0] + 32).toFixed(1)} ${(points[0][1] - 18).toFixed(1)}`;
+      const baseCompanionOffsetX = w < 640 ? 14 : w < 1024 ? 22 : 32;
+      let compD = `M ${(points[0][0] + baseCompanionOffsetX).toFixed(1)} ${(points[0][1] - 18).toFixed(1)}`;
 
       const tension = 0.24;
 
@@ -104,8 +105,9 @@ export default function CurvedRibbonBackground() {
 
         d += ` C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)}, ${cp2x.toFixed(1)} ${cp2y.toFixed(1)}, ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`;
 
-        // Offset companion path for architectural ribbon contour
-        const offset = i % 2 === 0 ? -48 : 48;
+        // Offset companion path for architectural ribbon contour (scaled for mobile/tablet)
+        const baseOffset = w < 640 ? 16 : w < 1024 ? 30 : 48;
+        const offset = i % 2 === 0 ? -baseOffset : baseOffset;
         const c_cp1x = cp1x + offset;
         const c_cp2x = cp2x + offset;
         const c_p2x = p2[0] + offset;

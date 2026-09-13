@@ -210,12 +210,12 @@ export default function Footer({ lang = "en" }: FooterProps) {
         </div>
 
         {/* Bottom Sub-Footer Bar */}
-        <div className="pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500 font-mono">
+        <div className="pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500 font-mono text-center sm:text-start">
           <div>
             {t.copyright}
           </div>
 
-          <div className="flex items-center gap-6 text-gray-400">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-6 text-gray-400">
             <Link href={isAr ? "/#about" : "/?lang=en#about"} className="hover:text-[#008688] transition-colors">
               {t.privacy}
             </Link>

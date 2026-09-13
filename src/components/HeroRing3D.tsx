@@ -517,9 +517,12 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
 
     window.addEventListener("mousemove", handleMouseMove);
 
-    // --- 6. Resize Observer with Adaptive Mobile Viewport ---
+    // --- 6. Resize Observer with Adaptive Viewport for Mobile, Tablet, Laptop & 4K ---
     let isCurrentDesktop = window.innerWidth >= 1024;
     let isCurrentTablet = window.innerWidth >= 640 && window.innerWidth < 1024;
+    let responsiveScale = ringBaseScale;
+    let responsiveBaseX = ringBaseX;
+    let responsiveBaseY = ringBaseY;
 
     const handleResize = () => {
       if (!container) return;
@@ -529,19 +532,39 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
       isCurrentDesktop = w >= 1024;
       isCurrentTablet = w >= 640 && w < 1024;
 
-      camera.fov = isMobile ? 44 : 36;
-      camera.position.set(0, 0, isMobile ? 11.5 : 10.5);
+      camera.fov = isMobile ? 46 : isCurrentTablet ? 40 : 36;
+      camera.position.set(0, 0, isMobile ? 11.8 : isCurrentTablet ? 11.0 : 10.5);
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
 
       renderer.setSize(w, h);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-      heroGroup.scale.setScalar(isCurrentDesktop ? ringBaseScale : isCurrentTablet ? 0.56 : 0.44);
+      // Calculate safe visible boundaries to prevent edge clipping on 1024px-1366px screens
+      const halfVisibleWidth = camera.aspect * Math.tan((camera.fov * Math.PI) / 360) * camera.position.z;
+      const maxSafeX = Math.max(2.2, halfVisibleWidth - 1.55);
+
+      if (isCurrentDesktop) {
+        responsiveBaseX = Math.min(ringBaseX, maxSafeX);
+        responsiveBaseY = ringBaseY;
+        responsiveScale = ringBaseScale;
+      } else if (isCurrentTablet) {
+        responsiveBaseX = 0;
+        responsiveBaseY = -0.25;
+        responsiveScale = 0.56;
+      } else {
+        // Mobile: center ring in open bottom half of screen below headline
+        responsiveBaseX = 0;
+        responsiveBaseY = -1.15;
+        responsiveScale = 0.44;
+      }
+
+      heroGroup.scale.setScalar(responsiveScale);
     };
 
     const resizeObserver = new ResizeObserver(handleResize);
     resizeObserver.observe(container);
+    handleResize();
 
     // --- 7. Animation Loop with In-Place Circular Orbit & Parallax ---
     let animationFrameId: number;
@@ -572,8 +595,8 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
       const targetRotZ = baseRotZ + (-mouseX * 0.10 * (mirrored ? -1 : 1)) + inPlaceCircleX * 0.15;
 
       // 3. Position: Base Position + In-Place Circular Movement + Cursor Parallax (NO Z pushback)
-      const baseX = isCurrentDesktop ? ringBaseX : 0;
-      const baseY = isCurrentDesktop ? ringBaseY : isCurrentTablet ? 0.75 : 0.65;
+      const baseX = isCurrentDesktop ? (mirrored ? -responsiveBaseX : responsiveBaseX) : 0;
+      const baseY = responsiveBaseY;
       
       const targetPosX = baseX + inPlaceCircleX + (mouseX * 0.30);
       const targetPosY = baseY + inPlaceCircleY + (-mouseY * 0.22);
@@ -589,8 +612,7 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
       heroGroup.position.z += (targetPosZ - heroGroup.position.z) * 0.06;
 
       // Apply dynamic scale
-      const currentBaseScale = isCurrentDesktop ? ringBaseScale : isCurrentTablet ? 0.62 : 0.50;
-      heroGroup.scale.setScalar(currentBaseScale);
+      heroGroup.scale.setScalar(responsiveScale);
 
       renderer.render(scene, camera);
     };

@@ -523,9 +523,9 @@ export default function Home() {
             </div>
           </Link>
 
-          {/* Desktop Nav Links & Controls */}
-          <div className="hidden md:flex items-center gap-4 lg:gap-6">
-            <nav className="flex items-center gap-4 lg:gap-6 text-xs font-semibold tracking-wider text-gray-300">
+          {/* Desktop Nav Links & Controls (Adaptive: Visible on Large Screens and Above) */}
+          <div className="hidden lg:flex items-center gap-3 xl:gap-6">
+            <nav className="flex items-center gap-3.5 xl:gap-6 text-xs font-semibold tracking-wider text-gray-300">
               {navLinks.map((link) => {
                 const isSectionActive = link.href === `#${activeSection}`;
                 return link.href.startsWith("/") ? (
@@ -576,18 +576,18 @@ export default function Home() {
             {/* Contact Action Button */}
             <Link
               href={contactHref}
-              className="inline-flex items-center justify-center px-4 sm:px-6 py-2 text-xs font-bold tracking-widest uppercase rounded-lg btn-teal-outline cursor-pointer"
+              className="inline-flex items-center justify-center px-4 xl:px-6 py-2 text-xs font-bold tracking-widest uppercase rounded-lg btn-teal-outline cursor-pointer"
             >
               <span>{isAr ? "تحدث معنا" : "LET'S TALK"}</span>
             </Link>
           </div>
 
-          {/* Mobile Right Controls: Language & Hamburger */}
-          <div className="flex md:hidden items-center gap-2">
+          {/* Mobile & Tablet Right Controls: Language, Talk & Hamburger */}
+          <div className="flex lg:hidden items-center gap-2">
             <button
               onClick={toggleLanguage}
               aria-label="Toggle language"
-              className="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-bold rounded-md bg-white/[0.04] border border-white/10 text-gray-200 hover:text-[#008688]"
+              className="inline-flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-bold rounded-md bg-white/[0.04] border border-white/10 text-gray-200 hover:text-[#008688]"
             >
               <Globe className="w-3 h-3 text-[#008688]" />
               <span>{isAr ? "EN" : "عربي"}</span>
@@ -611,9 +611,9 @@ export default function Home() {
 
         </div>
 
-        {/* Mobile Slide-Down Drawer Menu */}
+        {/* Mobile & Tablet Slide-Down Drawer Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-white/10 bg-[#0d1426]/98 px-6 py-6 space-y-4 shadow-2xl backdrop-blur-2xl animate-in slide-in-from-top-2 duration-200">
+          <div className="lg:hidden border-t border-white/10 bg-[#0d1426]/98 px-6 py-6 space-y-4 shadow-2xl backdrop-blur-2xl animate-in slide-in-from-top-2 duration-200">
             <nav className="flex flex-col space-y-3 text-sm font-bold">
               {navLinks.map((link) => {
                 const isSectionActive = link.href === `#${activeSection}`;
@@ -970,23 +970,23 @@ export default function Home() {
               </div>
             </ScrollReveal>
 
-            {/* Interactive Step Jump Buttons */}
-            <div className="space-y-2 pt-2">
+            {/* Interactive Step Jump Buttons (Adaptive: Horizontal Pills on Mobile, Sticky Vertical Stack on Desktop) */}
+            <div className="flex lg:flex-col overflow-x-auto lg:overflow-visible gap-2 pt-2 pb-1 lg:pb-0 scrollbar-none">
               {showcaseSolutions.map((sol, idx) => (
                 <button
                   key={sol.id}
                   onClick={() => scrollToSolution(sol.id, idx)}
-                  className={`w-full p-3.5 rounded-md border text-start transition-all duration-300 flex items-center justify-between cursor-pointer ${
+                  className={`flex-shrink-0 lg:w-full p-2.5 sm:p-3.5 rounded-md border text-start transition-all duration-300 flex items-center justify-between gap-3 cursor-pointer ${
                     activeSolutionIdx === idx
                       ? "bg-white/[0.06] border-[#008688] text-white shadow-[0_0_15px_rgba(0,134,136,0.15)]"
                       : "bg-white/[0.02] border-white/10 text-gray-400 hover:border-white/20 hover:text-gray-200"
                   }`}
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2.5 sm:gap-3">
                     <span className="font-mono text-xs font-bold text-[#008688]">{sol.step}</span>
-                    <span className="text-xs font-bold font-sans">{sol.title}</span>
+                    <span className="text-xs font-bold font-sans whitespace-nowrap lg:whitespace-normal">{sol.title}</span>
                   </div>
-                  <ArrowRight className={`w-3.5 h-3.5 text-[#008688] transition-transform ${activeSolutionIdx === idx ? "translate-x-1" : "opacity-40"} ${isAr ? "rotate-180" : ""}`} />
+                  <ArrowRight className={`hidden sm:inline w-3.5 h-3.5 text-[#008688] transition-transform ${activeSolutionIdx === idx ? "translate-x-1" : "opacity-40"} ${isAr ? "rotate-180" : ""}`} />
                 </button>
               ))}
             </div>
@@ -1046,11 +1046,11 @@ export default function Home() {
                 </div>
 
                 {/* Bottom Metric Badges */}
-                <div className="grid grid-cols-3 gap-3 pt-4 border-t border-white/10 text-center font-mono">
+                <div className="grid grid-cols-3 gap-2 sm:gap-3 pt-4 border-t border-white/10 text-center font-mono">
                   {sol.metrics.map((m) => (
-                    <div key={m.label} className="p-2.5 rounded-md bg-white/[0.02] border border-white/10">
+                    <div key={m.label} className="p-2 sm:p-2.5 rounded-md bg-white/[0.02] border border-white/10 flex flex-col justify-center">
                       <div className="text-xs sm:text-sm font-bold text-[#008688]">{m.val}</div>
-                      <div className="text-[9px] text-gray-400 truncate mt-0.5">{m.label}</div>
+                      <div className="text-[9px] sm:text-[10px] text-gray-400 leading-tight mt-0.5">{m.label}</div>
                     </div>
                   ))}
                 </div>
@@ -1420,19 +1420,19 @@ export default function Home() {
       {/* 10. Saudi Ehsan Platform 1% Social Pledge Banner */}
       <section id="ehsan" className="relative z-10 py-12 sm:py-16 px-4 sm:px-8 lg:px-12 max-w-[1200px] mx-auto w-full">
         <ScrollReveal y={45} duration={1100}>
-          <div className="ehsan-pledge-card p-8 sm:p-12 rounded-md bg-gradient-to-r from-[#071f1b] via-[#060913] to-[#071f1b] border-2 border-[#008688] shadow-[0_16px_50px_-10px_rgba(0,134,136,0.28)] flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-start">
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-md bg-[#008688]/15 border border-[#008688]/40 flex items-center justify-center text-[#008688] flex-shrink-0 shadow-[0_0_15px_rgba(0,134,136,0.3)]">
-              <HeartHandshake className="w-7 h-7 text-[#008688]" />
+          <div className="ehsan-pledge-card p-5 sm:p-8 md:p-12 rounded-md bg-gradient-to-r from-[#071f1b] via-[#060913] to-[#071f1b] border-2 border-[#008688] shadow-[0_16px_50px_-10px_rgba(0,134,136,0.28)] flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-start">
+          <div className="flex flex-col sm:flex-row items-center sm:items-start md:items-center gap-4 text-center sm:text-start">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-md bg-[#008688]/15 border border-[#008688]/40 flex items-center justify-center text-[#008688] flex-shrink-0 shadow-[0_0_15px_rgba(0,134,136,0.3)]">
+              <HeartHandshake className="w-6 h-6 sm:w-7 sm:h-7 text-[#008688]" />
             </div>
             <div className="space-y-1">
               <div className="text-xs font-mono text-[#008688] font-bold uppercase tracking-wider">
                 {isAr ? "مبادرة مجتمعية" : "SOCIAL PLEDGE"}
               </div>
-              <h3 className="text-lg sm:text-xl font-bold !text-white">
+              <h3 className="text-base sm:text-lg md:text-xl font-bold !text-white">
                 {isAr ? "نتبرع بنسبة ١٪ من أرباح أعمالنا لمنصة إحسان" : "We Donate 1% of Profits to the Ehsan Platform"}
               </h3>
-              <p className="text-xs sm:text-sm !text-gray-300 font-normal">
+              <p className="text-xs sm:text-sm !text-gray-300 font-normal max-w-xl">
                 {isAr ? "دعماً للمشاريع والمبادرات الخيرية في المملكة العربية السعودية." : "Supporting charitable initiatives across Saudi Arabia."}
               </p>
             </div>
@@ -1440,7 +1440,7 @@ export default function Home() {
 
           <Link
             href={contactHref}
-            className="inline-flex items-center justify-center px-6 py-3 text-xs font-bold tracking-widest uppercase rounded-lg bg-[#008688] text-white hover:brightness-110 font-sans font-extrabold shadow-[0_4px_20px_rgba(0,134,136,0.4)] flex-shrink-0 cursor-pointer transition-all hover:scale-105"
+            className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 text-xs font-bold tracking-widest uppercase rounded-lg bg-[#008688] text-white hover:brightness-110 font-sans font-extrabold shadow-[0_4px_20px_rgba(0,134,136,0.4)] flex-shrink-0 cursor-pointer transition-all hover:scale-105"
           >
             <span>{isAr ? "تواصل معنا" : "GET IN TOUCH"}</span>
           </Link>
