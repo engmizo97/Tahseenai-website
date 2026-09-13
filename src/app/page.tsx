@@ -1510,109 +1510,73 @@ export default function Home() {
         </ScrollReveal>
       </section>
 
-      {/* 12. Final CTA Showcase Card - High-End Architectural Framed Dock */}
-      <section id="cta" className="relative z-10 py-16 sm:py-24 px-4 sm:px-8 lg:px-12 max-w-[1280px] mx-auto w-full">
-        <ScrollReveal y={45} duration={1100}>
-          <div className="relative rounded-2xl sm:rounded-3xl p-8 sm:p-14 lg:p-16 overflow-hidden border border-[#008688]/30 bg-gradient-to-b from-[#0e172a]/95 via-[#0b1222]/98 to-[#060913] text-center shadow-[0_25px_80px_-15px_rgba(0,0,0,0.7),0_0_50px_rgba(0,134,136,0.15)]">
+      {/* 12. Final CTA Banner - Full Screen Width Band Matching Reference Size */}
+      <section
+        id="cta"
+        className="cta-dark-band relative z-10 w-full overflow-hidden bg-gradient-to-r from-[#060913] via-[#091822] to-[#060913] border-y border-[#008688]/35 shadow-[0_10px_60px_rgba(0,134,136,0.15)] text-white py-12 sm:py-16 lg:py-18 px-4 sm:px-8"
+      >
+        {/* Radial Ambient Luminous Teal Glow in Center */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[850px] h-[260px] bg-[#008688]/15 rounded-full blur-[100px] pointer-events-none -z-0" />
+
+        {/* Faint Architectural Gridlines Overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-20 z-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px)",
+            backgroundSize: "64px 64px",
+            maskImage: "radial-gradient(ellipse 75% 75% at 50% 50%, black 30%, transparent 85%)",
+            WebkitMaskImage: "radial-gradient(ellipse 75% 75% at 50% 50%, black 30%, transparent 85%)",
+          }}
+        />
+
+        <ScrollReveal y={35} duration={1100}>
+          <div className="relative z-10 max-w-2xl mx-auto w-full text-center space-y-4">
             
-            {/* Architectural Crosshairs at 4 Corners */}
-            <span className="absolute top-3 left-3 text-[#008688]/40 font-mono text-xs select-none pointer-events-none">+</span>
-            <span className="absolute top-3 right-3 text-[#008688]/40 font-mono text-xs select-none pointer-events-none">+</span>
-            <span className="absolute bottom-3 left-3 text-[#008688]/40 font-mono text-xs select-none pointer-events-none">+</span>
-            <span className="absolute bottom-3 right-3 text-[#008688]/40 font-mono text-xs select-none pointer-events-none">+</span>
-
-            {/* Radial Luminous Ambient Bloom */}
-            <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[500px] sm:w-[700px] h-[300px] bg-[#008688]/20 rounded-full blur-[100px] pointer-events-none -z-0" />
-
-            {/* Faint Internal Geometric Blueprint Grid with Radial Mask */}
-            <div
-              className="absolute inset-0 pointer-events-none opacity-40 z-0"
-              style={{
-                backgroundImage: "linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px)",
-                backgroundSize: "48px 48px",
-                maskImage: "radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 80%)",
-                WebkitMaskImage: "radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 80%)",
-              }}
-            />
-
-            {/* Content Body */}
-            <div className="relative z-10 max-w-3xl mx-auto space-y-6">
-              
-              {/* Eyebrow with Pulsing Live Indicator */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#008688]/10 border border-[#008688]/30 backdrop-blur-md">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00f5d4] opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#008688]" />
-                </span>
-                <span className="text-[#5eead4] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
-                  {isAr ? "جاهز للبدء؟" : "READY TO GET STARTED?"}
-                </span>
-              </div>
-
-              {/* Display Headline */}
-              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.12] text-white">
-                {isAr ? (
-                  <>
-                    ابنِ أنظمة الذكاء الاصطناعي <br className="hidden sm:inline" />
-                    <span className="bg-gradient-to-r from-[#00f5d4] via-[#008688] to-[#38bdf8] bg-clip-text text-transparent">
-                      لمنشأتك معنا
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    Build Your AI Systems <br className="hidden sm:inline" />
-                    <span className="bg-gradient-to-r from-[#00f5d4] via-[#008688] to-[#38bdf8] bg-clip-text text-transparent">
-                      With Us
-                    </span>
-                  </>
-                )}
-              </h2>
-
-              {/* Subheading */}
-              <p className="text-xs sm:text-base text-gray-300 max-w-xl mx-auto leading-relaxed font-normal">
-                {isAr
-                  ? "تحدث مع فريقنا لنحدد لك أين يمكن للذكاء الاصطناعي والأتمتة توفير وقت منشأتك والتخلص من العمل اليدوي."
-                  : "Talk with our team to find out where AI and automation can save your business time and eliminate manual work."}
-              </p>
-
-              {/* Dual Action Group */}
-              <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4">
-                <Link
-                  href={contactHref}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 text-xs sm:text-sm font-extrabold tracking-widest uppercase rounded-xl bg-[#008688] text-white hover:brightness-110 shadow-[0_4px_25px_rgba(0,134,136,0.6)] hover:shadow-[0_6px_35px_rgba(0,134,136,0.8)] transition-all cursor-pointer group"
-                >
-                  <span>{isAr ? "تحدث مع فريقنا" : "TALK TO OUR TEAM"}</span>
-                  <ArrowRight className={`w-4 h-4 transition-transform group-hover:translate-x-1 ${isAr ? "rotate-180 group-hover:-translate-x-1" : ""}`} />
-                </Link>
-
-                <a
-                  href="mailto:info@tahseenai.com"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs sm:text-sm font-bold tracking-wider rounded-xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 hover:border-[#008688]/40 text-gray-300 hover:text-white transition-all cursor-pointer"
-                >
-                  <Mail className="w-4 h-4 text-[#008688]" />
-                  <span>info@tahseenai.com</span>
-                </a>
-              </div>
-
-              {/* Bottom Trust Badge Strip */}
-              <div className="pt-8 mt-6 border-t border-white/[0.08] flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-[11px] sm:text-xs text-gray-400 font-mono">
-                <div className="flex items-center gap-2">
-                  <Clock className="w-3.5 h-3.5 text-[#008688]" />
-                  <span>{isAr ? "إطلاق سريع خلال ١٤ يوماً" : "Fast 14-Day Setup"}</span>
-                </div>
-                <div className="hidden sm:block w-1 h-1 rounded-full bg-white/20" />
-                <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#008688]" />
-                  <span>{isAr ? "أمان وتوافق محلي متكامل" : "Enterprise Security"}</span>
-                </div>
-                <div className="hidden sm:block w-1 h-1 rounded-full bg-white/20" />
-                <div className="flex items-center gap-2">
-                  <HeartHandshake className="w-3.5 h-3.5 text-[#008688]" />
-                  <span>{isAr ? "تبرع بنسبة ١٪ لمنصة إحسان" : "1% to Ehsan Platform"}</span>
-                </div>
-              </div>
-
+            {/* Live Eyebrow Pill */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#008688]/10 border border-[#008688]/30 backdrop-blur-md">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00f5d4] opacity-75" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#008688]" />
+              </span>
+              <span className="text-[#5eead4] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
+                {isAr ? "جاهز للبدء؟" : "READY TO GET STARTED?"}
+              </span>
             </div>
+
+            {/* Display Headline */}
+            <h2 className="text-2xl sm:text-4xl lg:text-[46px] font-extrabold tracking-tight leading-[1.12] text-white">
+              {isAr ? (
+                <>
+                  <span className="text-white">ابنِ حلول الذكاء الاصطناعي</span>{" "}
+                  <span className="text-[#008688]">لمنشأتك معنا</span>
+                </>
+              ) : (
+                <>
+                  <span className="text-white">Build Your AI Systems</span>{" "}
+                  <span className="text-[#008688]">With Us</span>
+                </>
+              )}
+            </h2>
+
+            {/* Subtitle */}
+            <p className="text-xs sm:text-base text-gray-300 leading-relaxed font-normal max-w-lg mx-auto">
+              {isAr
+                ? "تحدث مع فريقنا لنحدد لك أين يمكن للذكاء الاصطناعي والأتمتة توفير وقت منشأتك."
+                : "Talk with our team to find out where AI and automation can save your business time."}
+            </p>
+
+            {/* CTA Button */}
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-3.5">
+              <Link
+                href={contactHref}
+                className="inline-flex items-center gap-2 px-7 sm:px-9 py-3.5 text-xs sm:text-sm font-extrabold tracking-widest uppercase rounded-lg bg-[#008688] text-white hover:brightness-110 shadow-[0_4px_25px_rgba(0,134,136,0.6)] hover:shadow-[0_6px_35px_rgba(0,134,136,0.85)] transition-all cursor-pointer group hover:scale-105"
+              >
+                <span>{isAr ? "تحدث مع فريقنا" : "TALK TO OUR TEAM"}</span>
+                <ArrowRight className={`w-4 h-4 transition-transform group-hover:translate-x-1 ${isAr ? "rotate-180 group-hover:-translate-x-1" : ""}`} />
+              </Link>
+            </div>
+
           </div>
         </ScrollReveal>
       </section>
