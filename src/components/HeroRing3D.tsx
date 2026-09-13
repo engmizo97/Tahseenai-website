@@ -282,7 +282,7 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     const rightFadeEnd = 1.0;
     const rightFadePower = 1.5;
 
-    const waveElevationY = isMobileInitial ? -2.75 : -2.35;
+    const waveElevationY = isMobileInitial ? -1.85 : -2.35;
     const waveAmplitude = isMobileInitial ? 0.68 : 0.65;
     const waveSpeed = 0.6;
     const depthFadePower = 0.5;
@@ -554,8 +554,8 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
         responsiveScale = 0.52;
       } else {
         // Mobile phone coordinates tuned by user
-        responsiveBaseX = 1.1;
-        responsiveBaseY = -0.05;
+        responsiveBaseX = 0.5;
+        responsiveBaseY = 0.75;
         responsiveScale = 0.44;
       }
 
