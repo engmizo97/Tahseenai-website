@@ -292,7 +292,7 @@
       font-size: 13px;
       line-height: 1.55;
       color: #cbd5e1;
-      max-w: 280px;
+      max-width: 280px;
       font-weight: 400;
     }
 
@@ -529,24 +529,41 @@
   <script>
     // --- 1. Mobile Config Parameters ---
     const config = {
-      // 📱 Ring Mobile Placement
-      ringMobilePosX: 0.0,
-      ringMobilePosY: -1.15,
+      // 📱 Ring Mobile Placement (User Tuned)
+      ringMobilePosX: 1.1,
+      ringMobilePosY: -0.05,
       ringMobilePosZ: 0.0,
       ringMobileScale: 0.44,
       ringMobileRotX: -0.59,
       ringMobileRotY: -0.66,
       ringMobileRotZ: -0.99,
 
-      // 🌊 Wave Mobile Parameters
-      waveElevationY: -2.35,
-      waveAmplitude: 0.65,
+      // 🌊 Wave Mobile Parameters (User Tuned)
+      waveElevationY: -2.75,
+      waveAmplitude: 0.68,
       waveArcHeight: 1.4,
-      waveArcCenter: -0.5,
+      waveArcCenter: 0.1,
       waveSpeed: 0.6,
       gridWidth: 81,
       waveTwist: 0.8,
       strandSpread: 15,
+
+      // 🕸️ Wireframe Lattice & Gridlines (Shown in screenshot)
+      lineOpacity: 0.14,
+      lineColor: '#00d2b4',
+      transverseStep: 3,
+      showLongitudinal: true,
+      showTransverse: true,
+      lineDiscardAlpha: 0.02,
+
+      // ◀ Left & Right Edge Fades & Cliff Slope
+      leftFadeStart: -0.10,
+      leftFadeEnd: -0.10,
+      leftFadePower: 1.95,
+      fadeYDrop: 1.00,
+      rightFadeStart: 0.20,
+      rightFadeEnd: 1.00,
+      rightFadePower: 1.50,
 
       // 📷 Mobile Camera
       cameraFOV: 46,
@@ -557,56 +574,76 @@
       showText: true,
       showLattice: true,
       orbitMotion: true,
-      preset: 'Default Mobile Center',
+      preset: 'User Tuned Setup (Active)',
     };
 
     const DEFAULTS = JSON.parse(JSON.stringify(config));
 
     // Preset Configurations
     const presets = {
-      'Default Mobile Center': {
-        ringMobilePosX: 0.0,
-        ringMobilePosY: -1.15,
+      'User Tuned Setup (Active)': {
+        ringMobilePosX: 1.1,
+        ringMobilePosY: -0.05,
         ringMobilePosZ: 0.0,
         ringMobileScale: 0.44,
-        waveElevationY: -2.35,
-        waveAmplitude: 0.65,
+        waveElevationY: -2.75,
+        waveAmplitude: 0.68,
         waveArcHeight: 1.4,
+        waveArcCenter: 0.1,
         cameraFOV: 46,
         cameraZ: 11.8,
+        lineOpacity: 0.14,
+        transverseStep: 3,
+        lineDiscardAlpha: 0.02,
+        fadeYDrop: 1.00,
       },
-      'Lower Center & Expansive Wave': {
-        ringMobilePosX: 0.0,
-        ringMobilePosY: -1.45,
-        ringMobilePosZ: 0.5,
-        ringMobileScale: 0.48,
-        waveElevationY: -2.85,
-        waveAmplitude: 0.75,
-        waveArcHeight: 1.6,
-        cameraFOV: 48,
-        cameraZ: 12.0,
-      },
-      'Mid Compact Framing': {
-        ringMobilePosX: 0.0,
-        ringMobilePosY: -0.85,
-        ringMobilePosZ: -0.2,
-        ringMobileScale: 0.40,
-        waveElevationY: -2.10,
-        waveAmplitude: 0.55,
-        waveArcHeight: 1.2,
-        cameraFOV: 44,
-        cameraZ: 11.5,
-      },
-      'Right Shifted (Editorial)': {
-        ringMobilePosX: 0.65,
-        ringMobilePosY: -1.20,
+      'Smooth Edge (No Cliff Drop)': {
+        ringMobilePosX: 1.1,
+        ringMobilePosY: -0.05,
         ringMobilePosZ: 0.0,
-        ringMobileScale: 0.46,
-        waveElevationY: -2.35,
-        waveAmplitude: 0.65,
+        ringMobileScale: 0.44,
+        waveElevationY: -2.75,
+        waveAmplitude: 0.68,
         waveArcHeight: 1.4,
+        waveArcCenter: 0.1,
         cameraFOV: 46,
         cameraZ: 11.8,
+        lineOpacity: 0.14,
+        transverseStep: 3,
+        lineDiscardAlpha: 0.06,
+        fadeYDrop: 0.15,
+      },
+      'Dense Topographic Wireframe': {
+        ringMobilePosX: 1.1,
+        ringMobilePosY: -0.05,
+        ringMobilePosZ: 0.0,
+        ringMobileScale: 0.44,
+        waveElevationY: -2.75,
+        waveAmplitude: 0.68,
+        waveArcHeight: 1.4,
+        waveArcCenter: 0.1,
+        cameraFOV: 46,
+        cameraZ: 11.8,
+        lineOpacity: 0.22,
+        transverseStep: 1,
+        lineDiscardAlpha: 0.03,
+        fadeYDrop: 0.70,
+      },
+      'Subtle Faint Lines': {
+        ringMobilePosX: 1.1,
+        ringMobilePosY: -0.05,
+        ringMobilePosZ: 0.0,
+        ringMobileScale: 0.44,
+        waveElevationY: -2.75,
+        waveAmplitude: 0.68,
+        waveArcHeight: 1.4,
+        waveArcCenter: 0.1,
+        cameraFOV: 46,
+        cameraZ: 11.8,
+        lineOpacity: 0.08,
+        transverseStep: 4,
+        lineDiscardAlpha: 0.05,
+        fadeYDrop: 0.40,
       }
     };
 
@@ -788,22 +825,31 @@
     const totalPoints = numStrands * ptsPerStrand;
 
     let waveGeom = new THREE.BufferGeometry();
+    let lineGeom = new THREE.BufferGeometry();
     let positions = new Float32Array(totalPoints * 3);
     let alphas = new Float32Array(totalPoints);
     let sizes = new Float32Array(totalPoints);
 
     function computeLeftFade(uNorm) {
-      const edge = -0.10;
-      if (uNorm <= edge) return 0.0;
-      const t = Math.min(1.0, (uNorm - edge) / 0.90);
-      return Math.pow(t * t * (3.0 - 2.0 * t), 1.95);
+      if (config.leftFadeEnd <= config.leftFadeStart) {
+        return uNorm >= config.leftFadeEnd ? 1.0 : 0.0;
+      }
+      if (uNorm <= config.leftFadeStart) return 0.0;
+      if (uNorm >= config.leftFadeEnd) return 1.0;
+      const t = (uNorm - config.leftFadeStart) / (config.leftFadeEnd - config.leftFadeStart);
+      const smooth = t * t * (3.0 - 2.0 * t);
+      return Math.pow(Math.max(0.0, Math.min(1.0, smooth)), config.leftFadePower);
     }
 
     function computeRightFade(uNorm) {
-      if (uNorm <= 0.2) return 1.0;
-      if (uNorm >= 1.0) return 0.0;
-      const t = (uNorm - 0.2) / 0.8;
-      return 1.0 - Math.pow(t * t * (3.0 - 2.0 * t), 1.5);
+      if (config.rightFadeEnd <= config.rightFadeStart) {
+        return uNorm <= config.rightFadeStart ? 1.0 : 0.0;
+      }
+      if (uNorm <= config.rightFadeStart) return 1.0;
+      if (uNorm >= config.rightFadeEnd) return 0.0;
+      const t = (config.rightFadeEnd - uNorm) / (config.rightFadeEnd - config.rightFadeStart);
+      const smooth = t * t * (3.0 - 2.0 * t);
+      return Math.pow(Math.max(0.0, Math.min(1.0, smooth)), config.rightFadePower);
     }
 
     function getHorizontalFade(uNorm) {
@@ -840,7 +886,9 @@
           const strandTwist = vNorm * config.waveTwist * Math.sin(uZeroToOne * Math.PI);
           const diagonalLift = (uNorm + 0.3) * 1.25;
 
-          const y = config.waveElevationY + (risingArch + undulatingWave + strandTwist + diagonalLift) * totalEdgeFade;
+          // fadeYDrop controls whether Y plunges to baseline (cliff) or stays floating (smooth alpha fade)
+          const yMultiplier = 1.0 - (1.0 - totalEdgeFade) * config.fadeYDrop;
+          const y = config.waveElevationY + (risingArch + undulatingWave + strandTwist + diagonalLift) * yMultiplier;
 
           positions[pIdx * 3] = x;
           positions[pIdx * 3 + 1] = y;
@@ -863,9 +911,37 @@
       waveGeom.setAttribute("position", new THREE.BufferAttribute(positions, 3));
       waveGeom.setAttribute("alpha", new THREE.BufferAttribute(alphas, 1));
       waveGeom.setAttribute("size", new THREE.BufferAttribute(sizes, 1));
+      waveGeom.attributes.position.needsUpdate = true;
+      waveGeom.attributes.alpha.needsUpdate = true;
+      waveGeom.attributes.size.needsUpdate = true;
+
+      rebuildLines();
     }
 
-    rebuildWave();
+    function rebuildLines() {
+      const lineIndices = [];
+      if (config.showLongitudinal) {
+        for (let s = 0; s < numStrands; s++) {
+          for (let p = 0; p < ptsPerStrand - 1; p++) {
+            lineIndices.push(s * ptsPerStrand + p, s * ptsPerStrand + p + 1);
+          }
+        }
+      }
+      if (config.showTransverse) {
+        const step = Math.max(1, Math.round(config.transverseStep));
+        for (let s = 0; s < numStrands - 1; s++) {
+          for (let p = 0; p < ptsPerStrand; p += step) {
+            lineIndices.push(s * ptsPerStrand + p, (s + 1) * ptsPerStrand + p);
+          }
+        }
+      }
+
+      lineGeom.setAttribute("position", waveGeom.getAttribute("position"));
+      lineGeom.setAttribute("alpha", waveGeom.getAttribute("alpha"));
+      lineGeom.setIndex(lineIndices);
+      lineGeom.attributes.position.needsUpdate = true;
+      lineGeom.attributes.alpha.needsUpdate = true;
+    }
 
     // Particle Texture
     const pCanvas = document.createElement("canvas");
@@ -925,28 +1001,13 @@
     scene.add(wavePoints);
 
     // Synchronized Wireframe Lattice Line Segments
-    const lineIndices = [];
-    for (let s = 0; s < numStrands; s++) {
-      for (let p = 0; p < ptsPerStrand - 1; p++) {
-        lineIndices.push(s * ptsPerStrand + p, s * ptsPerStrand + p + 1);
-      }
-    }
-    for (let s = 0; s < numStrands - 1; s++) {
-      for (let p = 0; p < ptsPerStrand; p += 3) {
-        lineIndices.push(s * ptsPerStrand + p, (s + 1) * ptsPerStrand + p);
-      }
-    }
-
-    const lineGeom = new THREE.BufferGeometry();
-    lineGeom.setAttribute("position", waveGeom.getAttribute("position"));
-    lineGeom.setAttribute("alpha", waveGeom.getAttribute("alpha"));
-    lineGeom.setIndex(lineIndices);
-
     const lineShaderMaterial = new THREE.ShaderMaterial({
       uniforms: {
         uTime: { value: 0.0 },
         uWaveSpeed: { value: config.waveSpeed },
-        uLineOpacity: { value: 0.14 },
+        uLineColor: { value: new THREE.Color(config.lineColor) },
+        uLineOpacity: { value: config.lineOpacity },
+        uLineDiscardAlpha: { value: config.lineDiscardAlpha },
       },
       vertexShader: `
         attribute float alpha;
@@ -957,17 +1018,20 @@
         void main() {
           vAlpha = alpha;
           vec3 pos = position;
-          float wave = sin(pos.x * 0.18 + uTime * uWaveSpeed * 1.5) * 
-                       cos(pos.z * 0.22 + uTime * uWaveSpeed * 1.0) * 0.42;
+          float wave = sin(pos.x * 0.22 + uTime * uWaveSpeed * 1.1 + pos.z * 0.14) * 0.38 +
+                       cos(pos.z * 0.20 + uTime * uWaveSpeed * 0.85) * 0.25;
           pos.y += wave * (0.25 + alpha * 0.75);
           gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
         }
       `,
       fragmentShader: `
+        uniform vec3 uLineColor;
         uniform float uLineOpacity;
+        uniform float uLineDiscardAlpha;
         varying float vAlpha;
         void main() {
-          gl_FragColor = vec4(0.0, 0.82, 0.71, vAlpha * uLineOpacity);
+          if (vAlpha < uLineDiscardAlpha) discard;
+          gl_FragColor = vec4(uLineColor, vAlpha * uLineOpacity);
         }
       `,
       transparent: true,
@@ -977,6 +1041,8 @@
 
     const waveLineMesh = new THREE.LineSegments(lineGeom, lineShaderMaterial);
     scene.add(waveLineMesh);
+
+    rebuildWave();
 
     // --- 5. Animation Loop ---
     let animationFrameId;
@@ -988,8 +1054,13 @@
 
       waveShaderMaterial.uniforms.uTime.value = elapsedTime;
       waveShaderMaterial.uniforms.uWaveSpeed.value = config.waveSpeed;
+
       lineShaderMaterial.uniforms.uTime.value = elapsedTime;
       lineShaderMaterial.uniforms.uWaveSpeed.value = config.waveSpeed;
+      lineShaderMaterial.uniforms.uLineOpacity.value = config.lineOpacity;
+      lineShaderMaterial.uniforms.uLineColor.value.set(config.lineColor);
+      lineShaderMaterial.uniforms.uLineDiscardAlpha.value = config.lineDiscardAlpha;
+
       glowUniforms.pulseTime.value = elapsedTime * 1.2;
 
       // In-Place Smooth Orbital Motion
@@ -1054,7 +1125,7 @@
     }
 
     // --- 7. lil-gui Controller Setup ---
-    const gui = new lil.GUI({ title: '📱 Mobile 3D Tuner' });
+    const gui = new lil.GUI({ title: '📱 Mobile 3D Tuner', width: 330 });
 
     // Presets Folder
     const presetFolder = gui.addFolder('🎯 Presets');
@@ -1088,6 +1159,27 @@
     waveFolder.add(config, 'strandSpread', 5, 30, 1).name('Strand Spread').onChange(rebuildWave).listen();
     waveFolder.add(config, 'gridWidth', 30, 140, 1).name('Grid Width').onChange(rebuildWave).listen();
     waveFolder.open();
+
+    // Wireframe Lattice & Gridlines Folder (Requested by user)
+    const latticeFolder = gui.addFolder('🕸️ Lattice Wireframe Lines');
+    latticeFolder.add(config, 'lineOpacity', 0.0, 0.8, 0.01).name('Line Opacity').listen();
+    latticeFolder.addColor(config, 'lineColor').name('Line Color').listen();
+    latticeFolder.add(config, 'transverseStep', 1, 10, 1).name('Grid Spacing Step').onChange(rebuildLines).listen();
+    latticeFolder.add(config, 'lineDiscardAlpha', 0.00, 0.25, 0.01).name('Edge Cutoff Alpha').listen();
+    latticeFolder.add(config, 'showLongitudinal').name('Strand Lines').onChange(rebuildLines);
+    latticeFolder.add(config, 'showTransverse').name('Cross Gridlines').onChange(rebuildLines);
+    latticeFolder.open();
+
+    // Edge Fade & Cliff Slope Folder (Requested by user)
+    const fadeFolder = gui.addFolder('◀ Edge Fade & Cliff Slope');
+    fadeFolder.add(config, 'fadeYDrop', 0.0, 1.0, 0.05).name('Edge Cliff Drop (Y)').onChange(rebuildWave).listen();
+    fadeFolder.add(config, 'leftFadeStart', -1.0, 0.5, 0.02).name('Left Fade Start').onChange(rebuildWave).listen();
+    fadeFolder.add(config, 'leftFadeEnd', -0.8, 0.8, 0.02).name('Left Fade End').onChange(rebuildWave).listen();
+    fadeFolder.add(config, 'leftFadePower', 0.2, 4.0, 0.05).name('Left Fade Curve').onChange(rebuildWave).listen();
+    fadeFolder.add(config, 'rightFadeStart', -0.2, 0.8, 0.02).name('Right Fade Start').onChange(rebuildWave).listen();
+    fadeFolder.add(config, 'rightFadeEnd', 0.3, 1.0, 0.02).name('Right Fade End').onChange(rebuildWave).listen();
+    fadeFolder.add(config, 'rightFadePower', 0.2, 4.0, 0.05).name('Right Fade Curve').onChange(rebuildWave).listen();
+    fadeFolder.open();
 
     // Camera Folder
     const camFolder = gui.addFolder('📷 Camera Settings');
@@ -1191,6 +1283,13 @@
         waveArcHeight: Number(config.waveArcHeight.toFixed(2)),
         waveArcCenter: Number(config.waveArcCenter.toFixed(2)),
         waveSpeed: Number(config.waveSpeed.toFixed(2)),
+        lineOpacity: Number(config.lineOpacity.toFixed(2)),
+        lineColor: config.lineColor,
+        transverseStep: Number(config.transverseStep),
+        lineDiscardAlpha: Number(config.lineDiscardAlpha.toFixed(2)),
+        fadeYDrop: Number(config.fadeYDrop.toFixed(2)),
+        leftFadeStart: Number(config.leftFadeStart.toFixed(2)),
+        leftFadeEnd: Number(config.leftFadeEnd.toFixed(2)),
         cameraFOV: Number(config.cameraFOV),
         cameraZ: Number(config.cameraZ.toFixed(1)),
       };

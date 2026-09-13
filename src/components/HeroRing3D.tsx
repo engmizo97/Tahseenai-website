@@ -264,7 +264,7 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
 
     const strandSpread = 15.0;
     const waveArcHeight = 1.4;
-    const waveArcCenter = -0.5;
+    const waveArcCenter = isMobileInitial ? 0.1 : -0.5;
     const waveTwist = 0.8;
     const gridWidth = 81.0;
 
@@ -282,8 +282,8 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     const rightFadeEnd = 1.0;
     const rightFadePower = 1.5;
 
-    const waveElevationY = -2.35;
-    const waveAmplitude = 0.65;
+    const waveElevationY = isMobileInitial ? -2.75 : -2.35;
+    const waveAmplitude = isMobileInitial ? 0.68 : 0.65;
     const waveSpeed = 0.6;
     const depthFadePower = 0.5;
 
@@ -549,13 +549,13 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
         responsiveBaseY = ringBaseY;
         responsiveScale = ringBaseScale;
       } else if (isCurrentTablet) {
-        responsiveBaseX = 0;
-        responsiveBaseY = -0.25;
-        responsiveScale = 0.56;
+        responsiveBaseX = 0.55;
+        responsiveBaseY = -0.10;
+        responsiveScale = 0.52;
       } else {
-        // Mobile: center ring in open bottom half of screen below headline
-        responsiveBaseX = 0;
-        responsiveBaseY = -1.15;
+        // Mobile phone coordinates tuned by user
+        responsiveBaseX = 1.1;
+        responsiveBaseY = -0.05;
         responsiveScale = 0.44;
       }
 
