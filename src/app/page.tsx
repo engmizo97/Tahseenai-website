@@ -53,6 +53,7 @@ export default function Home() {
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [activeSolutionIdx, setActiveSolutionIdx] = useState(0);
+  const [activeSection, setActiveSection] = useState<string>("home");
 
   // NEXUS Studio-Style Scroll State Tracking
   const [scrollY, setScrollY] = useState(0);
@@ -69,6 +70,20 @@ export default function Home() {
           const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
           if (totalHeight > 0) {
             setScrollProgress(Math.min(1, Math.max(0, currentY / totalHeight)));
+          }
+
+          // Track active nav section during scroll
+          const sectionIds = ["about", "education", "solutions", "insights", "services", "home"];
+          const scrollPos = currentY + 250;
+          for (const id of sectionIds) {
+            const el = document.getElementById(id);
+            if (el) {
+              const docTop = el.getBoundingClientRect().top + currentY;
+              if (scrollPos >= docTop) {
+                setActiveSection(id);
+                break;
+              }
+            }
           }
 
           // Track active solution card during scroll as right column moves
@@ -157,18 +172,18 @@ export default function Home() {
     ? [
         { name: "الرئيسية", href: "#home" },
         { name: "خدماتنا", href: "#services" },
-        { name: "تحسين التعليمية", href: "#education" },
         { name: "التحليلات", href: "#insights" },
         { name: "الحلول", href: "#solutions" },
+        { name: "تحسين التعليمية", href: "#education" },
         { name: "من نحن", href: "#about" },
         { name: "اتصل بنا", href: contactHref },
       ]
     : [
         { name: "HOME", href: "#home" },
         { name: "SERVICES", href: "#services" },
-        { name: "EDUCATION", href: "#education" },
         { name: "INSIGHTS", href: "#insights" },
         { name: "SOLUTIONS", href: "#solutions" },
+        { name: "EDUCATION", href: "#education" },
         { name: "ABOUT US", href: "#about" },
         { name: "CONTACT", href: contactHref },
       ];
@@ -178,6 +193,7 @@ export default function Home() {
       e.preventDefault();
       setMobileMenuOpen(false);
       const targetId = href.replace("#", "");
+      setActiveSection(targetId);
       if (targetId === "home") {
         window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
@@ -535,26 +551,41 @@ export default function Home() {
           {/* Desktop Nav Links & Controls */}
           <div className="hidden md:flex items-center gap-4 lg:gap-6">
             <nav className="flex items-center gap-4 lg:gap-6 text-xs font-semibold tracking-wider text-gray-300">
-              {navLinks.map((link) =>
-                link.href.startsWith("/") ? (
+              {navLinks.map((link) => {
+                const isSectionActive = link.href === `#${activeSection}`;
+                return link.href.startsWith("/") ? (
                   <Link
                     key={link.name}
                     href={link.href}
-                    className="hover:text-[#008688] hover:scale-105 transition-all duration-200 cursor-pointer"
+                    className={`relative py-1 transition-all duration-200 cursor-pointer ${
+                      isSectionActive
+                        ? "text-[#008688] font-bold"
+                        : "text-gray-300 hover:text-[#008688]"
+                    }`}
                   >
-                    {link.name}
+                    <span>{link.name}</span>
+                    {isSectionActive && (
+                      <span className="absolute -bottom-1 left-0 right-0 h-[2px] bg-[#008688] rounded-full shadow-[0_0_8px_rgba(0,134,136,0.8)]" />
+                    )}
                   </Link>
                 ) : (
                   <a
                     key={link.name}
                     href={link.href}
                     onClick={(e) => handleSmoothScroll(e, link.href)}
-                    className="hover:text-[#008688] hover:scale-105 transition-all duration-200 cursor-pointer"
+                    className={`relative py-1 transition-all duration-200 cursor-pointer ${
+                      isSectionActive
+                        ? "text-[#008688] font-bold"
+                        : "text-gray-300 hover:text-[#008688]"
+                    }`}
                   >
-                    {link.name}
+                    <span>{link.name}</span>
+                    {isSectionActive && (
+                      <span className="absolute -bottom-1 left-0 right-0 h-[2px] bg-[#008688] rounded-full shadow-[0_0_8px_rgba(0,134,136,0.8)]" />
+                    )}
                   </a>
-                )
-              )}
+                );
+              })}
             </nav>
 
             {/* Little Theme Switch Slider (RTL/LTR Normalized with dir="ltr") */}
@@ -655,29 +686,34 @@ export default function Home() {
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-white/10 bg-[#0d1426]/98 px-6 py-6 space-y-4 shadow-2xl backdrop-blur-2xl animate-in slide-in-from-top-2 duration-200">
             <nav className="flex flex-col space-y-3 text-sm font-bold">
-              {navLinks.map((link) =>
-                link.href.startsWith("/") ? (
+              {navLinks.map((link) => {
+                const isSectionActive = link.href === `#${activeSection}`;
+                return link.href.startsWith("/") ? (
                   <Link
                     key={link.name}
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="py-2.5 border-b border-white/5 text-gray-200 hover:text-[#008688] transition-colors flex items-center justify-between"
+                    className={`py-2.5 border-b border-white/5 transition-colors flex items-center justify-between ${
+                      isSectionActive ? "text-[#008688] font-bold" : "text-gray-200 hover:text-[#008688]"
+                    }`}
                   >
                     <span>{link.name}</span>
-                    <ArrowRight className={`w-3.5 h-3.5 text-gray-500 ${isAr ? "rotate-180" : ""}`} />
+                    <ArrowRight className={`w-3.5 h-3.5 ${isSectionActive ? "text-[#008688]" : "text-gray-500"} ${isAr ? "rotate-180" : ""}`} />
                   </Link>
                 ) : (
                   <a
                     key={link.name}
                     href={link.href}
                     onClick={(e) => handleSmoothScroll(e, link.href)}
-                    className="py-2.5 border-b border-white/5 text-gray-200 hover:text-[#008688] transition-colors flex items-center justify-between"
+                    className={`py-2.5 border-b border-white/5 transition-colors flex items-center justify-between ${
+                      isSectionActive ? "text-[#008688] font-bold" : "text-gray-200 hover:text-[#008688]"
+                    }`}
                   >
                     <span>{link.name}</span>
-                    <ArrowRight className={`w-3.5 h-3.5 text-gray-500 ${isAr ? "rotate-180" : ""}`} />
+                    <ArrowRight className={`w-3.5 h-3.5 ${isSectionActive ? "text-[#008688]" : "text-gray-500"} ${isAr ? "rotate-180" : ""}`} />
                   </a>
-                )
-              )}
+                );
+              })}
             </nav>
 
             <div className="pt-2">

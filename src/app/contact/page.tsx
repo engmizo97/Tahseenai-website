@@ -157,17 +157,25 @@ export default function ContactPage() {
           {/* Desktop Nav Links & Controls */}
           <div className="hidden md:flex items-center gap-4 lg:gap-7">
             <nav className="flex items-center gap-4 lg:gap-7 text-xs font-semibold tracking-wider text-gray-200">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className={`transition-colors duration-200 cursor-pointer ${
-                    link.href === contactHref ? "text-[#008688]" : "hover:text-[#008688]"
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = link.href === contactHref;
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className={`relative py-1 transition-all duration-200 cursor-pointer ${
+                      isActive
+                        ? "text-[#008688] font-bold"
+                        : "text-gray-300 hover:text-[#008688]"
+                    }`}
+                  >
+                    <span>{link.name}</span>
+                    {isActive && (
+                      <span className="absolute -bottom-1 left-0 right-0 h-[2px] bg-[#008688] rounded-full shadow-[0_0_8px_rgba(0,134,136,0.8)]" />
+                    )}
+                  </Link>
+                );
+              })}
             </nav>
 
             {/* Little Theme Switch Slider */}
