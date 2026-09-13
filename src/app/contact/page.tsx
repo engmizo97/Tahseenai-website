@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Mail, MapPin, Clock, CheckCircle2, MessageSquare, Sparkles, Send, Globe, Menu, X } from "lucide-react";
 import Footer from "@/components/Footer";
-import CurvedRibbonBackground from "@/components/CurvedRibbonBackground";
 
 export default function ContactPage() {
   const [lang, setLang] = useState<"ar" | "en">("en");
@@ -112,9 +111,6 @@ export default function ContactPage() {
       dir={isAr ? "rtl" : "ltr"}
       className="relative min-h-screen bg-[#0d1426] text-white flex flex-col justify-between overflow-x-clip font-sans"
     >
-      {/* Architectural Sweeping Ribbon & Dashed Grid Background */}
-      <CurvedRibbonBackground />
-
       {/* 1. Sticky Header / Navbar */}
       <header className="sticky top-0 z-50 w-full bg-[#0d1426]/92 backdrop-blur-xl border-b border-white/[0.06] transition-all duration-300">
         <div className="py-2.5 sm:py-3 px-4 sm:px-8 lg:px-16 xl:px-24 max-w-[1500px] mx-auto w-full flex items-center justify-between">
