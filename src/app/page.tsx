@@ -35,7 +35,6 @@ import {
 } from "lucide-react";
 import HeroRing3D from "@/components/HeroRing3D";
 import Footer from "@/components/Footer";
-import AmbientWaveParticles from "@/components/AmbientWaveParticles";
 import ScrollReveal from "@/components/ScrollReveal";
 import CurvedRibbonBackground from "@/components/CurvedRibbonBackground";
 
@@ -501,9 +500,6 @@ export default function Home() {
         className="fixed top-0 left-0 right-0 h-[2.5px] bg-[#008688] z-[100] origin-left pointer-events-none transition-transform duration-75 ease-out shadow-[0_0_10px_rgba(0,134,136,0.8)]"
         style={{ transform: `scaleX(${scrollProgress})` }}
       />
-
-      {/* Ambient Wave Particles Scattered Across Webpage */}
-      <AmbientWaveParticles />
 
       {/* 1. Sticky Header / Navbar (Locked to Dark Aesthetic in Both Modes) */}
       <header className="sticky top-0 z-50 w-full backdrop-blur-xl border-b border-white/[0.06] bg-[#0d1426]/92 text-white transition-all duration-300">

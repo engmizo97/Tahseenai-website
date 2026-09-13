@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Mail, MapPin, Clock, CheckCircle2, MessageSquare, Sparkles, Send, Globe, Menu, X } from "lucide-react";
 import Footer from "@/components/Footer";
-import AmbientWaveParticles from "@/components/AmbientWaveParticles";
 import CurvedRibbonBackground from "@/components/CurvedRibbonBackground";
 
 export default function ContactPage() {
@@ -115,9 +114,6 @@ export default function ContactPage() {
     >
       {/* Architectural Sweeping Ribbon & Dashed Grid Background */}
       <CurvedRibbonBackground />
-
-      {/* Ambient Wave Particles */}
-      <AmbientWaveParticles />
 
       {/* 1. Sticky Header / Navbar */}
       <header className="sticky top-0 z-50 w-full bg-[#0d1426]/92 backdrop-blur-xl border-b border-white/[0.06] transition-all duration-300">
