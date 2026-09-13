@@ -1509,63 +1509,41 @@ export default function Home() {
         </ScrollReveal>
       </section>
 
-      {/* 12. Final CTA Banner - Full Screen Width & Center-Docked Layout */}
-      <section id="cta" className="cta-dark-band relative z-10 w-full overflow-hidden bg-gradient-to-r from-[#060913] via-[#091822] to-[#060913] border-y border-[#008688]/35 shadow-[0_10px_60px_rgba(0,134,136,0.15)] text-white py-4 sm:py-6 lg:py-7 px-4 sm:px-8">
+      {/* 12. Final CTA Banner - Clean Centered Layout */}
+      <section id="cta" className="cta-dark-band relative z-10 w-full overflow-hidden bg-gradient-to-r from-[#060913] via-[#091822] to-[#060913] border-y border-[#008688]/35 shadow-[0_10px_60px_rgba(0,134,136,0.15)] text-white py-12 sm:py-16 lg:py-20 px-4 sm:px-8">
         <ScrollReveal y={45} duration={1100}>
-          <div className="max-w-[1120px] mx-auto w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-            
-            {/* Left Column: Heading & CTA (Shifted to the Right towards Center) */}
-            <div className={`lg:col-span-6 space-y-3 sm:space-y-3.5 text-start ${isAr ? "lg:pr-12 xl:pr-16" : "lg:pl-12 xl:pl-16"} flex flex-col justify-center`}>
-              <span className="text-[#008688] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase block">
-                {isAr ? "جاهز للبدء؟" : "READY TO GET STARTED?"}
-              </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight !text-white">
-                {isAr ? (
-                  <>
-                    <span className="!text-white">ابنِ حلول الذكاء الاصطناعي</span> <br className="hidden sm:inline" />
-                    <span className="text-[#008688]">لمنشأتك معنا</span>
-                  </>
-                ) : (
-                  <>
-                    <span className="!text-white">Build Your AI Systems</span> <br className="hidden sm:inline" />
-                    <span className="text-[#008688]">With Us</span>
-                  </>
-                )}
-              </h2>
-              <p className="text-xs sm:text-sm !text-gray-300 leading-relaxed font-normal max-w-md">
-                {isAr
-                  ? "تحدث مع فريقنا لنحدد لك أين يمكن للذكاء الاصطناعي والأتمتة توفير وقت منشأتك."
-                  : "Talk with our team to find out where AI and automation can save your business time."}
-              </p>
-              <div className="pt-1 flex flex-wrap items-center gap-4">
-                <Link
-                  href={contactHref}
-                  className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 text-xs sm:text-sm font-extrabold tracking-widest uppercase rounded-lg bg-[#008688] text-white hover:brightness-110 shadow-[0_4px_25px_rgba(0,134,136,0.6)] transition-all cursor-pointer group"
-                >
-                  <span>{isAr ? "تحدث مع فريقنا" : "TALK TO OUR TEAM"}</span>
-                  <ArrowRight className={`w-4 h-4 transition-transform group-hover:translate-x-1 ${isAr ? "rotate-180 group-hover:-translate-x-1" : ""}`} />
-                </Link>
-              </div>
+          <div className="max-w-2xl mx-auto w-full text-center space-y-4">
+            <span className="text-[#008688] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase block">
+              {isAr ? "جاهز للبدء؟" : "READY TO GET STARTED?"}
+            </span>
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight !text-white">
+              {isAr ? (
+                <>
+                  <span className="!text-white">ابنِ حلول الذكاء الاصطناعي</span>{" "}
+                  <span className="text-[#008688]">لمنشأتك معنا</span>
+                </>
+              ) : (
+                <>
+                  <span className="!text-white">Build Your AI Systems</span>{" "}
+                  <span className="text-[#008688]">With Us</span>
+                </>
+              )}
+            </h2>
+            <p className="text-xs sm:text-base !text-gray-300 leading-relaxed font-normal max-w-lg mx-auto">
+              {isAr
+                ? "تحدث مع فريقنا لنحدد لك أين يمكن للذكاء الاصطناعي والأتمتة توفير وقت منشأتك."
+                : "Talk with our team to find out where AI and automation can save your business time."}
+            </p>
+            <div className="pt-3 flex items-center justify-center">
+              <Link
+                href={contactHref}
+                className="inline-flex items-center gap-2 px-7 sm:px-9 py-3.5 text-xs sm:text-sm font-extrabold tracking-widest uppercase rounded-lg bg-[#008688] text-white hover:brightness-110 shadow-[0_4px_25px_rgba(0,134,136,0.6)] transition-all cursor-pointer group"
+              >
+                <span>{isAr ? "تحدث مع فريقنا" : "TALK TO OUR TEAM"}</span>
+                <ArrowRight className={`w-4 h-4 transition-transform group-hover:translate-x-1 ${isAr ? "rotate-180 group-hover:-translate-x-1" : ""}`} />
+              </Link>
             </div>
-
-            {/* Right Column: Animated Large Elaborate AI Solution Graphic (Floating & Borderless) */}
-            <div className="lg:col-span-6 flex items-center justify-center w-full">
-              <div className="relative w-full h-[220px] sm:h-[270px] lg:h-[310px] max-w-[540px] flex items-center justify-center group animate-cta-float">
-                <div className="absolute inset-0 bg-[#008688]/10 rounded-full blur-[60px] pointer-events-none animate-cta-glow -z-10" />
-                <Image
-                  src="/cta-ai-solution.png"
-                  alt="Build Your AI-Powered Solution"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 540px"
-                  className="object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-[0_15px_35px_rgba(0,134,136,0.35)]"
-                  priority
-                />
-              </div>
-            </div>
-
           </div>
-        </div>
         </ScrollReveal>
       </section>
       </div>
