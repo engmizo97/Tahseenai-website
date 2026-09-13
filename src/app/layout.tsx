@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className="h-full antialiased scroll-smooth"
+      className="h-full antialiased scroll-smooth dark"
     >
       <body className="bg-[#0d1426] text-gray-100 min-h-full flex flex-col selection:bg-[#008688]/30 selection:text-[#008688]">
         {children}

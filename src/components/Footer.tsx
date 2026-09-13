@@ -6,12 +6,10 @@ import { Mail, MapPin, ArrowRight, HeartHandshake } from "lucide-react";
 
 interface FooterProps {
   lang?: "ar" | "en";
-  theme?: "dark" | "light";
 }
 
-export default function Footer({ lang = "en", theme = "dark" }: FooterProps) {
+export default function Footer({ lang = "en" }: FooterProps) {
   const isAr = lang === "ar";
-  const isLight = theme === "light";
   const contactHref = isAr ? "/contact?lang=ar" : "/contact";
   const homePrefix = isAr ? "/?lang=ar" : "";
 
@@ -108,7 +106,7 @@ export default function Footer({ lang = "en", theme = "dark" }: FooterProps) {
             <Link href={isAr ? "/" : "/?lang=en"} className="flex items-center group">
               <div className="relative h-11 w-52 sm:h-12 sm:w-60 transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_15px_rgba(0,134,136,0.3)]">
                 <Image
-                  src={isLight ? "/tahseen-logo-light.png" : "/tahseen-logo.png"}
+                  src="/tahseen-logo.png"
                   alt="Tahseen AI"
                   fill
                   sizes="(max-width: 640px) 208px, 240px"

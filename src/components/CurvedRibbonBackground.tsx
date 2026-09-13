@@ -2,20 +2,13 @@
 
 import { useEffect, useRef } from "react";
 
-interface CurvedRibbonBackgroundProps {
-  theme?: "dark" | "light";
-}
-
 interface PathSample {
   d: number;
   x: number;
   y: number;
 }
 
-export default function CurvedRibbonBackground({
-  theme = "dark",
-}: CurvedRibbonBackgroundProps) {
-  const isLight = theme === "light";
+export default function CurvedRibbonBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const particleSvgRef = useRef<SVGSVGElement>(null);
@@ -264,17 +257,13 @@ export default function CurvedRibbonBackground({
     <div
       ref={containerRef}
       aria-hidden="true"
-      className={`absolute inset-0 w-full h-full pointer-events-none overflow-hidden transition-opacity duration-500 ${
-        isLight ? "opacity-45" : "opacity-100"
-      }`}
+      className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden"
     >
       {/* Faint Big Architectural Gridlines (Rest of Webpage Background, Excludes Hero) */}
       <div
         className="absolute inset-0 w-full h-full pointer-events-none z-0"
         style={{
-          backgroundImage: isLight
-            ? "linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px)"
-            : "linear-gradient(to right, rgba(255, 255, 255, 0.032) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.032) 1px, transparent 1px)",
+          backgroundImage: "linear-gradient(to right, rgba(255, 255, 255, 0.032) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.032) 1px, transparent 1px)",
           backgroundSize: "96px 96px",
         }}
       />

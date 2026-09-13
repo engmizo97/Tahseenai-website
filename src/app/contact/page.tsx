@@ -3,16 +3,14 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Mail, MapPin, Clock, CheckCircle2, MessageSquare, Sparkles, Send, Globe, Menu, X, Sun, Moon } from "lucide-react";
+import { ArrowRight, Mail, MapPin, Clock, CheckCircle2, MessageSquare, Sparkles, Send, Globe, Menu, X } from "lucide-react";
 import Footer from "@/components/Footer";
 import AmbientWaveParticles from "@/components/AmbientWaveParticles";
 import CurvedRibbonBackground from "@/components/CurvedRibbonBackground";
 
 export default function ContactPage() {
   const [lang, setLang] = useState<"ar" | "en">("en");
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
   const isAr = lang === "ar";
-  const isLight = theme === "light";
   const homePrefix = isAr ? "/?lang=ar" : "";
   const contactHref = isAr ? "/contact?lang=ar" : "/contact";
 
@@ -43,14 +41,9 @@ export default function ContactPage() {
           }
         }
 
-        const savedTheme = localStorage.getItem("tahseen_theme") as "dark" | "light" | null;
-        if (savedTheme === "dark" || savedTheme === "light") {
-          setTheme(savedTheme);
-          document.documentElement.classList.remove("dark", "light");
-          document.documentElement.classList.add(savedTheme);
-        } else {
-          document.documentElement.classList.add("dark");
-        }
+        document.documentElement.classList.remove("light");
+        document.documentElement.classList.add("dark");
+        localStorage.removeItem("tahseen_theme");
       }
     }, 0);
     return () => clearTimeout(timer);
@@ -73,16 +66,6 @@ export default function ContactPage() {
         url.searchParams.set("lang", "ar");
       }
       window.history.replaceState({}, "", url.toString());
-    }
-  };
-
-  const toggleTheme = () => {
-    const nextTheme = theme === "dark" ? "light" : "dark";
-    setTheme(nextTheme);
-    if (typeof window !== "undefined") {
-      localStorage.setItem("tahseen_theme", nextTheme);
-      document.documentElement.classList.remove("dark", "light");
-      document.documentElement.classList.add(nextTheme);
     }
   };
 
@@ -128,16 +111,16 @@ export default function ContactPage() {
   return (
     <div
       dir={isAr ? "rtl" : "ltr"}
-      className="relative min-h-screen bg-[#060913] text-white flex flex-col justify-between overflow-x-clip font-sans"
+      className="relative min-h-screen bg-[#0d1426] text-white flex flex-col justify-between overflow-x-clip font-sans"
     >
       {/* Architectural Sweeping Ribbon & Dashed Grid Background */}
-      <CurvedRibbonBackground theme={theme} />
+      <CurvedRibbonBackground />
 
       {/* Ambient Wave Particles */}
-      <AmbientWaveParticles theme={theme} />
+      <AmbientWaveParticles />
 
       {/* 1. Sticky Header / Navbar */}
-      <header className="sticky top-0 z-50 w-full bg-[#060913]/90 backdrop-blur-xl border-b border-white/[0.04] transition-all duration-300">
+      <header className="sticky top-0 z-50 w-full bg-[#0d1426]/92 backdrop-blur-xl border-b border-white/[0.06] transition-all duration-300">
         <div className="py-2.5 sm:py-3 px-4 sm:px-8 lg:px-16 xl:px-24 max-w-[1500px] mx-auto w-full flex items-center justify-between">
           
           {/* Logo */}
@@ -178,30 +161,6 @@ export default function ContactPage() {
               })}
             </nav>
 
-            {/* Little Theme Switch Slider */}
-            <button
-              onClick={toggleTheme}
-              type="button"
-              dir="ltr"
-              role="switch"
-              aria-checked={isLight}
-              aria-label={isLight ? "Switch to Dark Mode" : "Switch to Light Mode"}
-              className="relative inline-flex items-center w-12 h-6 p-0.5 rounded-full border border-white/20 bg-white/10 transition-colors duration-300 cursor-pointer flex-shrink-0"
-            >
-              <div className="w-full flex justify-between items-center px-1 text-xs select-none pointer-events-none">
-                <Sun className={`w-3 h-3 ${isLight ? "text-amber-500 opacity-100" : "text-gray-400 opacity-40"}`} />
-                <Moon className={`w-3 h-3 ${!isLight ? "text-cyan-300 opacity-100" : "text-gray-400 opacity-40"}`} />
-              </div>
-              <span
-                style={{ left: "2px" }}
-                className={`absolute top-0.5 bottom-0.5 w-5 h-5 rounded-full bg-[#008688] shadow-xs flex items-center justify-center text-[#060913] transition-transform duration-300 transform ${
-                  isLight ? "translate-x-0" : "translate-x-6"
-                }`}
-              >
-                {isLight ? <Sun className="w-3 h-3 text-[#060913]" /> : <Moon className="w-3 h-3 text-[#060913]" />}
-              </span>
-            </button>
-
             {/* Language Toggle Button */}
             <button
               onClick={toggleLanguage}
@@ -222,28 +181,6 @@ export default function ContactPage() {
 
           {/* Mobile Controls */}
           <div className="flex md:hidden items-center gap-2">
-            {/* Mobile Little Theme Slider */}
-            <button
-              onClick={toggleTheme}
-              type="button"
-              dir="ltr"
-              aria-label="Toggle theme"
-              className="relative inline-flex items-center w-11 h-5.5 p-0.5 rounded-full border border-white/20 bg-white/10 transition-colors"
-            >
-              <div className="w-full flex justify-between items-center px-1 text-[10px] select-none pointer-events-none">
-                <Sun className={`w-2.5 h-2.5 ${isLight ? "text-amber-500" : "text-gray-400 opacity-40"}`} />
-                <Moon className={`w-2.5 h-2.5 ${!isLight ? "text-cyan-300" : "text-gray-400 opacity-40"}`} />
-              </div>
-              <span
-                style={{ left: "2px" }}
-                className={`absolute top-0.5 bottom-0.5 w-4.5 h-4.5 rounded-full bg-[#008688] shadow-xs flex items-center justify-center text-[#060913] transition-transform duration-300 transform ${
-                  isLight ? "translate-x-0" : "translate-x-5"
-                }`}
-              >
-                {isLight ? <Sun className="w-2.5 h-2.5" /> : <Moon className="w-2.5 h-2.5" />}
-              </span>
-            </button>
-
             <button
               onClick={toggleLanguage}
               aria-label="Toggle language"
@@ -542,7 +479,7 @@ export default function ContactPage() {
       </main>
 
       {/* 3. Enterprise Footer */}
-      <Footer lang={lang} theme={theme} />
+      <Footer lang={lang} />
 
     </div>
   );
