@@ -111,6 +111,16 @@ export default function ContactPage() {
       dir={isAr ? "rtl" : "ltr"}
       className="relative min-h-screen bg-[#0d1426] text-white flex flex-col justify-between overflow-x-clip font-sans"
     >
+      {/* Faint Big Architectural Blueprint Gridlines */}
+      <div
+        className="absolute inset-0 w-full h-full pointer-events-none z-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, rgba(255, 255, 255, 0.032) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.032) 1px, transparent 1px)",
+          backgroundSize: "96px 96px",
+        }}
+      />
+
       {/* 1. Sticky Header / Navbar */}
       <header className="sticky top-0 z-50 w-full bg-[#0d1426]/92 backdrop-blur-xl border-b border-white/[0.06] transition-all duration-300">
         <div className="py-2.5 sm:py-3 px-4 sm:px-8 lg:px-16 xl:px-24 max-w-[1500px] mx-auto w-full flex items-center justify-between">
