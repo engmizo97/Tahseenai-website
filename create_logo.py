@@ -111,6 +111,7 @@ def build_master_logo(is_light=False):
         return img, ImageDraw.Draw(img)
 
     s_E, d = create_slogan_glyph(8, SH)
+    d.line([(1, 1), (1, 9)], fill=slogan_color, width=SST)
     d.line([(1, 1), (7, 1)], fill=slogan_color, width=SST)
     d.line([(1, 5), (6, 5)], fill=slogan_color, width=SST)
     d.line([(1, 9), (7, 9)], fill=slogan_color, width=SST)
@@ -125,9 +126,10 @@ def build_master_logo(is_light=False):
     d.line([(7, 1), (7, 9)], fill=slogan_color, width=SST)
     d.line([(1, 5), (7, 5)], fill=slogan_color, width=SST)
 
-    # A (Upright futuristic / \ with NO crossbar - matching TAHSEEN A)
+    # A (Clean standard crossbar, matching font family without futuristic chevron)
     s_A, d = create_slogan_glyph(8, SH)
-    d.line([(1, 9), (4, 1), (7, 9)], fill=slogan_color, width=SST, joint='miter')
+    d.line([(1, 9), (4, 1), (7, 9)], fill=slogan_color, width=SST)
+    d.line([(2, 6), (6, 6)], fill=slogan_color, width=SST)
 
     s_C, d = create_slogan_glyph(8, SH)
     d.line([(7, 1), (2, 1), (2, 9), (7, 9)], fill=slogan_color, width=SST)
