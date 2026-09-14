@@ -70,17 +70,17 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     const isDesktop = width >= 1024;
     const isTablet = width >= 640 && width < 1024;
     
-    const ringBaseX = 3.91;
-    const ringBaseY = 0.90;
+    const ringBaseX = 0.0;
+    const ringBaseY = 0.15;
     const ringBaseZ = 0.0;
     const ringBaseScale = 0.78;
 
     heroGroup.position.set(
-      isDesktop ? (mirrored ? -ringBaseX : ringBaseX) : 0,
-      isDesktop ? ringBaseY : isTablet ? 0.75 : 0.65,
+      ringBaseX,
+      isDesktop ? ringBaseY : 0.42,
       ringBaseZ
     );
-    heroGroup.scale.setScalar(isDesktop ? ringBaseScale : isTablet ? 0.62 : 0.50);
+    heroGroup.scale.setScalar(isDesktop ? ringBaseScale : isTablet ? 0.52 : 0.46);
     scene.add(heroGroup);
 
     const baseRotX = -0.59;
@@ -324,9 +324,9 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     }
 
     const buildWavePositions = (mobile: boolean) => {
-      const elevation = mobile ? -1.85 : -2.35;
-      const amp = mobile ? 0.68 : 0.65;
-      const arcCenter = mobile ? 0.1 : -0.5;
+      const elevation = mobile ? -1.40 : -1.55;
+      const amp = mobile ? 0.60 : 0.65;
+      const arcCenter = 0.0;
 
       let pIdx = 0;
       for (let s = 0; s < numStrands; s++) {
@@ -562,31 +562,29 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
         buildWavePositions(isMobile);
       }
 
-      camera.fov = isMobile ? 46 : isCurrentTablet ? 40 : 36;
-      camera.position.set(0, 0, isMobile ? 11.8 : isCurrentTablet ? 11.0 : 10.5);
+      camera.fov = isMobile ? 46 : isCurrentTablet ? 42 : 38;
+      camera.position.set(0, 0, isMobile ? 11.8 : isCurrentTablet ? 11.2 : 10.5);
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
 
       renderer.setSize(w, h);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-      // Calculate safe visible boundaries to prevent edge clipping on 1024px-1366px screens
-      const halfVisibleWidth = camera.aspect * Math.tan((camera.fov * Math.PI) / 360) * camera.position.z;
-      const maxSafeX = Math.max(2.2, halfVisibleWidth - 1.55);
-
       if (isCurrentDesktop) {
-        responsiveBaseX = Math.min(ringBaseX, maxSafeX);
+        // Centered horizontally in the desktop right column
+        responsiveBaseX = 0.0;
         responsiveBaseY = ringBaseY;
         responsiveScale = ringBaseScale;
       } else if (isCurrentTablet) {
-        responsiveBaseX = 0.55;
-        responsiveBaseY = -0.10;
+        // Centered horizontally underneath CTA button on tablet
+        responsiveBaseX = 0.0;
+        responsiveBaseY = 0.40;
         responsiveScale = 0.52;
       } else {
-        // Mobile phone coordinates: in Arabic, center ring in open lower area to prevent text overlap
-        responsiveBaseX = mirrored ? 0.0 : 0.5;
-        responsiveBaseY = mirrored ? -1.10 : 0.75;
-        responsiveScale = 0.44;
+        // Centered horizontally underneath CTA button on mobile
+        responsiveBaseX = 0.0;
+        responsiveBaseY = 0.42;
+        responsiveScale = 0.46;
       }
 
       heroGroup.scale.setScalar(responsiveScale);

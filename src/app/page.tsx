@@ -663,20 +663,16 @@ export default function Home() {
       <main
         id="home"
         style={{ minHeight: "calc(100dvh - 65px)" }}
-        className="relative z-10 pt-14 sm:pt-18 lg:pt-22 pb-10 sm:pb-14 px-4 sm:px-8 lg:px-16 max-w-[1680px] mx-auto w-full flex flex-col justify-between"
+        className="relative z-10 pt-6 sm:pt-10 lg:pt-14 pb-6 sm:pb-10 px-4 sm:px-8 lg:px-16 max-w-[1680px] mx-auto w-full flex flex-col justify-between"
       >
-        
-        {/* 3D Canvas Layer */}
-        <HeroRing3D mirrored={isAr} />
-
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-4 items-center min-h-[360px] sm:min-h-[400px] lg:min-h-[420px] pointer-events-none">
+        <div className="relative z-10 w-full flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-8 items-center flex-1">
           
-          {/* Left Hero Column */}
-          <div className="lg:col-span-6 xl:col-span-6 space-y-5 sm:space-y-6 lg:space-y-7 text-start pointer-events-auto">
+          {/* Hero Content / Button Wrapper (position: relative, vertical anchor) */}
+          <div className="hero-content relative w-full lg:col-span-6 space-y-4 sm:space-y-6 lg:space-y-7 text-start">
             
             {/* Primary Headline */}
-            <ScrollReveal y={35} duration={1100} delay={100}>
-              <h1 className="text-3xl sm:text-5xl lg:text-[52px] xl:text-[58px] 2xl:text-[62px] font-bold tracking-tight text-white leading-[1.12] drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
+            <ScrollReveal priority y={35} duration={1100} delay={100}>
+              <h1 className="text-2xl xs:text-3xl sm:text-5xl lg:text-[52px] xl:text-[58px] 2xl:text-[62px] font-bold tracking-tight text-white leading-[1.12] drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
                 {isAr ? (
                   <>
                     حلول ذكاء اصطناعي <br />
@@ -692,7 +688,7 @@ export default function Home() {
             </ScrollReveal>
 
             {/* Subtitle */}
-            <ScrollReveal y={35} duration={1100} delay={250}>
+            <ScrollReveal priority y={35} duration={1100} delay={250}>
               <p className="text-sm sm:text-base lg:text-[17px] text-gray-300 leading-[1.65] font-normal max-w-sm sm:max-w-md">
                 {isAr
                   ? "نبني وكلاء ذكاء اصطناعي وأنظمة أتمتة تساعد الشركات على إنجاز أعمالها اليومية بسرعة ودقة."
@@ -700,9 +696,9 @@ export default function Home() {
               </p>
             </ScrollReveal>
 
-            {/* Primary CTA Button */}
-            <ScrollReveal y={35} duration={1100} delay={380}>
-              <div className="pt-2 sm:pt-3 flex flex-wrap items-center gap-3.5">
+            {/* Primary CTA Button (Vertical Anchor) */}
+            <ScrollReveal priority y={35} duration={1100} delay={380}>
+              <div className="hero-cta-anchor pt-1 sm:pt-2 flex flex-wrap items-center gap-3.5">
                 <Link
                   href={contactHref}
                   className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3 sm:py-3.5 text-xs sm:text-sm font-extrabold tracking-widest uppercase rounded-lg btn-teal-outline cursor-pointer group"
@@ -715,8 +711,10 @@ export default function Home() {
 
           </div>
 
-          {/* Right Empty Spacing for 3D Ring */}
-          <div className="hidden lg:block lg:col-span-6 xl:col-span-6 h-[340px] sm:h-[380px]" />
+          {/* Separate .hero-visual layer: positioned below CTA button on mobile/tablet, right column on desktop */}
+          <div className="hero-visual relative w-full lg:col-span-6 h-[clamp(320px,46vh,440px)] sm:h-[clamp(360px,50vh,500px)] lg:h-[clamp(460px,65vh,620px)] pointer-events-none flex items-center justify-center">
+            <HeroRing3D mirrored={isAr} />
+          </div>
 
         </div>
       </main>

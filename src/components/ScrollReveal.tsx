@@ -10,6 +10,7 @@ interface ScrollRevealProps {
   className?: string;
   as?: ElementType;
   threshold?: number;
+  priority?: boolean;
 }
 
 export default function ScrollReveal({
@@ -20,11 +21,14 @@ export default function ScrollReveal({
   className = "",
   as: Component = "div",
   threshold = 0.08,
+  priority = false,
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(priority);
 
   useEffect(() => {
+    if (priority) return;
+
     const el = ref.current;
     if (!el) return;
 
@@ -45,7 +49,7 @@ export default function ScrollReveal({
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [threshold]);
+  }, [threshold, priority]);
 
   return (
     <Component
