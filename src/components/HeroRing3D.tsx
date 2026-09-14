@@ -287,7 +287,7 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     const rightFadeEnd = 1.0;
     const rightFadePower = 1.5;
 
-    const waveElevationY = isMobileInitial ? -1.85 : -2.35;
+    const waveElevationY = isMobileInitial ? -2.75 : -2.35;
     const waveAmplitude = isMobileInitial ? 0.68 : 0.65;
     const waveSpeed = 0.6;
     const depthFadePower = 0.5;
@@ -324,7 +324,7 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     }
 
     const buildWavePositions = (mobile: boolean) => {
-      const elevation = mobile ? -1.85 : -2.35;
+      const elevation = mobile ? -2.75 : -2.35;
       const amp = mobile ? 0.68 : 0.65;
       const arcCenter = mobile ? 0.1 : -0.5;
 

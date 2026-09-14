@@ -675,7 +675,7 @@ export default function Home() {
           <div className="lg:col-span-6 xl:col-span-6 space-y-5 sm:space-y-6 lg:space-y-7 text-start pointer-events-auto">
             
             {/* Primary Headline */}
-            <ScrollReveal y={35} duration={1100} delay={100}>
+            <ScrollReveal priority y={35} duration={1100} delay={100}>
               <h1 className="text-3xl sm:text-5xl lg:text-[52px] xl:text-[58px] 2xl:text-[62px] font-bold tracking-tight text-white leading-[1.12] drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
                 {isAr ? (
                   <>
@@ -692,7 +692,7 @@ export default function Home() {
             </ScrollReveal>
 
             {/* Subtitle */}
-            <ScrollReveal y={35} duration={1100} delay={250}>
+            <ScrollReveal priority y={35} duration={1100} delay={250}>
               <p className="text-sm sm:text-base lg:text-[17px] text-gray-300 leading-[1.65] font-normal max-w-sm sm:max-w-md">
                 {isAr
                   ? "نبني وكلاء ذكاء اصطناعي وأنظمة أتمتة تساعد الشركات على إنجاز أعمالها اليومية بسرعة ودقة."
@@ -701,7 +701,7 @@ export default function Home() {
             </ScrollReveal>
 
             {/* Primary CTA Button */}
-            <ScrollReveal y={35} duration={1100} delay={380}>
+            <ScrollReveal priority y={35} duration={1100} delay={380}>
               <div className="pt-2 sm:pt-3 flex flex-wrap items-center gap-3.5">
                 <Link
                   href={contactHref}
