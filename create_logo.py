@@ -125,9 +125,9 @@ def build_master_logo(is_light=False):
     d.line([(7, 1), (7, 9)], fill=slogan_color, width=SST)
     d.line([(1, 5), (7, 5)], fill=slogan_color, width=SST)
 
+    # A (Upright futuristic / \ with NO crossbar - matching TAHSEEN A)
     s_A, d = create_slogan_glyph(8, SH)
-    d.line([(1, 9), (4, 1), (7, 9)], fill=slogan_color, width=SST)
-    d.line([(2, 6), (6, 6)], fill=slogan_color, width=SST)
+    d.line([(1, 9), (4, 1), (7, 9)], fill=slogan_color, width=SST, joint='miter')
 
     s_C, d = create_slogan_glyph(8, SH)
     d.line([(7, 1), (2, 1), (2, 9), (7, 9)], fill=slogan_color, width=SST)
