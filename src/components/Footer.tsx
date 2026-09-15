@@ -35,8 +35,8 @@ export default function Footer({ lang = "en" }: FooterProps) {
       ],
       colCompany: "عن الشركة",
       companyList: [
-        { name: "من نحن", href: "/#about" },
-        { name: "قصص النجاح", href: "/#insights" },
+        { name: "من نحن", href: `${homePrefix}/#about` },
+        { name: "قصص النجاح", href: `${homePrefix}/#testimonials` },
         { name: "اتصل بنا", href: contactHref },
       ],
       colContact: "التواصل",
@@ -71,7 +71,7 @@ export default function Footer({ lang = "en" }: FooterProps) {
       colCompany: "Company",
       companyList: [
         { name: "About Us", href: `${homePrefix}/#about` },
-        { name: "Client Stories", href: `${homePrefix}/#insights` },
+        { name: "Client Stories", href: `${homePrefix}/#testimonials` },
         { name: "Contact Us", href: contactHref },
       ],
       colContact: "Contact",
