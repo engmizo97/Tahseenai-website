@@ -16,8 +16,8 @@ export default function Footer({ lang = "en" }: FooterProps) {
   const content = {
     ar: {
       mission:
-        "نبني وكلاء ذكاء اصطناعي وأنظمة أتمتة تساعد الشركات في المملكة على توفير الوقت وإنجاز الأعمال بكفاءة.",
-      hq: "المقر الرئيسي في الرياض، المملكة العربية السعودية",
+        "وكلاء ذكاء اصطناعي وأنظمة أتمتة تساعد الشركات في السعودية على إنجاز أعمالها اليومية بكفاءة.",
+      hq: "الرياض، المملكة العربية السعودية",
       social: (
         <>
           تبرع بنسبة 1% من الأرباح لصالح{" "}
@@ -26,27 +26,24 @@ export default function Footer({ lang = "en" }: FooterProps) {
       ),
       colSolutions: "المنصة والحلول",
       solutionsList: [
-        { name: "منظومة تحسين التعليمية", href: "https://edutahseen.com" },
+        { name: "تحسين التعليمية", href: "https://edutahseen.com" },
         { name: "وكلاء الذكاء الاصطناعي", href: "/#services" },
-        { name: "أتمتة العمليات المؤسسية", href: "/#services" },
-        { name: "التحليلات والمتابعة الحية", href: "/#insights" },
-        { name: "أتمتة الحملات والتواصل", href: "/#solutions" },
-        { name: "استشارات واستراتيجيات AI", href: "/#services" },
-        { name: "هندسة الويب والتطبيقات المتكاملة", href: "/#services" },
+        { name: "أتمتة العمليات", href: "/#services" },
+        { name: "المتابعة والتحليلات", href: "/#insights" },
+        { name: "استشارات الذكاء الاصطناعي", href: "/#services" },
+        { name: "تطوير الويب والتطبيقات", href: "/#services" },
       ],
       colCompany: "عن الشركة",
       companyList: [
-        { name: "عن تحسين للذكاء الاصطناعي", href: "/#about" },
-        { name: "رسالتنا ورؤيتنا", href: "/#about" },
-        { name: "قصص نجاح العملاء", href: "/#insights" },
-        { name: "الوظائف والشراكات", href: contactHref },
+        { name: "من نحن", href: "/#about" },
+        { name: "قصص النجاح", href: "/#insights" },
         { name: "اتصل بنا", href: contactHref },
       ],
-      colContact: "التواصل المباشر",
-      contactDesc: "هل لديك استفسار أو ترغب في بدء مشروع جديد؟ تواصل معنا مباشرة.",
-      emailLabel: "البريد الإلكتروني المباشر",
+      colContact: "التواصل",
+      contactDesc: "لديك سؤال أو ترغب في بدء مشروع؟ تواصل معنا مباشرة.",
+      emailLabel: "البريد الإلكتروني",
       letsTalk: "تحدث معنا",
-      copyright: `© ${new Date().getFullYear()} مجموعة تحسين للذكاء الاصطناعي (Tahseen AI). جميع الحقوق محفوظة.`,
+      copyright: `© ${new Date().getFullYear()} مجموعة تحسين للذكاء الاصطناعي. جميع الحقوق محفوظة.`,
       privacy: "سياسة الخصوصية",
       terms: "الشروط والأحكام",
       security: "أمان الأنظمة",
@@ -54,40 +51,37 @@ export default function Footer({ lang = "en" }: FooterProps) {
     },
     en: {
       mission:
-        "We build AI agents, automated workflows, and custom software that help Saudi businesses save time and work efficiently.",
-      hq: "Headquartered in Riyadh, Kingdom of Saudi Arabia",
+        "AI agents, automated workflows, and custom software for businesses in Saudi Arabia.",
+      hq: "Riyadh, Kingdom of Saudi Arabia",
       social: (
         <>
           1% of profits donated to{" "}
           <strong className="text-white">Ehsan Platform (منصة إحسان)</strong>
         </>
       ),
-      colSolutions: "Solutions & Platform",
+      colSolutions: "Solutions",
       solutionsList: [
-        { name: "Tahseen Education (edutahseen.com)", href: "https://edutahseen.com" },
-        { name: "Autonomous AI Agents", href: `${homePrefix}/#services` },
-        { name: "Enterprise Workflow Automation", href: `${homePrefix}/#services` },
-        { name: "Real-Time Insights & Oversight", href: `${homePrefix}/#insights` },
-        { name: "Campaign & Outreach Automation", href: `${homePrefix}/#solutions` },
-        { name: "AI Consultation & Strategy", href: `${homePrefix}/#services` },
-        { name: "Full-Stack Web & Mobile Engineering", href: `${homePrefix}/#services` },
+        { name: "Tahseen Education", href: "https://edutahseen.com" },
+        { name: "AI Agents", href: `${homePrefix}/#services` },
+        { name: "Process Automation", href: `${homePrefix}/#services` },
+        { name: "Live Analytics", href: `${homePrefix}/#insights` },
+        { name: "AI Consulting", href: `${homePrefix}/#services` },
+        { name: "Web & App Development", href: `${homePrefix}/#services` },
       ],
       colCompany: "Company",
       companyList: [
-        { name: "About Tahseen AI", href: `${homePrefix}/#about` },
-        { name: "Our Purpose & Vision", href: `${homePrefix}/#about` },
-        { name: "Client Success Stories", href: `${homePrefix}/#insights` },
-        { name: "Careers & Partnerships", href: contactHref },
+        { name: "About Us", href: `${homePrefix}/#about` },
+        { name: "Client Stories", href: `${homePrefix}/#insights` },
         { name: "Contact Us", href: contactHref },
       ],
-      colContact: "Direct Contact",
-      contactDesc: "Have a question or want to start a project? Connect directly with our team.",
-      emailLabel: "Email Engineering",
+      colContact: "Contact",
+      contactDesc: "Have a question or ready to start a project? Reach out anytime.",
+      emailLabel: "Email",
       letsTalk: "LET'S TALK",
-      copyright: `© ${new Date().getFullYear()} Tahseen AI (مجموعة تحسين للذكاء الاصطناعي). All rights reserved.`,
+      copyright: `© ${new Date().getFullYear()} Tahseen AI Group. All rights reserved.`,
       privacy: "Privacy Policy",
       terms: "Terms of Service",
-      security: "System Security",
+      security: "Security",
       vision: "KSA • Vision 2030",
     },
   };

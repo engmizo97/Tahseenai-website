@@ -193,9 +193,9 @@ export default function Home() {
           step: "٠١",
           total: "٠٣",
           tag: "المبيعات والدعم",
-          title: "وكلاء المبيعات وخدمة العملاء",
-          subtitle: "وكلاء ذكاء اصطناعي للإجابة على العملاء وتأهيل المبيعات على مدار الساعة.",
-          desc: "نشر وكلاء عبر واتساب والبريد والموقع للرد على الأسئلة، وحجز المواعيد، وتحويل العملاء المؤهلين لفريقك مباشرة.",
+          title: "وكلاء المبيعات والدعم",
+          subtitle: "ردود سريعة وتأهيل للعملاء على مدار الساعة.",
+          desc: "يعمل عبر واتساب والموقع والبريد للإجابة على الأسئلة، وحجز المواعيد، وتحويل العملاء المؤهلين لفريقك مباشرة.",
           metrics: [
             { label: "نمو المبيعات", val: "٣ أضعاف" },
             { label: "سرعة الرد", val: "< ١٠ ثوانٍ" },
@@ -213,9 +213,9 @@ export default function Home() {
           step: "٠٢",
           total: "٠٣",
           tag: "أتمتة العمليات",
-          title: "أتمتة مسارات العمل اليومية",
-          subtitle: "تقليص إدخال البيانات والمهام اليدوية المتكررة بين الفرق.",
-          desc: "اربط برامج الـ ERP، وقواعد البيانات، والدعم الفني، وبوابات الدفع لتقليص أكثر من ٤٠٪ من الأعباء اليدوية.",
+          title: "أتمتة العمليات",
+          subtitle: "اربط برامجك وتوقف عن إدخال البيانات يدوياً.",
+          desc: "مزامنة مستمرة بين برامج الـ ERP وقواعد البيانات لمنع تكرار الإدخال اليدوي وتقليص الأخطاء.",
           metrics: [
             { label: "تقليص العمل اليدوي", val: "-٤٢٪" },
             { label: "دقة البيانات", val: "٩٩.٩٪" },
@@ -233,9 +233,9 @@ export default function Home() {
           step: "٠٣",
           total: "٠٣",
           tag: "التحليلات والمتابعة",
-          title: "لوحات تحكم ومتابعة حية",
-          subtitle: "رؤية واضحة لحجم المحادثات، وسرعة الرد، وجودة النتائج.",
-          desc: "تابع أداء الوكلاء، وسرعة الاستجابة، ورضا العملاء في الوقت الفعلي دون أي تخمين.",
+          title: "لوحات المتابعة الحية",
+          subtitle: "متابعة دقيقة لحجم العمل وجودة النتائج.",
+          desc: "شاهد سرعة الاستجابة، ورضا العملاء، وأداء كل مسار عمل مباشرة دون تخمين.",
           metrics: [
             { label: "سرعة الاستجابة", val: "~٠.٤ ثانية" },
             { label: "نسبة الاستقرار", val: "٩٩.٩٨٪" },
@@ -255,9 +255,9 @@ export default function Home() {
           step: "01",
           total: "03",
           tag: "SALES & SUPPORT",
-          title: "AI Agents for Sales & Support",
-          subtitle: "AI agents that answer questions, qualify leads, and book meetings 24/7.",
-          desc: "Set up agents on WhatsApp, web chat, and email to answer questions, book calendar meetings, and hand off qualified leads to your team.",
+          title: "Sales & Support Agents",
+          subtitle: "Fast answers and lead qualification around the clock.",
+          desc: "Deploys on WhatsApp, web chat, and email to qualify buyers and book meetings directly on your calendar.",
           metrics: [
             { label: "Sales Growth", val: "3X Faster" },
             { label: "Response Time", val: "< 10s" },
@@ -275,9 +275,9 @@ export default function Home() {
           step: "02",
           total: "03",
           tag: "OPERATIONS",
-          title: "Workflow & Task Automation",
-          subtitle: "Automate repetitive daily tasks across your business tools.",
-          desc: "Connect your ERP, database, support desk, and payment tools to cut manual work by more than 40%.",
+          title: "Process Automation",
+          subtitle: "Connect your tools and stop copying data by hand.",
+          desc: "Syncs your ERP, CRM, and databases to eliminate repetitive data entry and reduce errors.",
           metrics: [
             { label: "Manual Work Cut", val: "-42%" },
             { label: "Data Accuracy", val: "99.9%" },
@@ -295,9 +295,9 @@ export default function Home() {
           step: "03",
           total: "03",
           tag: "ANALYTICS",
-          title: "Live Dashboards & Performance",
-          subtitle: "Clear views of conversation volume, speed, and accuracy.",
-          desc: "Track agent accuracy, response times, and customer outcomes in real time without guessing.",
+          title: "Live Analytics",
+          subtitle: "Track volume, speed, and accuracy in real time.",
+          desc: "Monitor response times and resolution rates across every channel without guesswork.",
           metrics: [
             { label: "Response Speed", val: "~0.4s" },
             { label: "Uptime", val: "99.98%" },
@@ -695,8 +695,8 @@ export default function Home() {
             <ScrollReveal priority y={35} duration={1100} delay={250}>
               <p className="text-sm sm:text-base lg:text-[17px] text-gray-300 leading-[1.65] font-normal max-w-sm sm:max-w-md">
                 {isAr
-                  ? "نبني وكلاء ذكاء اصطناعي وأنظمة أتمتة تساعد الشركات على إنجاز أعمالها اليومية بسرعة ودقة."
-                  : "We build AI agents and automations that save businesses time and reduce manual work."}
+                  ? "نبني وكلاء ذكاء اصطناعي وأنظمة أتمتة تنجز أعمالك اليومية بسرعة ودقة."
+                  : "We build AI agents and automations that eliminate routine work for your business."}
               </p>
             </ScrollReveal>
 
@@ -738,18 +738,18 @@ export default function Home() {
             <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
               {isAr ? (
                 <>
-                  حلول ذكاء اصطناعي <span className="text-[#008688]">للأعمال الفعلية</span>
+                  خدماتنا <span className="text-[#008688]">الأساسية</span>
                 </>
               ) : (
                 <>
-                  AI Services Built for <span className="text-[#008688]">Results</span>
+                  Our Core <span className="text-[#008688]">Services</span>
                 </>
               )}
             </h2>
             <p className="text-xs sm:text-base text-gray-400 leading-relaxed font-normal">
               {isAr
-                ? "نبني وكلاء ذكاء اصطناعي وأنظمة أتمتة برمجية تختصر وقت فريقك وتحل المشكلات التشغيلية."
-                : "We build AI agents, automated workflows, and custom software that solve real operational bottlenecks."}
+                ? "برمجيات وحلول أتمتة مصممة لحل العقبات التشغيلية اليومية."
+                : "Software and automations built to solve everyday operational bottlenecks."}
             </p>
           </div>
         </ScrollReveal>
@@ -842,18 +842,18 @@ export default function Home() {
             <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
               {isAr ? (
                 <>
-                  تابع أداء أنظمتك <span className="text-[#008688]">لحظة بلحظة</span>
+                  متابعة حية <span className="text-[#008688]">للعمليات</span>
                 </>
               ) : (
                 <>
-                  See How Your AI Performs in <span className="text-[#008688]">Real Time</span>
+                  Live AI <span className="text-[#008688]">Operations</span>
                 </>
               )}
             </h2>
             <p className="text-xs sm:text-base text-gray-400 leading-relaxed font-normal max-w-2xl mx-auto">
               {isAr
-                ? "شاهد سجلات المحادثات وسرعة الرد والمهام المنجزة مباشرة وبوضوح دون تخمين."
-                : "See conversation logs, response speeds, and completed tasks as they happen without guesswork."}
+                ? "راقب المحادثات وسرعة الرد والمهام المنجزة أولاً بأول."
+                : "Monitor conversation volume, response times, and completed tasks as they happen."}
             </p>
           </div>
         </ScrollReveal>
@@ -948,25 +948,25 @@ export default function Home() {
               <div className="space-y-3">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#008688]/10 border border-[#008688]/30 text-[#008688] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
                   <Cpu className="w-3.5 h-3.5" />
-                  <span>{isAr ? "حلول عملية" : "BUILT FOR REAL WORK"}</span>
+                  <span>{isAr ? "الحلول" : "SOLUTIONS"}</span>
                 </div>
                 <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
                   {isAr ? (
                     <>
-                      حلول ذكاء اصطناعي مصممة <br className="hidden sm:inline" />
-                      <span className="text-[#008688]">لقطاعك</span>
+                      حلول مخصصة <br className="hidden sm:inline" />
+                      <span className="text-[#008688]">لفرق العمل</span>
                     </>
                   ) : (
                     <>
-                      AI Solutions Built for <br className="hidden sm:inline" />
-                      <span className="text-[#008688]">Your Industry</span>
+                      AI Built for <br className="hidden sm:inline" />
+                      <span className="text-[#008688]">Your Team</span>
                     </>
                   )}
                 </h2>
                 <p className="text-xs sm:text-sm text-gray-400 leading-relaxed font-normal">
                   {isAr
-                    ? "حلول ذكاء اصطناعي جاهزة لمساعدة فريقك على إنجاز الأعمال اليومية دون تكرار يدوي."
-                    : "Explore our AI systems built to cut repetitive work and help your teams move faster."}
+                    ? "أدوات عملية تختصر المهام الروتينية ليركز فريقك على الأهم."
+                    : "Practical tools that cut routine tasks so your team can focus on what matters."}
                 </p>
               </div>
             </ScrollReveal>
@@ -1098,23 +1098,23 @@ export default function Home() {
           <div className="text-center space-y-3 max-w-3xl mx-auto mb-10 sm:mb-12">
             <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-md bg-[#008688]/10 border border-[#008688]/30 text-[#008688] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase shadow-[0_0_15px_rgba(0,134,136,0.15)]">
               <GraduationCap className="w-3.5 h-3.5" />
-              <span>{isAr ? "الذراع التعليمي • مجموعة تحسين للذكاء الاصطناعي" : "EDUCATIONAL DIVISION • TAHSEEN AI GROUP"}</span>
+              <span>{isAr ? "تحسين التعليمية" : "TAHSEEN EDUCATION"}</span>
             </div>
             <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
               {isAr ? (
                 <>
-                  تحسين التعليمية • <span className="text-[#008688]">منظومة التفوق والتوجيه الجامعي</span>
+                  استعد لاختباراتك <span className="text-[#008688]">المدرسية والجامعية</span>
                 </>
               ) : (
                 <>
-                  Tahseen Education • <span className="text-[#008688]">AI-Powered High School Excellence</span>
+                  AI Prep for <span className="text-[#008688]">High School Exams</span>
                 </>
               )}
             </h2>
             <p className="text-xs sm:text-base text-gray-400 leading-relaxed font-normal max-w-2xl mx-auto">
               {isAr
-                ? "المنظومة التعليمية الذكية الشاملة لطلاب المرحلة الثانوية في المملكة العربية السعودية — ثلاث محطات متتالية، حساب واحد، ومسار واضح حتى باب الجامعة."
-                : "The unified AI learning ecosystem for Saudi high school students — three sequential stations, one account, and a clear pathway to top university admission."}
+                ? "منصة واحدة لطلاب المرحلة الثانوية في السعودية للاستعداد لاختبارات القدرات والتحصيلي وتحديد المسار الجامعي."
+                : "One platform for Saudi high school students to prepare for Qudurat and Tahsili, and plan their university path."}
             </p>
           </div>
         </ScrollReveal>
@@ -1140,13 +1140,13 @@ export default function Home() {
               <div className="space-y-2">
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight">
                   {isAr
-                    ? "منصة واحدة شاملة لاختبارات قياس"
-                    : "One Unified Platform for Exam Prep"}
+                    ? "كل ما تحتاجه لاختبارات قياس"
+                    : "Everything for Qudurat & Tahsili"}
                 </h3>
                 <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-normal">
                   {isAr
-                    ? "تساعد تحسين الطلاب على الاستعداد لاختبارات القدرات والتحصيلي من خلال شروحات ذكية خطوة بخطوة، وبنوك أسئلة محدثة، وتقارير دورية لأولياء الأمور."
-                    : "Tahseen Education helps high school students prepare for Qudurat and Tahsili exams with step-by-step AI explanations, practice questions, and parent progress reports."}
+                    ? "شروحات ذكية خطوة بخطوة، وبنوك أسئلة محدثة وفق الاختبارات الرسمية، وتقارير متابعة دورية."
+                    : "Step-by-step AI explanations, practice questions matching official test formats, and progress reports."}
                 </p>
               </div>
 
@@ -1308,13 +1308,11 @@ export default function Home() {
           <h4 className="text-xs sm:text-base md:text-lg font-bold text-gray-300 text-center tracking-tight leading-relaxed max-w-xl">
             {isAr ? (
               <>
-                معتمد وموثوق من قِبل كبرى المؤسسات الرائدة <br className="hidden sm:inline" />
-                في المملكة العربية السعودية
+                موثوق من مؤسسات رائدة في المملكة العربية السعودية
               </>
             ) : (
               <>
-                Adopted by renowned, trusted, and leading enterprises <br className="hidden sm:inline" />
-                in Saudi Arabia
+                Trusted by leading organizations across Saudi Arabia
               </>
             )}
           </h4>
@@ -1367,7 +1365,7 @@ export default function Home() {
           <div className="text-center space-y-3 max-w-2xl mx-auto mb-12 sm:mb-16">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#008688]/10 border border-[#008688]/30 text-[#008688] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>{isAr ? "مُجرب وموثوق على مستوى المملكة" : "TESTED & TRUSTED NATIONWIDE"}</span>
+              <span>{isAr ? "آراء العملاء" : "TESTIMONIALS"}</span>
             </div>
             <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight text-center">
               {isAr ? (
@@ -1382,8 +1380,8 @@ export default function Home() {
             </h2>
             <p className="text-xs sm:text-base text-gray-400 leading-relaxed font-normal text-center">
               {isAr
-                ? "آراء وتجارب مباشرة من قادة ومؤسسي الأعمال في السعودية الذين سرّعوا أعمالهم مع تحسين للذكاء الاصطناعي."
-                : "Hear directly from founders and enterprise leaders across Saudi Arabia accelerating workflows with Tahseen AI."}
+                ? "آراء فرق العمل التي تستخدم حلول تحسين للذكاء الاصطناعي في السعودية."
+                : "Feedback from teams using Tahseen AI to run their daily operations."}
             </p>
           </div>
         </ScrollReveal>
@@ -1454,7 +1452,7 @@ export default function Home() {
         <ScrollReveal y={40} duration={1100}>
           <div className="text-center space-y-3 max-w-2xl mx-auto mb-12 sm:mb-16">
             <span className="text-[#008688] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
-              {isAr ? "استفساراتك بإجابات واضحة" : "FREQUENTLY ASKED QUESTIONS"}
+              {isAr ? "الأسئلة الشائعة" : "FAQ"}
             </span>
             <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
               {isAr ? (
@@ -1469,8 +1467,8 @@ export default function Home() {
             </h2>
             <p className="text-xs sm:text-base text-gray-400 leading-relaxed font-normal">
               {isAr
-                ? "كل ما تود معرفته حول خدمات تحسين للذكاء الاصطناعي وكيف نساعد منشأتك على التوسع الذكي."
-                : "Everything you need to know about our AI systems, implementation speed, and enterprise integration."}
+                ? "إجابات واضحة عن أكثر الأسئلة شيوعاً حول خدماتنا وكيفية عملها."
+                : "Clear answers to common questions about our services and how we work."}
             </p>
           </div>
         </ScrollReveal>
@@ -1540,7 +1538,7 @@ export default function Home() {
                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#008688]" />
               </span>
               <span className="text-[#5eead4] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
-                {isAr ? "جاهز للبدء؟" : "READY TO GET STARTED?"}
+                {isAr ? "جاهز للبدء؟" : "READY TO START?"}
               </span>
             </div>
 
@@ -1548,13 +1546,13 @@ export default function Home() {
             <h2 className="text-2xl sm:text-4xl lg:text-[46px] font-extrabold tracking-tight leading-[1.12] text-white">
               {isAr ? (
                 <>
-                  <span className="text-white">ابنِ حلول الذكاء الاصطناعي</span>{" "}
-                  <span className="text-[#008688]">لمنشأتك معنا</span>
+                  <span className="text-white">جاهز لأتمتة</span>{" "}
+                  <span className="text-[#008688]">أعمالك؟</span>
                 </>
               ) : (
                 <>
-                  <span className="text-white">Build Your AI Systems</span>{" "}
-                  <span className="text-[#008688]">With Us</span>
+                  <span className="text-white">Ready to Automate</span>{" "}
+                  <span className="text-[#008688]">Your Business?</span>
                 </>
               )}
             </h2>
@@ -1562,8 +1560,8 @@ export default function Home() {
             {/* Subtitle */}
             <p className="text-xs sm:text-base text-gray-300 leading-relaxed font-normal max-w-lg mx-auto">
               {isAr
-                ? "تحدث مع فريقنا لنحدد لك أين يمكن للذكاء الاصطناعي والأتمتة توفير وقت منشأتك."
-                : "Talk with our team to find out where AI and automation can save your business time."}
+                ? "تحدث معنا لنحدد لك أين يمكن للذكاء الاصطناعي توفير وقت فريقك."
+                : "Tell us about your workflow, and we'll show you where AI can save you time."}
             </p>
 
             {/* CTA Button */}
