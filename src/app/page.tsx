@@ -1211,29 +1211,36 @@ export default function Home() {
         </div>
         </ScrollReveal>
 
-        {/* 3 Sharp Sub-Mentions */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* 4 Interactive Educational Platform Cards (No AI Suffix, Dedicated Logos) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           
+          {/* Platform 1: Tahseen Education */}
           <ScrollReveal delay={0} y={45} duration={1100}>
             <a
-              href="https://edutahseen.com/qudurat"
+              href="https://edutahseen.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-4 sm:p-5 rounded-md sharp-bento flex items-center justify-between gap-3 text-start group cursor-pointer h-full"
+              className="p-4 sm:p-5 rounded-md sharp-bento flex items-center justify-between gap-3 text-start group cursor-pointer h-full transition-all duration-300 hover:-translate-y-1"
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-md bg-[#008688]/10 border border-[#008688]/30 flex items-center justify-center text-[#008688] flex-shrink-0 group-hover:scale-105 transition-transform">
-                  <BookOpen className="w-5 h-5" />
+                <div className="relative w-11 h-11 rounded-lg bg-white/5 border border-[#008688]/30 p-1.5 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform overflow-hidden shadow-[0_0_12px_rgba(0,134,136,0.2)]">
+                  <Image
+                    src="/platforms/tahseen-edu.png"
+                    alt="Tahseen Education"
+                    width={36}
+                    height={36}
+                    className="object-contain"
+                  />
                 </div>
                 <div>
-                  <div className="text-xs font-mono text-[#008688] font-semibold uppercase">
-                    {isAr ? "المحطة الأولى" : "Station 01"}
+                  <div className="text-[10px] font-mono text-[#008688] font-bold uppercase tracking-wider">
+                    {isAr ? "المنظومة التعليمية" : "ECOSYSTEM"}
                   </div>
                   <h4 className="text-sm font-bold text-white group-hover:text-[#008688] transition-colors">
-                    {isAr ? "قدرات AI (Qudurat)" : "Qudurat AI"}
+                    {isAr ? "تحسين التعليمية" : "Tahseen Education"}
                   </h4>
                   <p className="text-[11px] text-gray-400 line-clamp-1">
-                    {isAr ? "تدريب مخصص للقسمين الكمي واللفظي" : "Quantitative and verbal exam prep"}
+                    {isAr ? "المنظومة الشاملة للثانوية والقبول" : "Comprehensive student portal"}
                   </p>
                 </div>
               </div>
@@ -1241,26 +1248,67 @@ export default function Home() {
             </a>
           </ScrollReveal>
 
-          <ScrollReveal delay={120} y={45} duration={1100}>
+          {/* Platform 2: Qudurat */}
+          <ScrollReveal delay={90} y={45} duration={1100}>
+            <a
+              href="https://edutahseen.com/qudurat"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-4 sm:p-5 rounded-md sharp-bento flex items-center justify-between gap-3 text-start group cursor-pointer h-full transition-all duration-300 hover:-translate-y-1"
+            >
+              <div className="flex items-center gap-3">
+                <div className="relative w-11 h-11 rounded-lg bg-white/5 border border-[#008688]/30 p-1.5 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform overflow-hidden shadow-[0_0_12px_rgba(0,134,136,0.2)]">
+                  <Image
+                    src="/platforms/qudurat.webp"
+                    alt="Qudurat Platform"
+                    width={36}
+                    height={36}
+                    className="object-contain"
+                  />
+                </div>
+                <div>
+                  <div className="text-[10px] font-mono text-[#008688] font-bold uppercase tracking-wider">
+                    {isAr ? "اختبار القدرات" : "EXAM PREP"}
+                  </div>
+                  <h4 className="text-sm font-bold text-white group-hover:text-[#008688] transition-colors">
+                    {isAr ? "منصة قدرات" : "Qudurat"}
+                  </h4>
+                  <p className="text-[11px] text-gray-400 line-clamp-1">
+                    {isAr ? "تدريب تكيفي للكمي واللفظي وتجميعات 1447" : "Adaptive quantitative & verbal prep"}
+                  </p>
+                </div>
+              </div>
+              <ExternalLink className="w-4 h-4 text-gray-500 group-hover:text-[#008688] flex-shrink-0 transition-colors" />
+            </a>
+          </ScrollReveal>
+
+          {/* Platform 3: Tahsili */}
+          <ScrollReveal delay={180} y={45} duration={1100}>
             <a
               href="https://edutahseen.com/tahsili"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-4 sm:p-5 rounded-md sharp-bento flex items-center justify-between gap-3 text-start group cursor-pointer h-full"
+              className="p-4 sm:p-5 rounded-md sharp-bento flex items-center justify-between gap-3 text-start group cursor-pointer h-full transition-all duration-300 hover:-translate-y-1"
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-md bg-[#38BDF8]/10 border border-[#38BDF8]/30 flex items-center justify-center text-[#38BDF8] flex-shrink-0 group-hover:scale-105 transition-transform">
-                  <GraduationCap className="w-5 h-5" />
+                <div className="relative w-11 h-11 rounded-lg bg-white/5 border border-[#38BDF8]/30 p-1.5 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform overflow-hidden shadow-[0_0_12px_rgba(56,189,248,0.2)]">
+                  <Image
+                    src="/platforms/tahsili.webp"
+                    alt="Tahsili Platform"
+                    width={36}
+                    height={36}
+                    className="object-contain"
+                  />
                 </div>
                 <div>
-                  <div className="text-xs font-mono text-[#38BDF8] font-semibold uppercase">
-                    {isAr ? "المحطة الثانية" : "Station 02"}
+                  <div className="text-[10px] font-mono text-[#38BDF8] font-bold uppercase tracking-wider">
+                    {isAr ? "التحصيلي العلمي" : "SCIENCE EXAM"}
                   </div>
                   <h4 className="text-sm font-bold text-white group-hover:text-[#38BDF8] transition-colors">
-                    {isAr ? "تحصيلي AI (Tahsili)" : "Tahsili AI"}
+                    {isAr ? "منصة تحصيلي" : "Tahsili"}
                   </h4>
                   <p className="text-[11px] text-gray-400 line-clamp-1">
-                    {isAr ? "مراجعة مركزة للمواد العلمية والرياضيات" : "Science and math exam prep"}
+                    {isAr ? "شامل المواد العلمية الأربع مع محاكي قياس" : "Science & math 4-subject mastery"}
                   </p>
                 </div>
               </div>
@@ -1268,26 +1316,33 @@ export default function Home() {
             </a>
           </ScrollReveal>
 
-          <ScrollReveal delay={240} y={45} duration={1100}>
+          {/* Platform 4: Bawsalati */}
+          <ScrollReveal delay={270} y={45} duration={1100}>
             <a
               href="https://edutahseen.com/busalati"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-4 sm:p-5 rounded-md sharp-bento flex items-center justify-between gap-3 text-start group cursor-pointer h-full"
+              className="p-4 sm:p-5 rounded-md sharp-bento flex items-center justify-between gap-3 text-start group cursor-pointer h-full transition-all duration-300 hover:-translate-y-1"
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-md bg-[#A855F7]/10 border border-[#A855F7]/30 flex items-center justify-center text-[#A855F7] flex-shrink-0 group-hover:scale-105 transition-transform">
-                  <Compass className="w-5 h-5" />
+                <div className="relative w-11 h-11 rounded-lg bg-white/5 border border-[#A855F7]/30 p-1.5 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform overflow-hidden shadow-[0_0_12px_rgba(168,85,247,0.2)]">
+                  <Image
+                    src="/platforms/bawsalati.webp"
+                    alt="Bawsalati Assessment"
+                    width={36}
+                    height={36}
+                    className="object-contain"
+                  />
                 </div>
                 <div>
-                  <div className="text-xs font-mono text-[#A855F7] font-semibold uppercase">
-                    {isAr ? "المحطة الثالثة" : "Station 03"}
+                  <div className="text-[10px] font-mono text-[#A855F7] font-bold uppercase tracking-wider">
+                    {isAr ? "تحديد التخصص" : "CAREER RIASEC"}
                   </div>
                   <h4 className="text-sm font-bold text-white group-hover:text-[#A855F7] transition-colors">
-                    {isAr ? "بوصلتي (Bausalty)" : "Bausalty AI"}
+                    {isAr ? "منصة بوصلتي" : "Bawsalati"}
                   </h4>
                   <p className="text-[11px] text-gray-400 line-clamp-1">
-                    {isAr ? "توجيه واختيار التخصص الجامعي والمهني" : "Major and career guidance"}
+                    {isAr ? "مقياس هولاند واختيار التخصص الجامعي" : "Major & career guidance"}
                   </p>
                 </div>
               </div>
@@ -1299,7 +1354,7 @@ export default function Home() {
 
       </section>
 
-      {/* 8. Enterprise Social Proof & Partner Logos (Positioned after Tahseen Education) */}
+      {/* 8. Enterprise Social Proof & Partner Logos (Single Row Across All Devices) */}
       <section id="about" className="relative z-10 py-12 sm:py-16 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28 border-t border-white/[0.08]">
         
         {/* Centered Heading */}
@@ -1307,54 +1362,52 @@ export default function Home() {
           <div className="hidden sm:block flex-1 border-t border-white/10" />
           <h4 className="text-xs sm:text-base md:text-lg font-bold text-gray-300 text-center tracking-tight leading-relaxed max-w-xl">
             {isAr ? (
-              <>
-                موثوق من مؤسسات رائدة في المملكة العربية السعودية
-              </>
+              <>موثوق من مؤسسات رائدة في المملكة العربية السعودية</>
             ) : (
-              <>
-                Trusted by leading organizations across Saudi Arabia
-              </>
+              <>Trusted by leading organizations across Saudi Arabia</>
             )}
           </h4>
           <div className="hidden sm:block flex-1 border-t border-white/10" />
         </div>
 
-        {/* Sharp White/Teal Container Box */}
-        <div className="rounded-md bg-white/[0.96] backdrop-blur-2xl border border-white/20 p-6 sm:p-8 md:p-10 shadow-lg flex flex-wrap items-center justify-center gap-8 sm:gap-14 lg:gap-20 transition-all duration-300">
-          
-          {/* Logo 1: Zana */}
-          <div className="relative h-12 w-28 sm:h-14 sm:w-36 transition-transform duration-300 hover:scale-105">
-            <Image
-              src="/partners/partner-1.png"
-              alt="Zana - Empowering Startups"
-              fill
-              sizes="(max-width: 640px) 112px, 144px"
-              className="object-contain"
-            />
-          </div>
+        {/* Sharp White/Teal Container Box - Single Horizontal Row (3 Columns) */}
+        <div className="rounded-md bg-white/[0.96] backdrop-blur-2xl border border-white/20 py-5 px-4 sm:py-7 sm:px-8 shadow-lg max-w-4xl mx-auto transition-all duration-300">
+          <div className="grid grid-cols-3 items-center justify-items-center gap-2 sm:gap-6 md:gap-12 w-full">
+            
+            {/* Logo 1: Zana */}
+            <div className="relative h-9 w-20 sm:h-12 sm:w-32 md:h-14 md:w-36 transition-transform duration-300 hover:scale-105">
+              <Image
+                src="/partners/partner-1.png"
+                alt="Zana - Empowering Startups"
+                fill
+                sizes="(max-width: 640px) 80px, 144px"
+                className="object-contain"
+              />
+            </div>
 
-          {/* Logo 2: Imam Abdulrahman Bin Faisal University */}
-          <div className="relative h-12 w-36 sm:h-16 sm:w-52 transition-transform duration-300 hover:scale-105">
-            <Image
-              src="/partners/partner-2.svg"
-              alt="Imam Abdulrahman Bin Faisal University"
-              fill
-              sizes="(max-width: 640px) 144px, 208px"
-              className="object-contain"
-            />
-          </div>
+            {/* Logo 2: Imam Abdulrahman Bin Faisal University */}
+            <div className="relative h-9 w-24 sm:h-14 sm:w-44 md:h-16 md:w-52 transition-transform duration-300 hover:scale-105">
+              <Image
+                src="/partners/partner-2.svg"
+                alt="Imam Abdulrahman Bin Faisal University"
+                fill
+                sizes="(max-width: 640px) 100px, 208px"
+                className="object-contain"
+              />
+            </div>
 
-          {/* Logo 3: ITQAN */}
-          <div className="relative h-12 w-28 sm:h-14 sm:w-36 transition-transform duration-300 hover:scale-105">
-            <Image
-              src="/partners/partner-3.png"
-              alt="ITQAN - Driven by Knowledge"
-              fill
-              sizes="(max-width: 640px) 112px, 144px"
-              className="object-contain"
-            />
-          </div>
+            {/* Logo 3: ITQAN */}
+            <div className="relative h-9 w-20 sm:h-12 sm:w-32 md:h-14 md:w-36 transition-transform duration-300 hover:scale-105">
+              <Image
+                src="/partners/partner-3.png"
+                alt="ITQAN - Driven by Knowledge"
+                fill
+                sizes="(max-width: 640px) 80px, 144px"
+                className="object-contain"
+              />
+            </div>
 
+          </div>
         </div>
 
       </section>
