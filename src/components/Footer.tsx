@@ -100,7 +100,7 @@ export default function Footer({ lang = "en" }: FooterProps) {
             <Link href={isAr ? "/" : "/?lang=en"} className="flex items-center group">
               <div className="relative h-11 w-52 sm:h-12 sm:w-60 transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_15px_rgba(0,134,136,0.3)]">
                 <Image
-                  src="/tahseen-logo.png?v=2"
+                  src="/tahseen-logo.png?v=3"
                   alt="Tahseen AI"
                   fill
                   sizes="(max-width: 640px) 208px, 240px"
