@@ -129,7 +129,7 @@ export default function ContactPage() {
           <Link href={isAr ? "/" : "/?lang=en"} className="flex items-center group cursor-pointer">
             <div className="relative h-8 w-36 sm:h-9 sm:w-44 lg:h-10 lg:w-48 transition-transform duration-200 group-hover:scale-105">
               <Image
-                src="/tahseen-logo.png?v=3"
+                src="/tahseen-logo.png?v=4"
                 alt="Tahseen AI"
                 fill
                 sizes="(max-width: 640px) 144px, 192px"
