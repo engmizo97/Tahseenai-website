@@ -1141,13 +1141,13 @@ export default function Home() {
               <div className="space-y-2">
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight">
                   {isAr
-                    ? "كل ما تحتاجه لاختبارات قياس"
-                    : "Everything for Qudurat & Tahsili"}
+                    ? "تمكين الشباب"
+                    : "Youth Empowerment"}
                 </h3>
                 <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-normal">
                   {isAr
-                    ? "شروحات ذكية خطوة بخطوة، وبنوك أسئلة محدثة وفق الاختبارات الرسمية، وتقارير متابعة دورية."
-                    : "Step-by-step AI explanations, practice questions matching official test formats, and progress reports."}
+                    ? "منظومة تحسين التعليمية لتمكين الطلاب في اختبارات قياس واختيار التخصص والمسار المهني."
+                    : "Empowering students with AI-driven test prep, university admissions, and career guidance."}
                 </p>
               </div>
 
@@ -1158,7 +1158,7 @@ export default function Home() {
                     <span>{isAr ? "المعلم الذكي" : "AI Smart Tutor"}</span>
                   </div>
                   <p className="text-[11px] text-gray-400">
-                    {isAr ? "يشرح طريقة حل كل مسألة خطوة بخطوة" : "Explains how to solve each question step by step"}
+                    {isAr ? "شرح فوري وتدريب مخصص لكل طالب" : "Personalized step-by-step guidance"}
                   </p>
                 </div>
 
@@ -1168,7 +1168,7 @@ export default function Home() {
                     <span>{isAr ? "تقارير المتابعة" : "Progress Reports"}</span>
                   </div>
                   <p className="text-[11px] text-gray-400">
-                    {isAr ? "متابعة دقيقة لمستوى الطالب ونقاط التحسين" : "Clear tracking of student strengths and areas to practice"}
+                    {isAr ? "متابعة دقيقة لنقاط القوة والتحسين" : "Clear tracking of strengths and focus areas"}
                   </p>
                 </div>
 
@@ -1178,7 +1178,7 @@ export default function Home() {
                     <span>{isAr ? "معايير قياس" : "Real Exam Standards"}</span>
                   </div>
                   <p className="text-[11px] text-gray-400">
-                    {isAr ? "أسئلة وتدريبات محدثة وفق الاختبارات الرسمية" : "Question banks updated to match current test formats"}
+                    {isAr ? "تجميعات محدثة ونماذج اختبار محاكية" : "Updated question banks matching official formats"}
                   </p>
                 </div>
               </div>
