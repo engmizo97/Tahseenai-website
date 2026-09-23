@@ -389,45 +389,45 @@ export default function Home() {
     ? [
         {
           q: "ما هي تحسين للذكاء الاصطناعي؟",
-          a: "تحسين هي شركة تقنية سعودية تبني وكلاء ذكاء اصطناعي، وأنظمة أتمتة لمسارات العمل، وبرمجيات مخصصة تساعد الشركات على توفير الوقت وتقليص الأعباء اليدوية.",
+          a: "شركة تقنية سعودية تبني وكلاء ذكاء اصطناعي وأنظمة أتمتة تلغي المهام اليدوية وتختصر الوقت.",
         },
         {
           q: "ما هي الخدمات الأساسية التي تقدمونها؟",
-          a: "نبني وكلاء للمبيعات وخدمة العملاء، ونؤتمت مسارات العمل اليومية وربط الأنظمة، ونطور تطبيقات الويب والجوال، ونقدم استشارات عملية لتبني أدوات الذكاء الاصطناعي.",
+          a: "وكلاء مبيعات ودعم 24/7، أتمتة مسارات العمل وربط الأنظمة، تطوير برمجيات مخصصة، واستشارات تبني الذكاء الاصطناعي.",
         },
         {
           q: "كيف تساعد حلول تحسين منشأتي؟",
-          a: "نساعدك على توفير ساعات العمل اليومية وتكاليف التشغيل؛ حيث يجيب الوكلاء على استفسارات العملاء خلال ثوانٍ، وتتولى الأتمتة إدخال البيانات ومزامنتها بين برامجك دون تكرار يدوي.",
+          a: "نقلص تكاليف التشغيل وساعات العمل اليومية برد فوري على العملاء ومزامنة البيانات بين أنظمتك بلا أخطاء.",
         },
         {
           q: "هل يمكن تخصيص الذكاء الاصطناعي ليتحدث بأسلوب شركتنا؟",
-          a: "نعم، ندرب كل وكيل على بيانات منشأتك وخدماتك وأسلوب تواصلك، ليتحدث بنبرة فريقك ويرتبط بأنظمتك مباشرة.",
+          a: "نعم، ندرب الوكيل على بيانات خدماتك وهويتك ليتحدث بأسلوب فريقك ويتصل بأنظمتك مباشرة.",
         },
         {
           q: "هل تقدمون خدماتكم للشركات الناشئة؟",
-          a: "نعم، نعمل مع الشركات الناشئة ورواد الأعمال والمنشآت الكبرى، ونحدد نطاق العمل حسب احتياجك الفعلي وميزانيتك.",
+          a: "نعم، نقدم حلولنا للشركات الناشئة والمنشآت الكبرى بنطاق عمل يناسب احتياجك وميزانيتك.",
         },
       ]
     : [
         {
           q: "What is Tahseen AI?",
-          a: "Tahseen AI is a Saudi technology company that builds AI agents, automated workflows, and custom software to help businesses save time and cut repetitive manual work.",
+          a: "A Saudi tech company building AI agents and automations that eliminate manual work and save operational time.",
         },
         {
           q: "What services do you offer?",
-          a: "We build AI agents for sales and support, automate everyday business workflows, connect ERPs and databases, build custom web and mobile apps, and consult on AI adoption.",
+          a: "24/7 sales and support agents, workflow automation, ERP integrations, custom software development, and AI consulting.",
         },
         {
           q: "How does Tahseen AI help my business?",
-          a: "We help you save time and cut operational costs. Our agents answer customer questions in seconds, while automations handle data entry and system updates without manual effort.",
+          a: "We cut operating costs and manual hours with instant customer responses and error-free data synchronization.",
         },
         {
           q: "Can the AI match our company brand and voice?",
-          a: "Yes. We train every agent on your company information and communication style so responses sound natural, accurate, and aligned with your team.",
+          a: "Yes. Agents are trained on your company data and brand voice to communicate naturally and accurately.",
         },
         {
           q: "Do you work with startups?",
-          a: "Yes. We work with both growing startups and established companies, tailoring the scope and setup to what your team actually needs.",
+          a: "Yes. We tailor our deployments for startups, SMEs, and enterprises based on your exact budget and workflow.",
         },
       ];
 
@@ -749,8 +749,8 @@ export default function Home() {
             </h2>
             <p className="text-xs sm:text-base text-gray-400 leading-relaxed font-normal">
               {isAr
-                ? "برمجيات وحلول أتمتة مصممة لحل العقبات التشغيلية اليومية."
-                : "Software and automations built to solve everyday operational bottlenecks."}
+                ? "أنظمة أتمتة وبرمجيات ترفع كفاءة عملياتك وتلغي الهدر."
+                : "Automations and software built to eliminate operational bottlenecks."}
             </p>
           </div>
         </ScrollReveal>
@@ -769,8 +769,8 @@ export default function Home() {
               </h3>
               <p className="text-xs text-gray-400 leading-relaxed font-normal max-w-[240px] text-center mx-auto">
                 {isAr
-                  ? "وكلاء أذكياء يجيبون على استفسارات العملاء، ويؤهلون المبيعات، ويقدمون الدعم 24/7."
-                  : "Agents that answer customer questions, qualify leads, and handle routine support 24/7."}
+                  ? "رد فوري على العملاء، وتأهيل المبيعات، ودعم مستمر 24/7."
+                  : "Instant customer responses, lead qualification, and 24/7 support."}
               </p>
             </div>
           </ScrollReveal>
@@ -786,8 +786,8 @@ export default function Home() {
               </h3>
               <p className="text-xs text-gray-400 leading-relaxed font-normal max-w-[240px] text-center mx-auto">
                 {isAr
-                  ? "ربط أنظمتك وبرامج الـ ERP لتقليل المهام اليدوية المتكررة."
-                  : "Connect your tools and ERP systems to automate repetitive daily tasks."}
+                  ? "ربط الأنظمة وبرامج الـ ERP لإلغاء الإدخال والمهام المتكررة."
+                  : "Seamless system and ERP integrations that eliminate repetitive work."}
               </p>
             </div>
           </ScrollReveal>
@@ -803,8 +803,8 @@ export default function Home() {
               </h3>
               <p className="text-xs text-gray-400 leading-relaxed font-normal max-w-[240px] text-center mx-auto">
                 {isAr
-                  ? "خطط عملية وواضحة تساعدك على تبني الذكاء الاصطناعي في المكان المناسب."
-                  : "Practical roadmaps and audits to help you adopt AI where it adds actual value."}
+                  ? "خارطة طريق واضحة لتبني الذكاء الاصطناعي بعائد استثماري ملموس."
+                  : "Actionable roadmaps to deploy AI where it drives measurable ROI."}
               </p>
             </div>
           </ScrollReveal>
@@ -820,8 +820,8 @@ export default function Home() {
               </h3>
               <p className="text-xs text-gray-400 leading-relaxed font-normal max-w-[240px] text-center mx-auto">
                 {isAr
-                  ? "تطبيقات ويب وجوال مخصصة تعمل بكفاءة واعتمادية عالية."
-                  : "Custom web and mobile apps built to run reliably as your business grows."}
+                  ? "تطبيقات ويب وجوال متطورة وقابلة للتوسع وفق احتياجاتك."
+                  : "Scalable web and mobile applications tailored to your business."}
               </p>
             </div>
           </ScrollReveal>
