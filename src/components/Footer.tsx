@@ -216,7 +216,7 @@ export default function Footer({ lang = "en" }: FooterProps) {
             <Link href={isAr ? "/#about" : "/?lang=en#about"} className="hover:text-[#008688] transition-colors">
               {t.terms}
             </Link>
-            <Link href={isAr ? "/#insights" : "/?lang=en#insights"} className="hover:text-[#008688] transition-colors">
+            <Link href={isAr ? "/#about" : "/?lang=en#about"} className="hover:text-[#008688] transition-colors">
               {t.security}
             </Link>
             <span className="text-[#008688] font-semibold">{t.vision}</span>

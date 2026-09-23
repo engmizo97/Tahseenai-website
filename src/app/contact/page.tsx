@@ -71,16 +71,16 @@ export default function ContactPage() {
     ? [
         { name: "الرئيسية", href: `${homePrefix}/#home` },
         { name: "خدماتنا", href: `${homePrefix}/#services` },
-        { name: "التحليلات", href: `${homePrefix}/#insights` },
         { name: "الحلول", href: `${homePrefix}/#solutions` },
+        { name: "تحسين التعليمية", href: `${homePrefix}/#education` },
         { name: "من نحن", href: `${homePrefix}/#about` },
         { name: "اتصل بنا", href: contactHref },
       ]
     : [
         { name: "HOME", href: `${homePrefix}/#home` },
         { name: "SERVICES", href: `${homePrefix}/#services` },
-        { name: "INSIGHTS", href: `${homePrefix}/#insights` },
         { name: "SOLUTIONS", href: `${homePrefix}/#solutions` },
+        { name: "EDUCATION", href: `${homePrefix}/#education` },
         { name: "ABOUT US", href: `${homePrefix}/#about` },
         { name: "CONTACT", href: contactHref },
       ];

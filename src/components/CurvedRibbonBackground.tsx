@@ -43,12 +43,10 @@ export default function CurvedRibbonBackground() {
       // Major sections to flow through top to bottom
       const sectionIds = [
         "services",
-        "insights",
         "solutions",
         "education",
         "about",
         "testimonials",
-        "ehsan",
         "faq",
         "cta",
       ];

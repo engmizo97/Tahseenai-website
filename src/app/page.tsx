@@ -11,9 +11,7 @@ import {
   ChevronRight,
   CheckCircle2,
   Sparkles,
-  HeartHandshake,
   Mail,
-  Activity,
   BarChart3,
   TrendingUp,
   Quote,
@@ -31,7 +29,6 @@ import {
   ExternalLink,
   Cpu,
   ShieldCheck,
-  Check,
   UserCheck,
   Code2,
 } from "lucide-react";
@@ -70,7 +67,7 @@ export default function Home() {
           }
 
           // Track active nav section during scroll
-          const sectionIds = ["about", "education", "solutions", "insights", "services", "home"];
+          const sectionIds = ["about", "education", "solutions", "services", "home"];
           const scrollPos = currentY + 250;
           for (const id of sectionIds) {
             const el = document.getElementById(id);
@@ -154,7 +151,6 @@ export default function Home() {
     ? [
         { name: "الرئيسية", href: "#home" },
         { name: "خدماتنا", href: "#services" },
-        { name: "التحليلات", href: "#insights" },
         { name: "الحلول", href: "#solutions" },
         { name: "تحسين التعليمية", href: "#education" },
         { name: "من نحن", href: "#about" },
@@ -163,7 +159,6 @@ export default function Home() {
     : [
         { name: "HOME", href: "#home" },
         { name: "SERVICES", href: "#services" },
-        { name: "INSIGHTS", href: "#insights" },
         { name: "SOLUTIONS", href: "#solutions" },
         { name: "EDUCATION", href: "#education" },
         { name: "ABOUT US", href: "#about" },
@@ -830,114 +825,6 @@ export default function Home() {
 
       </section>
 
-      {/* 4. Comprehensive Insights Section */}
-      <section id="insights" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28 border-t border-white/[0.08]">
-        
-        {/* Header */}
-        <ScrollReveal y={40} duration={1100}>
-          <div className="text-center space-y-3 max-w-3xl mx-auto mb-12 sm:mb-16">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#008688]/10 border border-[#008688]/30 text-[#008688] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
-              <Activity className="w-3.5 h-3.5" />
-              <span>{isAr ? "متابعة مباشرة" : "LIVE MONITORING"}</span>
-            </div>
-            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
-              {isAr ? (
-                <>
-                  متابعة حية <span className="text-[#008688]">للعمليات</span>
-                </>
-              ) : (
-                <>
-                  Live AI <span className="text-[#008688]">Operations</span>
-                </>
-              )}
-            </h2>
-            <p className="text-xs sm:text-base text-gray-400 leading-relaxed font-normal max-w-2xl mx-auto">
-              {isAr
-                ? "راقب المحادثات وسرعة الرد والمهام المنجزة أولاً بأول."
-                : "Monitor conversation volume, response times, and completed tasks as they happen."}
-            </p>
-          </div>
-        </ScrollReveal>
-
-        {/* 2-Column Sharp Bento Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
-          
-          {/* Card 1: Lead Velocity & Autonomous Qualification */}
-          <ScrollReveal delay={0} y={45} duration={1100}>
-            <div className="p-6 sm:p-8 sharp-bento space-y-5 text-start h-full">
-              <div className="flex items-center justify-between">
-                <div className="w-10 h-10 rounded-md bg-[#008688]/10 border border-[#008688]/30 flex items-center justify-center text-[#008688]">
-                  <UserCheck className="w-5 h-5" />
-                </div>
-                <span className="text-xs font-mono text-[#008688] font-bold">
-                  {isAr ? "استجابة فورية" : "Instant Response"}
-                </span>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold">
-                  {isAr ? "تأهيل العملاء آلياً" : "Automated Lead Qualification"}
-                </h3>
-                <p className="text-xs sm:text-sm text-gray-400 mt-1.5 leading-relaxed font-normal">
-                  {isAr
-                    ? "تأهيل فوري للمحادثات عبر واتساب والبريد، ومزامنة تلقائية مع الـ CRM."
-                    : "Instant qualification across WhatsApp and email, synced directly to your CRM."}
-                </p>
-              </div>
-
-              <div className="space-y-2 pt-2 border-t border-white/5 text-xs text-gray-300">
-                <div className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-[#008688] flex-shrink-0" />
-                  <span>{isAr ? "استجابة فورية خلال ثوانٍ" : "Instant response in seconds"}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-[#008688] flex-shrink-0" />
-                  <span>{isAr ? "تحويل مباشر للمبيعات" : "Direct sales handoff"}</span>
-                </div>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          {/* Card 2: Operations & Data Synchronization */}
-          <ScrollReveal delay={160} y={45} duration={1100}>
-            <div className="p-6 sm:p-8 sharp-bento space-y-5 text-start h-full">
-              <div className="flex items-center justify-between">
-                <div className="w-10 h-10 rounded-md bg-[#38BDF8]/10 border border-[#38BDF8]/30 flex items-center justify-center text-[#38BDF8]">
-                  <Workflow className="w-5 h-5" />
-                </div>
-                <span className="text-xs font-mono text-[#38BDF8] font-bold">
-                  {isAr ? "دقة ٩٩.٩٪" : "99.9% Accuracy"}
-                </span>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold">
-                  {isAr ? "ربط الأنظمة وسلاسل العمل" : "Connected Systems & Workflows"}
-                </h3>
-                <p className="text-xs sm:text-sm text-gray-400 mt-1.5 leading-relaxed font-normal">
-                  {isAr
-                    ? "اربط قواعد البيانات وبوابات الدفع وبرامج الـ ERP دون تعقيد لتبقى بياناتك متطابقة."
-                    : "Connect databases, payment gateways, and ERP systems so your data stays in sync."}
-                </p>
-              </div>
-
-              <div className="space-y-2 pt-2 border-t border-white/5 text-xs text-gray-300">
-                <div className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-[#38BDF8] flex-shrink-0" />
-                  <span>{isAr ? "تقليص العمل اليدوي بأكثر من ٤٠٪" : "Cut manual processing time by over 40%"}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-[#38BDF8] flex-shrink-0" />
-                  <span>{isAr ? "توافق تام مع المعايير والتشريعات المحلية" : "Secure setup compliant with local regulations"}</span>
-                </div>
-              </div>
-            </div>
-          </ScrollReveal>
-
-        </div>
-
-      </section>
-
       {/* 6. SOLUTIONS SHOWCASE WITH STICKY SCROLL EFFECT & BENTO BOXES ON ONE SIDE */}
       <section id="solutions" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28 border-t border-white/[0.08]">
         
@@ -1104,11 +991,11 @@ export default function Home() {
             <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
               {isAr ? (
                 <>
-                  استعد لاختباراتك <span className="text-[#008688]">المدرسية والجامعية</span>
+                  تمكين <span className="text-[#008688]">الشباب</span>
                 </>
               ) : (
                 <>
-                  AI Prep for <span className="text-[#008688]">High School Exams</span>
+                  Youth <span className="text-[#008688]">Empowerment</span>
                 </>
               )}
             </h2>
@@ -1141,13 +1028,13 @@ export default function Home() {
               <div className="space-y-2">
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight">
                   {isAr
-                    ? "تمكين الشباب"
-                    : "Youth Empowerment"}
+                    ? "أدوات متطورة لاجتياز الاختبارات"
+                    : "Advanced Tools to Master Your Exams"}
                 </h3>
                 <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-normal">
                   {isAr
-                    ? "منظومة تحسين التعليمية لتمكين الطلاب في اختبارات قياس واختيار التخصص والمسار المهني."
-                    : "Empowering students with AI-driven test prep, university admissions, and career guidance."}
+                    ? "تدريب مخصص، وتتبع دقيق لنقاط القوة والتحسين، ونماذج محاكية للاختبارات الرسمية."
+                    : "Adaptive practice, real exam simulations, and personalized progress tracking."}
                 </p>
               </div>
 
@@ -1468,37 +1355,6 @@ export default function Home() {
             </ScrollReveal>
           ))}
         </div>
-      </section>
-
-      {/* 10. Saudi Ehsan Platform 1% Social Pledge Banner */}
-      <section id="ehsan" className="relative z-10 py-12 sm:py-16 px-4 sm:px-8 lg:px-12 max-w-[1200px] mx-auto w-full">
-        <ScrollReveal y={45} duration={1100}>
-          <div className="ehsan-pledge-card p-5 sm:p-8 md:p-12 rounded-md bg-gradient-to-r from-[#071f1b] via-[#060913] to-[#071f1b] border-2 border-[#008688] shadow-[0_16px_50px_-10px_rgba(0,134,136,0.28)] flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-start">
-          <div className="flex flex-col sm:flex-row items-center sm:items-start md:items-center gap-4 text-center sm:text-start">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-md bg-[#008688]/15 border border-[#008688]/40 flex items-center justify-center text-[#008688] flex-shrink-0 shadow-[0_0_15px_rgba(0,134,136,0.3)]">
-              <HeartHandshake className="w-6 h-6 sm:w-7 sm:h-7 text-[#008688]" />
-            </div>
-            <div className="space-y-1">
-              <div className="text-xs font-mono text-[#008688] font-bold uppercase tracking-wider">
-                {isAr ? "مبادرة مجتمعية" : "SOCIAL PLEDGE"}
-              </div>
-              <h3 className="text-base sm:text-lg md:text-xl font-bold !text-white">
-                {isAr ? "نتبرع بنسبة ١٪ من أرباح أعمالنا لمنصة إحسان" : "We Donate 1% of Profits to the Ehsan Platform"}
-              </h3>
-              <p className="text-xs sm:text-sm !text-gray-300 font-normal max-w-xl">
-                {isAr ? "دعماً للمشاريع والمبادرات الخيرية في المملكة العربية السعودية." : "Supporting charitable initiatives across Saudi Arabia."}
-              </p>
-            </div>
-          </div>
-
-          <Link
-            href={contactHref}
-            className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 text-xs font-bold tracking-widest uppercase rounded-lg bg-[#008688] text-white hover:brightness-110 font-sans font-extrabold shadow-[0_4px_20px_rgba(0,134,136,0.4)] flex-shrink-0 cursor-pointer transition-all hover:scale-105"
-          >
-            <span>{isAr ? "تواصل معنا" : "GET IN TOUCH"}</span>
-          </Link>
-        </div>
-        </ScrollReveal>
       </section>
 
       {/* 11. FAQ Section */}
