@@ -29,6 +29,26 @@ export default function RootLayout({
       lang="en"
       className="h-full antialiased scroll-smooth dark"
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (typeof window !== 'undefined') {
+                if ('serviceWorker' in navigator) {
+                  navigator.serviceWorker.getRegistrations().then(function(regs) {
+                    for (var r of regs) r.unregister();
+                  });
+                }
+                if ('caches' in window) {
+                  caches.keys().then(function(names) {
+                    for (var n of names) caches.delete(n);
+                  });
+                }
+              }
+            `,
+          }}
+        />
+      </head>
       <body className="bg-[#0d1426] text-gray-100 min-h-full flex flex-col selection:bg-[#008688]/30 selection:text-[#008688]">
         {children}
       </body>
