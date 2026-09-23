@@ -727,8 +727,7 @@ export default function Home() {
         {/* Section Heading */}
         <ScrollReveal y={40} duration={1100}>
           <div className="text-center space-y-3 max-w-2xl mx-auto mb-10 sm:mb-14">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#008688]/10 border border-[#008688]/30 text-[#008688] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
-              <Cpu className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center px-3 py-1 rounded-md bg-[#008688]/10 border border-[#008688]/30 text-[#008688] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
               <span>{isAr ? "خدماتنا" : "SERVICES"}</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
