@@ -18,7 +18,6 @@ import {
   TrendingUp,
   Quote,
   Star,
-  Bot,
   Workflow,
   LineChart,
   Users,
@@ -325,21 +324,21 @@ export default function Home() {
   const testimonials = isAr
     ? [
         {
-          quote: "أتمتت تحسين استقبال وتصنيف طلبات عملائنا في أسبوعين فقط، ووفرت علينا ساعات من العمل اليومي على الجداول.",
+          quote: "أتمتت تحسين تصنيف طلباتنا في أسبوعين، واختصرت ساعات من العمل اليدوي اليومي.",
           author: "أحمد المطيري",
           role: "مدير العمليات",
           company: "فيوتشر تيك",
           metrics: "-٤٢٪ عمل يدوي",
         },
         {
-          quote: "وكيل الواتساب يجيب الآن على استفسارات عملائنا فوراً على مدار الساعة، ويرسل العملاء المؤهلين مباشرة لفريق المبيعات.",
+          quote: "يجيب وكيل الواتساب على العملاء فوراً على مدار الساعة، ويوجه المؤهلين للمبيعات بدقة.",
           author: "سارة الحربي",
           role: "مديرة النمو",
           company: "داتا بلس",
           metrics: "رد فوري < ١٠ ثوانٍ",
         },
         {
-          quote: "قلصت الأتمتة وقت استجابتنا من ساعات إلى ثوانٍ معدودة، ولاحظنا تحسناً كبيراً في إغلاق الصفقات من الشهر الأول.",
+          quote: "قلصت الأتمتة وقت الاستجابة لثوانٍ معدودة، وارتفعت مبيعاتنا بشكل ملحوظ من أول شهر.",
           author: "خالد الغامدي",
           role: "الرئيس التنفيذي",
           company: "كلاود سفير",
@@ -348,21 +347,21 @@ export default function Home() {
       ]
     : [
         {
-          quote: "Tahseen automated our customer intake in just two weeks. We cut out hours of manual spreadsheet work every single day.",
+          quote: "Tahseen automated our intake in two weeks, cutting hours of daily manual work.",
           author: "Ahmed Al-Mutairi",
           role: "Head of Operations",
           company: "FutureTech KSA",
           metrics: "-42% Manual Work",
         },
         {
-          quote: "Our WhatsApp agent now handles customer questions instantly around the clock, with qualified leads sent straight to our sales team.",
+          quote: "Our WhatsApp agent answers customers 24/7 and routes qualified leads directly to sales.",
           author: "Sarah Al-Harbi",
           role: "Growth Director",
           company: "DataPlus",
           metrics: "Sub-10s Response",
         },
         {
-          quote: "The automated workflows sped up our response times from hours to seconds. Our lead conversion jumped noticeably in the first month.",
+          quote: "Automated workflows cut our response time to seconds, boosting sales from month one.",
           author: "Khaled Al-Ghamdi",
           role: "CEO",
           company: "CloudSphere",
@@ -868,7 +867,7 @@ export default function Home() {
             <div className="p-6 sm:p-8 sharp-bento space-y-5 text-start h-full">
               <div className="flex items-center justify-between">
                 <div className="w-10 h-10 rounded-md bg-[#008688]/10 border border-[#008688]/30 flex items-center justify-center text-[#008688]">
-                  <Bot className="w-5 h-5" />
+                  <UserCheck className="w-5 h-5" />
                 </div>
                 <span className="text-xs font-mono text-[#008688] font-bold">
                   {isAr ? "استجابة فورية" : "Instant Response"}
@@ -881,19 +880,19 @@ export default function Home() {
                 </h3>
                 <p className="text-xs sm:text-sm text-gray-400 mt-1.5 leading-relaxed font-normal">
                   {isAr
-                    ? "الوكلاء يجيبون على رسائل واتساب والموقع والبريد، ثم يسجلون بيانات العميل مباشرة في نظامك."
-                    : "Agents qualify inquiries across WhatsApp and email, then update your CRM automatically."}
+                    ? "تأهيل فوري للمحادثات عبر واتساب والبريد، ومزامنة تلقائية مع الـ CRM."
+                    : "Instant qualification across WhatsApp and email, synced directly to your CRM."}
                 </p>
               </div>
 
               <div className="space-y-2 pt-2 border-t border-white/5 text-xs text-gray-300">
                 <div className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-[#008688] flex-shrink-0" />
-                  <span>{isAr ? "رد سريع في ثوانٍ عبر قنوات التواصل" : "Fast responses in seconds across your channels"}</span>
+                  <span>{isAr ? "استجابة فورية خلال ثوانٍ" : "Instant response in seconds"}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-[#008688] flex-shrink-0" />
-                  <span>{isAr ? "تمرير العملاء المؤهلين لفريق المبيعات فوراً" : "Faster handoff to your sales team"}</span>
+                  <span>{isAr ? "تحويل مباشر للمبيعات" : "Direct sales handoff"}</span>
                 </div>
               </div>
             </div>
