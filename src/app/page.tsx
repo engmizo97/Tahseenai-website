@@ -33,6 +33,8 @@ import {
   Cpu,
   ShieldCheck,
   Check,
+  UserCheck,
+  Code2,
 } from "lucide-react";
 import HeroRing3D from "@/components/HeroRing3D";
 import Footer from "@/components/Footer";
@@ -206,7 +208,7 @@ export default function Home() {
             "حجز المواعيد وتحديث التقويم تلقائياً",
             "تأهيل العملاء ونقل بياناتهم للـ CRM",
           ],
-          icon: <Bot className="w-6 h-6 text-[#008688]" />,
+          icon: <UserCheck className="w-6 h-6 text-[#008688]" />,
         },
         {
           id: "solution-02",
@@ -268,7 +270,7 @@ export default function Home() {
             "Automated calendar booking and CRM sync",
             "Fast lead qualification and handoff",
           ],
-          icon: <Bot className="w-6 h-6 text-[#008688]" />,
+          icon: <UserCheck className="w-6 h-6 text-[#008688]" />,
         },
         {
           id: "solution-02",
@@ -761,14 +763,14 @@ export default function Home() {
           <ScrollReveal delay={0} y={45} duration={1100}>
             <div className="w-full p-6 sm:p-7 sharp-bento space-y-4 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 cursor-default h-full">
               <div className="w-12 h-12 rounded-md bg-[#008688]/10 border border-[#008688]/20 flex items-center justify-center text-[#008688] transition-all duration-300 group-hover:scale-105 mx-auto">
-                <Bot className="w-6 h-6" />
+                <UserCheck className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-bold text-white tracking-tight text-center group-hover:text-[#008688] transition-colors duration-200">
                 {isAr ? "وكلاء الذكاء الاصطناعي" : "AI Agents"}
               </h3>
               <p className="text-xs text-gray-400 leading-relaxed font-normal max-w-[240px] text-center mx-auto">
                 {isAr
-                  ? "وكلاء يجيبون على استفسارات العملاء، ويؤهلون المبيعات، ويقدمون الدعم على مدار الساعة."
+                  ? "وكلاء أذكياء يجيبون على استفسارات العملاء، ويؤهلون المبيعات، ويقدمون الدعم 24/7."
                   : "Agents that answer customer questions, qualify leads, and handle routine support 24/7."}
               </p>
             </div>
@@ -812,14 +814,14 @@ export default function Home() {
           <ScrollReveal delay={360} y={45} duration={1100}>
             <div className="w-full p-6 sm:p-7 sharp-bento space-y-4 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 cursor-default h-full">
               <div className="w-12 h-12 rounded-md bg-[#008688]/10 border border-[#008688]/20 flex items-center justify-center text-[#008688] transition-all duration-300 group-hover:scale-105 mx-auto">
-                <BarChart3 className="w-6 h-6" />
+                <Code2 className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-bold text-white tracking-tight text-center group-hover:text-[#008688] transition-colors duration-200">
                 {isAr ? "التطوير المخصص" : "Development"}
               </h3>
               <p className="text-xs text-gray-400 leading-relaxed font-normal max-w-[240px] text-center mx-auto">
                 {isAr
-                  ? "تطبيقات ويب وجوال مصممة لتعمل بثبات وتلبي احتياجات فريقك."
+                  ? "تطبيقات ويب وجوال مخصصة تعمل بكفاءة واعتمادية عالية."
                   : "Custom web and mobile apps built to run reliably as your business grows."}
               </p>
             </div>
