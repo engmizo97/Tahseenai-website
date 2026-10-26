@@ -31,6 +31,44 @@ export default function RootLayout({
     >
       <head>
         <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "@id": "https://tahseenai.com/#organization",
+              "name": "شركة تحسين الحلول التقنية للذكاء الاصطناعي",
+              "alternateName": ["Tahseen AI", "تحسين للذكاء الاصطناعي", "منصة تحسين التعليمية", "تحسين التعليمية"],
+              "url": "https://tahseenai.com",
+              "identifier": {
+                "@type": "PropertyValue",
+                "name": "الرقم الوطني الموحد",
+                "value": "7051762271"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "الرياض",
+                "addressCountry": "SA"
+              },
+              "sameAs": [
+                "https://edutahseen.com",
+                "https://www.instagram.com/tahseen.education/",
+                "https://www.tiktok.com/@tahseen.education",
+                "https://www.facebook.com/tahseen.education",
+                "https://x.com/TahsenEducation"
+              ],
+              "subOrganization": {
+                "@type": "EducationalOrganization",
+                "@id": "https://edutahseen.com/#organization",
+                "name": "منصة تحسين التعليمية",
+                "alternateName": ["تحسين التعليمية", "منصة قدرات", "منصة تحصيلي", "منصة بوصلتي", "edutahseen"],
+                "url": "https://edutahseen.com",
+                "description": "منصة تحسين التعليمية (edutahseen.com) — المنصة التعليمية الذكية الأولى في المملكة العربية السعودية للتدريب التكيفي على اختبارات القدرات العامة والتحصيلي ومقياس بوصلتي لتحديد التخصص الجامعي."
+              }
+            })
+          }}
+        />
+        <script
           dangerouslySetInnerHTML={{
             __html: `
               if (typeof window !== 'undefined') {
